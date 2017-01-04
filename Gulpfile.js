@@ -34,7 +34,7 @@ var rjsConfig = {
     out: "build/bundle.js",
     removeCombined: true,
     generateSourceMaps: true,
-    preserveLicenseComments: false,
+    preserveLicenseComments: true,
     findNestedDependencies: true
 };
 // Set up an express server (not starting it yet)
@@ -77,7 +77,11 @@ gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
         .pipe(annotate())
         .pipe(gulp.dest('app'))
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
+        .pipe(sourcemaps.write({
+            addComment: false
+        }))
         .pipe(gulp.dest('build'))
         .pipe(notify("entry ok!"));
 });
@@ -92,7 +96,11 @@ gulp.task('scripts', ['libScripts'], function () {
     return gulp.src(['app/scripts/**/*.js', 'app/scripts/**/**/*.js'])
         .pipe(annotate())
         .pipe(gulp.dest('app/scripts'))
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
+        .pipe(sourcemaps.write({
+            addComment: true
+        }))
         .pipe(gulp.dest('build/js'))
         .pipe(notify("scripts ok!"));
 });
