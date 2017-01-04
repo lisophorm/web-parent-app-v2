@@ -14,7 +14,13 @@ define(["angular", "uiRouter", "routeResolver", "lazyLoad", "ngAnimate", "ngCook
      * configure the main app module
      * @type {*|module}
      */
-    var app = angular.module("yoAngularifyApp", ["ngAnimate", "ngCookies", "ngResource", "ngSanitize", "ngTouch",
+    var app = angular.module("yoAngularifyApp",
+        [
+            "ngAnimate",
+            "ngCookies",
+            "ngResource",
+            "ngSanitize",
+            "ngTouch",
         "ui.router",
         "routeResolver",
         "lazyLoad"
