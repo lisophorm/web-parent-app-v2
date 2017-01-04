@@ -1,0 +1,21 @@
+{
+    "name": "yo-angularify",
+    "version": "0.0.0",
+    "dependencies": {
+        "requirejs": "~2.3.2",
+        "angular": "1.6.1",
+        "bootstrap-sass-official": "~3.2.0",
+        "angular-resource": "1.6.1",
+        "angular-cookies": "1.6.1",
+        "angular-sanitize": "1.6.1",
+        "angular-animate": "1.6.1",
+        "angular-touch": "1.6.1",
+        "angular-ui-router": "~0.3.2"
+    },
+    "devDependencies": {
+        "angular-mocks": "1.6.1",
+        "angular-scenario": "1.6.1"
+    },
+    "appPath": "app"
+}
+
