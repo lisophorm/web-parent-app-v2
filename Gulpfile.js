@@ -36,8 +36,7 @@ var rjsConfig = {
     generateSourceMaps: true,
     preserveLicenseComments: false,
     findNestedDependencies: true
-};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+};
 // Set up an express server (not starting it yet)
 var server = express();
 
@@ -50,7 +49,7 @@ server.use(livereload({port: livereloadport}));
 // Use our 'build' folder as rootfolder
 server.use(express.static('./build'));
 // Because I like HTML5 pushstate .. this redirects everything back to our index.html
-/#!/;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+/#!/;
 server.all('/*', function (req, res) {
     res.sendfile('index.html', {root: 'build'});
 });
@@ -73,7 +72,6 @@ gulp.task('lint', function () {
         .pipe(jshint.reporter('default'))
         .pipe(notify("jsHint ok!"));
 });
-
 
 gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
