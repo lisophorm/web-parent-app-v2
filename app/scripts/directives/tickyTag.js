@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name yoAngularifyApp.directive:tickyTag
+ * @name com.tinizine.azoomee.parent.main.directive:tickyTag
  * @description
  * # tickyTag
  */

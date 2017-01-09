@@ -13,6 +13,9 @@ require.config({
         "ngTouch": 'lib/angular-touch.min',
         "routeResolver": "js/load/route-resolver",
         "lazyLoad": "js/load/lazy-load",
+        // alan shit
+        'userSession':              'lib/userSession',
+        'httpProviderConfig':       'lib/httpProviderConfig',
         "app": "app"
     },
     shim: {
@@ -47,5 +50,5 @@ require.config({
 });
 
 require(["app"], function () {
-    angular.bootstrap(document, ["yoAngularifyApp"]);
+    angular.bootstrap(document, ["com.tinizine.azoomee.parent.main"]);
 });

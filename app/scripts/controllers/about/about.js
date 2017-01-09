@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name yoAngularifyApp.controller:aboutCtrl
+ * @name com.tinizine.azoomee.parent.main.controller:aboutCtrl
  * @description
  * # aboutCtrl
- * Controller of the yoAngularifyApp
+ * Controller of the com.tinizine.azoomee.parent.main
  */
 
 define(['app', 'angular'], function (app, angular) {
 
-    app.controller('AboutCtrl', ["$scope", "first", function ($scope, first) {
+    app.controller('AboutCtrl', ["$scope", "first", '$cookies', function ($scope, first, $cookies) {
         console.log('within about controller');
         $scope.title = "About page";
         $scope.sayHello = first.getGreet();

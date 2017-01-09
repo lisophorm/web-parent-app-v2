@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc service
- * @name yoAngularifyApp.servo01
+ * @name com.tinizine.azoomee.parent.main.servo01
  * @description
  * # servo01
- * Service in the yoAngularifyApp.
+ * Service in the com.tinizine.azoomee.parent.main.
  */
 define(['app', 'angular'], function (app, angular) {
     app.service('servo01', function servo01() {

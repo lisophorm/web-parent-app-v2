@@ -28,6 +28,7 @@ var express = require('express'),
 
 var rjsConfig = {
     mainConfigFile: "build/main.js",
+    //optimize: "none",
     optimize: "uglify2",
     baseUrl: "build",
     name: "main",
@@ -87,7 +88,25 @@ gulp.task('entry', function () {
 });
 
 gulp.task('libScripts', function () {
-    return gulp.src(['bower_components/angular-animate/**.js', 'bower_components/angular-cookies/**.js', 'bower_components/angular-resource/**.js', 'bower_components/angular-sanitize/**.js', 'bower_components/angular-touch/**.js', 'bower_components/angular-mocks/**.js', 'bower_components/angular-scenario/**.js', 'bower_components/angular/**.js', 'bower_components/requirejs/**.js', 'bower_components/angular-ui-router/release/**.js'])
+    // temporary. will try to get something more performant
+    return gulp.src([
+        'bower_components/angular-animate/**.js',
+        'bower_components/angular-cookies/**.js',
+        'bower_components/angular-resource/**.js',
+        'bower_components/angular-sanitize/**.js',
+        'bower_components/angular-touch/**.js',
+        'bower_components/angular-mocks/**.js',
+        'bower_components/angular-scenario/**.js',
+        'bower_components/angular/**.js',
+        'bower_components/requirejs/**.js',
+        'bower_components/angular-ui-router/release/**.js',
+        // alan shit here
+        'bower_components/azoomee.web-components-jwt/userSession.js',
+        'bower_components/azoomee.web-components-jwt/httpProviderConfig.js',
+        'bower_components/azoomee.web-components-jwt/Base64.js',
+        'bower_components/crypto-js/crypto-js.js',
+        'bower_components/moment/moment.js',
+    ])
         .pipe(gulp.dest('build/lib'));
 
 });
@@ -190,7 +209,7 @@ gulp.task('watch', ['lint'], function () {
         'inject'
     ]);
 
-    gulp.watch('./build/**').on('change', refresh.changed);
+    // gulp.watch('./build/**').on('change', refresh.changed);
 
 });
 

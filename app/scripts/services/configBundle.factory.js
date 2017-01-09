@@ -2,17 +2,17 @@
 
 /**
  * @ngdoc service
- * @name com.tinizine.azoomee.parent.main.factory01
+ * @name com.tinizine.azoomee.parent.main.configBundle
  * @description
- * # factory01
+ * # configBundle
  * Factory in the com.tinizine.azoomee.parent.main.
  */
 define(['app', 'angular'], function (app, angular) {
-    console.log('within define of factory01');
-    app.factory('factory01', function () {
+    console.log('within define of configBundle');
+    app.factory('configBundle', function () {
         // Service logic
         // ...
-        console.log('service logic of factory01');
+        console.log('service logic of configBundle');
 
         var meaningOfLife = 42;
 
