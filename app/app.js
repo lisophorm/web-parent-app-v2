@@ -193,6 +193,36 @@ define([
                 .otherwise('/login');
 
             $stateProvider
+                .state('totstoo', {
+                    url: '/totstoo',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('resendVerification', {
+                    url: '/verification/resend',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('verification', {
+                    url: '/verification',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('passwordReset', {
+                    url: '/passwordreset',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('forgotten', {
+                    url: '/forgotten',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('signup', {
+                    url: '/signup',
+                    files: ['first.service'],
+                    resolve: {}
+                })
                 .state('login', {
                     url: '/login',
                     files: {

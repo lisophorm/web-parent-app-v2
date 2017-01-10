@@ -52,7 +52,7 @@ server.use(express.static('./build'));
 // Because I like HTML5 pushstate .. this redirects everything back to our index.html
 /#!/;
 server.all('/*', function (req, res) {
-    res.sendfile('index.html', {root: 'build'});
+    res.sendFile('index.html', {root: 'build'});
 });
 
 // Dev task
