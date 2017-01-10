@@ -193,24 +193,37 @@ define([
                 .otherwise('/login');
 
             // default controller is RoutenameCtrl unless specified otherwise here
+            //
+            // ********** STATE NAME must be ALL LOWERCASE
+            // url can be camelcase
+            //
             $stateProvider
+                .state('resendverification', {
+                    url: '/verification/resend',
+                    controller: 'ResendVerificationCtrl',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('change_password', {
+                    url: '/change_password',
+                    controller: 'ChangePasswordCtrl',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('passwordreset', {
+                    url: '/passwordReset?token',
+                    controller: 'ForgottenPasswordResetCtrl',
+                    files: ['first.service'],
+
+                    resolve: {}
+                })
                 .state('totstoo', {
                     url: '/totstoo',
                     files: ['first.service'],
                     resolve: {}
                 })
-                .state('resendVerification', {
-                    url: '/verification/resend',
-                    files: ['first.service'],
-                    resolve: {}
-                })
                 .state('verification', {
                     url: '/verification',
-                    files: ['first.service'],
-                    resolve: {}
-                })
-                .state('passwordReset', {
-                    url: '/passwordreset',
                     files: ['first.service'],
                     resolve: {}
                 })
