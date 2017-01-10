@@ -201,15 +201,15 @@ gulp.task('watch', ['lint'], function () {
     gulp.watch(['app/*.js', 'app/scripts/**/*.js', 'app/scripts/controllers/**/*.js'], ['rjs']);
 
     // Watch our sass files
-    gulp.watch(['app/styles/*.scss', 'app/styles/*.css', 'app/styles/**/*.scss', 'app/styles/**/*.css'], [
+    gulp.watch(['app/styles/*.scss', 'app/styles/*.css', 'app/styles/**/*.scss', 'app/styles/**/*.css', 'app/*.html', 'app/**/*.html'], [
         'inject'
     ]);
 
-    gulp.watch(['app/*.html', 'app/**/*.html'], [
-        'inject'
-    ]);
+    // gulp.watch(['app/*.html', 'app/**/*.html'], [
+    //     'inject'
+    //  ]);
 
-    // gulp.watch('./build/**').on('change', refresh.changed);
+    gulp.watch('./build/**').on('change', refresh.changed);
 
 });
 

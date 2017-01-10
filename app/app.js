@@ -192,6 +192,7 @@ define([
             $urlRouterProvider
                 .otherwise('/login');
 
+            // default controller is RoutenameCtrl unless specified otherwise here
             $stateProvider
                 .state('totstoo', {
                     url: '/totstoo',
@@ -215,6 +216,7 @@ define([
                 })
                 .state('forgotten', {
                     url: '/forgotten',
+                    controller: 'ForgottenPasswordCtrl',
                     files: ['first.service'],
                     resolve: {}
                 })
