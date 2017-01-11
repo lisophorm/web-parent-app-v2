@@ -12,10 +12,11 @@ require.config({
         "ngSanitize": 'lib/angular-sanitize.min',
         "ngTouch": 'lib/angular-touch.min',
         "routeResolver": "js/load/route-resolver",
+        "moment": "lib/moment",
         "lazyLoad": "js/load/lazy-load",
         // alan shit
-        'userSession':              'lib/userSession',
-        'httpProviderConfig':       'lib/httpProviderConfig',
+        'userSession': 'lib/userSession',
+        'httpProviderConfig': 'lib/httpProviderConfig',
         "app": "app",
         "analytics": "js/analytics"
     },

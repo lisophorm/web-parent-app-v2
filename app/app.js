@@ -24,8 +24,40 @@ define([
     "userSession",
     "httpProviderConfig",
     'analytics/analytics'
+
+
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
              config, userSession, httpProviderConfig, analytics) {
+
+
+    var localStorageAvailable = (function () {
+        var blah = 'blah',
+            available;
+        try {
+            localStorage.setItem(blah, blah);
+            available = localStorage.getItem(blah) === blah;
+            localStorage.removeItem(blah);
+            return available;
+        } catch (e) {
+            return false;
+        }
+    })();
+
+    window.isLocalStorageAvailable = function () {
+        return localStorageAvailable;
+    };
+
+    if (window.mixpanel) {
+        if (window.isLocalStorageAvailable()) {
+            mixpanel.init(config.mixPanelToken, {persistence: "localStorage"});
+        } else {
+            mixpanel.init(config.mixPanelToken);
+        }
+        mixpanel.track("parentAppLoaded");
+    } else {
+        console.log('could not load mixpanel in the parent app');
+    }
+
     /**) {
     /**
      * configure the main app module
@@ -224,8 +256,8 @@ define([
                     resolve: {}
                 })
                 .state('verification', {
-                    url: '/verification',
-                    files: ['first.service'],
+                    url: '/verification?token&reason',
+                    files: ['rest/verificationApi'],
                     resolve: {}
                 })
                 .state('forgotten', {
@@ -242,7 +274,7 @@ define([
                     resolve: {}
                 })
                 .state('login', {
-                    url: '/login',
+                    url: '/login?token&reason',
                     files: {
                         s: ['first.service', 'rest/loginApi']
                     },
@@ -299,7 +331,7 @@ define([
             }
         }]);
     analytics(app); //Attach analytics factory to app
-    app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', function ($scope, $rootScope, externalPaths, userSession, $location) {
+    app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', '$http', '$q', function ($scope, $rootScope, externalPaths, userSession, $location, $http, $q) {
         console.log('********** MAIN CONTROLLER');
         $rootScope.safeApply = function (fn) {
             var phase = this.$root.$$phase;
@@ -311,6 +343,35 @@ define([
                 this.$apply(fn);
             }
         };
+
+        // bloody requireJS too complex using the rest services here
+        //
+        $rootScope.userUpdated = function () {
+            var defer = $q.defer();
+            $scope.userID = userSession.getJWTUser();
+            console.log('user url:', config.userUrl);
+            $http({
+                url: config.userUrl + '/adult/' + $scope.userID,
+                method: "GET"
+            }).then(function (res) {
+                console.log('user success', res.data);
+                $scope.profileName = res.data.profileName;
+                defer.resolve(res);
+            }, function (erro) {
+                console.log('USER ERROR', erro);
+                defer.reject(erro);
+            });
+            return defer.promise;
+
+        }
+
+        /*     $rootScope.userUpdated = function () {
+         return userApi.isUserVerified().then(function (isUserVerified) {
+         $rootScope.showVerificationWarning = !isUserVerified;
+         }, function () {
+         $rootScope.showVerificationWarning = false;
+         });
+         };*/
 
         $rootScope.logOut = function () {
             console.log('************ LOGOUT');
