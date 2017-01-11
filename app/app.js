@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name yoAngularifyApp
+ * @name web-parent-app-v2
  * @description
- * # yoAngularifyApp
+ * # web-parent-app-v2
  *
  * Main module of the application.
  */
