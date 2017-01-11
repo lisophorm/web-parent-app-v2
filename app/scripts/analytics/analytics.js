@@ -1,4 +1,3 @@
-console.log("**************** within analytics class");
 define([], function () {
     return function (app) {
         app.factory('analytics', function () {
