@@ -16,7 +16,8 @@ require.config({
         // alan shit
         'userSession':              'lib/userSession',
         'httpProviderConfig':       'lib/httpProviderConfig',
-        "app": "app"
+        "app": "app",
+        "analytics": "js/analytics"
     },
     shim: {
         "angular": {

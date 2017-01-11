@@ -22,9 +22,10 @@ define([
 
     "config",
     "userSession",
-    "httpProviderConfig"
+    "httpProviderConfig",
+    'analytics/analytics'
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
-             config, userSession, httpProviderConfig) {
+             config, userSession, httpProviderConfig, analytics) {
     /**) {
     /**
      * configure the main app module
@@ -297,7 +298,7 @@ define([
                 });
             }
         }]);
-
+    analytics(app); //Attach analytics factory to app
     app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', function ($scope, $rootScope, externalPaths, userSession, $location) {
         console.log('********** MAIN CONTROLLER');
         $rootScope.safeApply = function (fn) {
