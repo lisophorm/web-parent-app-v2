@@ -1,8 +1,9 @@
 define([
     'config',
-    'angular'
-], function (config, angular) {
-    angular.module('com.tinizine.azoomee.parent.rest').register.service('billingApi', ['$http', 'userSession', '$q', function ($http, userSession, $q) {
+    'angular',
+    'app'
+], function (config, angular, app) {
+    app.service('billingApi', ['$http', 'userSession', '$q', function ($http, userSession, $q) {
         var billingApi = {
             updateCardDetails: function (cardDetails) {
                 var url = config.billingUrl + '/user/' + userSession.getJWTUser() + '/paymentCard';

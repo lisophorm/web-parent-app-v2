@@ -235,7 +235,9 @@ define([
                 })
                 .state('signup', {
                     url: '/signup',
-                    files: ['first.service'],
+                    files: {
+                        s: ['first.service', 'rest/loginApi', 'rest/billingApi']
+                    },
                     resolve: {}
                 })
                 .state('login', {
