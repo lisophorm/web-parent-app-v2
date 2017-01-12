@@ -8,10 +8,12 @@
  * Service in the com.tinizine.azoomee.parent.main.
  */
 define(['app', 'angular'], function (app, angular) {
-    app.service('servo01', function servo01() {
+    app.service('servo01', ["$rootScope", function servo01($rootScope) {
+        console.log('INSIDE SERVO01');
         this.greet = "Hello From Servo01 service";
+        console.log($rootScope.gino);
         this.getGreet = function () {
             return this.greet;
         }
-    });
+    }]);
 });

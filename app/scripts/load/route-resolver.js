@@ -92,11 +92,7 @@ define(["angular"], function (angular) {
 
                         route.templateUrl = viewDir + state + ".html";
 
-                        console.log('**** actual route controller:', route.controller);
-                        if (typeof route.controller === 'undefined') {
-                            console.log('**** controller is undefined');
-                            route.controller = state.charAt(0).toUpperCase() + state.slice(1) + "Ctrl as " + state;
-                        }
+                        route.controller = state.charAt(0).toUpperCase() + state.slice(1) + "Ctrl as " + state;
 
                         route.resolve = angular.extend(route.resolve || {}, {
                             __load__: ['$q', '$rootScope', function ($q, $rootScope) {
