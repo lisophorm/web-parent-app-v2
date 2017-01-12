@@ -30,10 +30,9 @@ var rjsConfig = {
     mainConfigFile: "build/main.js",
     //optimize: "none",
     optimize: "uglify2",
-    baseUrl: "build",
+    baseUrl: "build/",
     name: "main",
     out: "build/bundle.js",
-    removeCombined: true,
     generateSourceMaps: true,
     preserveLicenseComments: true,
     findNestedDependencies: true
@@ -76,13 +75,11 @@ gulp.task('lint', function () {
 
 gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
+
+        .pipe(sourcemaps.init())
         .pipe(annotate())
-        .pipe(gulp.dest('app'))
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
-        .pipe(sourcemaps.write({
-            addComment: false
-        }))
+        .pipe(uglify({preserveComments: true}))
+        .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('build'))
         .pipe(notify("entry ok!"));
 });
@@ -113,13 +110,10 @@ gulp.task('libScripts', function () {
 
 gulp.task('scripts', ['libScripts'], function () {
     return gulp.src(['app/scripts/**/*.js', 'app/scripts/**/**/*.js'])
+        .pipe(sourcemaps.init())
         .pipe(annotate())
-        .pipe(gulp.dest('app/scripts'))
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
-        .pipe(sourcemaps.write({
-            addComment: true
-        }))
+        .pipe(uglify({preserveComments: true}))
+        .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('build/js'))
         .pipe(notify("scripts ok!"));
 });
@@ -198,10 +192,10 @@ gulp.task('watch', ['lint'], function () {
     ]);
 
     //watch our scripts, and when they change run lint and requirejs
-    gulp.watch(['app/*.js', 'app/scripts/**/*.js', 'app/scripts/controllers/**/*.js'], ['rjs']);
+    gulp.watch(['app/*.js', 'app/scripts/**/*.js', 'app/scripts/controllers/**/*.js'], {debounceDelay: 2000}, ['rjs']);
 
     // Watch our sass files
-    gulp.watch(['app/styles/*.scss', 'app/styles/*.css', 'app/styles/**/*.scss', 'app/styles/**/*.css'], [
+    gulp.watch(['app/styles/*.scss', 'app/styles/*.css', 'app/styles/**/*.scss', 'app/styles/**/*.css', 'app/*.html', 'app/**/*.html'], {debounceDelay: 3000}, [
         'inject'
     ]);
 
@@ -209,7 +203,7 @@ gulp.task('watch', ['lint'], function () {
         'inject'
     ]);
 
-    // gulp.watch('./build/**').on('change', refresh.changed);
+    gulp.watch(['./build/**/*.html', './build/**/*.js'], {debounceDelay: 4000}).on('change', refresh.changed);
 
 });
 

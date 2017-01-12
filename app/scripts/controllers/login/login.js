@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name yoAngularifyApp.controller:LoginCtrl
+ * @name web-parent-app-v2.controller:LoginCtrl
  * @description
  * # LoginCtrl
- * Controller of the yoAngularifyApp
+ * Controller of the web-parent-app-v2
  */
 
 define([
@@ -14,10 +14,28 @@ define([
     'config'
 ], function (app, angular, config) {
     app.controller('LoginCtrl',
-        ["$scope", "loginApi", 'userSession', '$location', function ($scope, loginApi, userSession, $location) {
+        ["$scope", "loginApi", 'userSession', '$location', 'analytics', '$stateParams', "$rootScope", function ($scope, loginApi, userSession, $location, analytics, $stateParams, $rootScope) {
+            $rootScope.userUpdated();
+            $rootScope.totstoo = false;
+            //dataStore.clearResources();
+            console.log('LOGIN CONTROLLER');
+            $scope.userId = userSession.getJWTUserName();
+            $scope.userId = ($scope.userId === "verify") ? "" : $scope.userId;
+            $scope.userMessage = false;
 
-            console.log('WITHINB LOGIN CONTROLLER');
-            $scope.title = "Login page";
+            if ($stateParams.reason === "loginSuccess") {
+                $scope.userMessage = "You can now login with your new password";
+            }
+            if ($stateParams.token) {
+                $scope.loading = true;
+                loginApi.loginUsingToken($scope.userId, $stateParams.token).then(
+                    loginSuccess,
+                    function (err) {
+                        console.log("Error login in with token", err);
+                        $scope.loading = false;
+                    }
+                );
+            }
 
             $scope.submit = function () {
                 console.log('LOGIN FUNCTION');
@@ -31,23 +49,26 @@ define([
             function loginSuccess() {
                 console.log('LOGIN SUCCESS');
                 console.log(userSession.getJWTUser());
-                $location.url("/home");
+                $rootScope.userUpdated();
+                analytics.updateUserId(userSession.getJWTUser());
+                analytics.sendEvent({type: 'parentAppLoginSuccess'});
+
                 // $location.url("/home");
                 //location.href="/home";
-                //analytics.updateUserId(userSession.getJWTUser());
-                //analytics.sendEvent({ type: 'parentAppLoginSuccess' });
-                //$rootScope.userUpdated();
-                //var searchParams = $location.search();
-                //if (searchParams && searchParams.goto) {
-                //$location.url(searchParams.goto);
-                // return;
-                //}
-                //controller.navigateToContacts();
+                analytics.updateUserId(userSession.getJWTUser());
+                analytics.sendEvent({type: 'parentAppLoginSuccess'});
+                //
+                var searchParams = $location.search();
+                if (searchParams && searchParams.goto) {
+                    $location.url(searchParams.goto);
+                    return;
+                }
+                $location.url("/home");
             }
 
             function loginError(resp) {
                 console.log('LOGIN ERROR');
-                //analytics.sendEvent({ type: 'parentAppLoginFailure' });
+                analytics.sendEvent({type: 'parentAppLoginFailure'});
                 $scope.loading = false;
                 //$scope.loginForm.$setUntouched();
                 $scope.pwd = "";

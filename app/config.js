@@ -1,6 +1,6 @@
 console.log('within CONFIG.JS');
 define("config", [], function () {
-    console.log('within define config');;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    console.log('within define config');
     var environmentName = 'dev',
         baseUrl,
         mixPanelToken;

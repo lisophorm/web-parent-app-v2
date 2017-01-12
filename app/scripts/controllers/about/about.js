@@ -5,7 +5,7 @@
  * @name com.tinizine.azoomee.parent.main.controller:aboutCtrl
  * @description
  * # aboutCtrl
- * Controller of the com.tinizine.azoomee.parent.main
+ * Test controller for test stuff
  */
 
 define(['app', 'angular', 'config'], function (app, angular, config) {
@@ -15,8 +15,6 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
         $scope.title = "About page";
         $scope.sayHello = first.getGreet();
         $scope.userID = userSession.getJWTUser();
-        //var factoryTemp=factory01.someMethod();
-        //console.log('factory content',factoryTemp);
         $http({
             url: config.userUrl + '/adult/' + $scope.userID,
             method: "GET"
@@ -28,6 +26,5 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
         });
     }]);
 
-    //also can use angular.module
 });
 

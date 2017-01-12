@@ -9,18 +9,16 @@
  */
 
 define(['app', 'angular', 'config'], function (app, angular, config) {
-    app.controller('HomeCtrl', ["$scope", "$rootScope", "servo01", "factory01", 'userSession', '$http', function ($scope, $rootScope, servo01, factory01, userSession, $http) {
+    app.controller('HomeCtrl', ["$scope", "servo01", "factory01", 'userSession', '$http', function ($scope, servo01, factory01, userSession, $http) {
         $scope.title = "Home page";
         $scope.dummy = servo01.getGreet();
         $scope.userID = userSession.getJWTUser();
         $scope.profileName = "";
-        console.log("HOME CONTROLLER");
         //$scope.userID=userSession.getJWTUser();
         var tempVar = factory01.someMethod();
         console.log('factory value', tempVar);
         console.log(userSession.getJWTUser());
         console.log('user url:', config.userUrl);
-        throw new Error();
         $http({
             url: config.userUrl + '/adult/' + $scope.userID,
             method: "GET"

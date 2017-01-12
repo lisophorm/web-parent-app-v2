@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name yoAngularifyApp
+ * @name web-parent-app-v2
  * @description
- * # yoAngularifyApp
+ * # web-parent-app-v2
  *
  * Main module of the application.
  */
@@ -22,9 +22,42 @@ define([
 
     "config",
     "userSession",
-    "httpProviderConfig"
+    "httpProviderConfig",
+    'analytics/analytics'
+
+
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
-             config, userSession, httpProviderConfig) {
+             config, userSession, httpProviderConfig, analytics) {
+
+
+    var localStorageAvailable = (function () {
+        var blah = 'blah',
+            available;
+        try {
+            localStorage.setItem(blah, blah);
+            available = localStorage.getItem(blah) === blah;
+            localStorage.removeItem(blah);
+            return available;
+        } catch (e) {
+            return false;
+        }
+    })();
+
+    window.isLocalStorageAvailable = function () {
+        return localStorageAvailable;
+    };
+
+    if (window.mixpanel) {
+        if (window.isLocalStorageAvailable()) {
+            mixpanel.init(config.mixPanelToken, {persistence: "localStorage"});
+        } else {
+            mixpanel.init(config.mixPanelToken);
+        }
+        mixpanel.track("parentAppLoaded");
+    } else {
+        console.log('could not load mixpanel in the parent app');
+    }
+
     /**) {
     /**
      * configure the main app module
@@ -192,39 +225,56 @@ define([
             $urlRouterProvider
                 .otherwise('/login');
 
+            // default controller is RoutenameCtrl unless specified otherwise here
+            //
+            // ********** STATE NAME must be ALL LOWERCASE
+            // url can be camelcase
+            //
             $stateProvider
+                .state('resendverification', {
+                    url: '/verification/resend',
+                    controller: 'ResendVerificationCtrl',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('change_password', {
+                    url: '/change_password',
+                    controller: 'ChangePasswordCtrl',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('passwordreset', {
+                    url: '/passwordReset?token',
+                    controller: 'ForgottenPasswordResetCtrl',
+                    files: ['first.service'],
+
+                    resolve: {}
+                })
                 .state('totstoo', {
                     url: '/totstoo',
                     files: ['first.service'],
                     resolve: {}
                 })
-                .state('resendVerification', {
-                    url: '/verification/resend',
-                    files: ['first.service'],
-                    resolve: {}
-                })
                 .state('verification', {
-                    url: '/verification',
-                    files: ['first.service'],
-                    resolve: {}
-                })
-                .state('passwordReset', {
-                    url: '/passwordreset',
-                    files: ['first.service'],
+                    url: '/verification?token&reason',
+                    files: ['rest/verificationApi'],
                     resolve: {}
                 })
                 .state('forgotten', {
                     url: '/forgotten',
+                    controller: 'ForgottenPasswordCtrl',
                     files: ['first.service'],
                     resolve: {}
                 })
                 .state('signup', {
                     url: '/signup',
-                    files: ['first.service'],
+                    files: {
+                        s: ['first.service', 'rest/loginApi', 'rest/billingApi']
+                    },
                     resolve: {}
                 })
                 .state('login', {
-                    url: '/login',
+                    url: '/login?token&reason',
                     files: {
                         s: ['first.service', 'rest/loginApi']
                     },
@@ -280,10 +330,9 @@ define([
                 });
             }
         }]);
-
-    app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', function ($scope, $rootScope, externalPaths, userSession, $location) {
+    analytics(app); //Attach analytics factory to app
+    app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', '$http', '$q', function ($scope, $rootScope, externalPaths, userSession, $location, $http, $q) {
         console.log('********** MAIN CONTROLLER');
-        $rootScope.gino = 4;
         $rootScope.safeApply = function (fn) {
             var phase = this.$root.$$phase;
             if (phase == '$apply' || phase == '$digest') {
@@ -294,6 +343,35 @@ define([
                 this.$apply(fn);
             }
         };
+
+        // bloody requireJS too complex using the rest services here
+        //
+        $rootScope.userUpdated = function () {
+            var defer = $q.defer();
+            $scope.userID = userSession.getJWTUser();
+            console.log('user url:', config.userUrl);
+            $http({
+                url: config.userUrl + '/adult/' + $scope.userID,
+                method: "GET"
+            }).then(function (res) {
+                console.log('user success', res.data);
+                $scope.profileName = res.data.profileName;
+                defer.resolve(res);
+            }, function (erro) {
+                console.log('USER ERROR', erro);
+                defer.reject(erro);
+            });
+            return defer.promise;
+
+        }
+
+        /*     $rootScope.userUpdated = function () {
+         return userApi.isUserVerified().then(function (isUserVerified) {
+         $rootScope.showVerificationWarning = !isUserVerified;
+         }, function () {
+         $rootScope.showVerificationWarning = false;
+         });
+         };*/
 
         $rootScope.logOut = function () {
             console.log('************ LOGOUT');

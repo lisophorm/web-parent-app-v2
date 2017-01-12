@@ -2,14 +2,15 @@
 
 /**
  * @ngdoc function
- * @name yoAngularifyApp.controller:ResendverificationCtrl
+ * @name web-parent-app-v2.controller:ResendverificationCtrl
  * @description
  * # ResendverificationCtrl
- * Controller of the yoAngularifyApp
+ * Controller of the web-parent-app-v2
  */
 
 define(['app', 'angular'], function (app, angular) {
-    app.controller('ResendverificationCtrl', ["$scope", function ($scope) {
+    app.controller('ResendVerificationCtrl', ["$scope", function ($scope) {
+        console.log('within resend notification controller');
         $scope.title = "Resendverification page"
     }]);
     // ...

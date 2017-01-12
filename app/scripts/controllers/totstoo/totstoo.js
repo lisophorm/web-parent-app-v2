@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name yoAngularifyApp.controller:TotstooCtrl
+ * @name web-parent-app-v2.controller:TotstooCtrl
  * @description
  * # TotstooCtrl
- * Controller of the yoAngularifyApp
+ * Controller of the web-parent-app-v2
  */
 
 define(['app', 'angular'], function (app, angular) {
