@@ -2,7 +2,7 @@
     "name": "yo-angularify",
     "version": "0.0.0",
     "dependencies": {
-        "requirejs": "2.1.20",
+        "requirejs": "2.3.2",
         "angular": "1.6.1",
         "bootstrap-sass-official": "~3.2.0",
         "angular-resource": "1.6.1",

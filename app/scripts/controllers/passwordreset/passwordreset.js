@@ -7,7 +7,6 @@
  * # PasswordresetCtrl
  * Controller of the web-parent-app-v2
  */
-
 define(['app', 'angular', 'config'], function (app, angular, config) {
     app.controller('ForgottenPasswordResetCtrl', ["$scope", "$stateParams", "$http", "$location", function ($scope, $stateParams, $http, $location) {
         $scope.title = "Passwordreset page";

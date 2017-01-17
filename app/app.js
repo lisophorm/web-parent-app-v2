@@ -184,6 +184,74 @@ define([
         .constant('externalPaths', [
             '/login', '/login/:reason', '/signup', '/verification', '/verification/resend', '/forgotten', '/passwordReset', '/learnMore'
         ])
+        // dynamic strings
+        .constant('signupEndStrings', {
+            enjoyApp: "GO TO THE AZOOMEE APP AND LOG IN TO GET STARTED!",
+            unlimitedMode: "Your family can now enjoy the premium unlimited version of Azoomee.",
+            freeTrial: "Enjoy your 15 days FREE on us",
+            canCancel: "You can cancel any time.",
+            periodFreeWithAzoomee: function (billingCycle, numOfCycles) {
+                var messageBody = "Your family can now enjoy the premium, unlimited version of Azoomee for ";
+                switch (billingCycle) {
+                    case 'BIENNIAL':
+                        return messageBody + numOfCycles * 2 + " years!";
+                    case 'ANNUAL':
+                        return messageBody + numOfCycles + (numOfCycles > 1 ? " years!" : " year");
+                    case 'BIANNUAL':
+                        return messageBody + numOfCycles * 6 + " months!";
+                    case 'MONTHLY':
+                        return messageBody + numOfCycles + (numOfCycles > 1 ? " months" : " month");
+                }
+            },
+            thankYouRegistering: "Thanks for signing up.",
+            youCanAccessLimitedVersion: "Your family can now enjoy the basic version of Azoomee for free. Upgrade at any time for unlimited access",
+            goToApp: "Go to app"
+        })
+        .constant('totsTooSignupEndStrings', {
+            enjoyApp: "Download and log in to get started!",
+            unlimitedMode: "Your family now has unlimited access to Azoomee Premium.",
+            freeTrial: "Enjoy your 15 days FREE on us",
+            canCancel: "You can cancel any time.",
+            periodFreeWithAzoomee: function (billingCycle, numOfCycles) {
+                var messageBody = "Your family now has unlimited access to Azoomee Premium for ";
+                switch (billingCycle) {
+                    case 'BIENNIAL':
+                        return messageBody + numOfCycles * 2 + " years!";
+                    case 'ANNUAL':
+                        return messageBody + numOfCycles + (numOfCycles > 1 ? " years!" : " year");
+                    case 'BIANNUAL':
+                        return messageBody + numOfCycles * 6 + " months!";
+                    case 'MONTHLY':
+                        return messageBody + numOfCycles + (numOfCycles > 1 ? " months" : " month");
+                }
+            },
+            welcomeToPremium: "Welcome to Azoomee Premium!",
+            thankYouRegistering: "Thanks for signing up.",
+            youCanAccessLimitedVersion: "Your family can now enjoy the basic version of Azoomee for free. Upgrade at any time for unlimited access",
+            goToApp: "Go to app"
+        })
+        //
+        .directive('cookieConsent', ['$cookies', function ($cookies) {
+            return {
+                scope: {},
+                template: '<div id="cookieConsent">' +
+                '<div ng-hide="userHasGivenConsent()" class="cookieConsent">' +
+                'By continuing to use the site, you agree to the use of cookies.' + ' <a href="' + 'www.google.com' + '" target="_blank">' + 'more' + '</a>' +
+                ' <button id="cookieConsentButton" ng-click="storeConsent()">' + 'accept' + '</button>' +
+                '</div>' +
+                '</div>',
+                controller: ['$scope', function ($scope) {
+                    var _consent = $cookies.get('azoomeeCookieConsent');
+                    $scope.storeConsent = function () {
+                        $cookies.put('azoomeeCookieConsent', true);
+                        _consent = true;
+                    };
+                    $scope.userHasGivenConsent = function () {
+                        return _consent;
+                    };
+                }]
+            };
+        }])
         // ********************
         //
         // form the original project
@@ -231,6 +299,19 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('subscriptionOffer', {
+                    url: '/subscriptionoffer',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('signupend', {
+                    url: '/signup/end',
+                    controller: 'SignupendCtrl',
+                    files: {
+                        s: ['first.service', 'rest/billingApi']
+                    },
+                    resolve: {}
+                })
                 .state('resendverification', {
                     url: '/verification/resend',
                     controller: 'ResendVerificationCtrl',
