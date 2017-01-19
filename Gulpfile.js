@@ -30,9 +30,10 @@ var rjsConfig = {
     mainConfigFile: "build/main.js",
     //optimize: "none",
     optimize: "uglify2",
-    baseUrl: "build/",
+    baseUrl: "build",
     name: "main",
     out: "build/bundle.js",
+    removeCombined: true,
     generateSourceMaps: true,
     preserveLicenseComments: true,
     findNestedDependencies: true
@@ -75,11 +76,13 @@ gulp.task('lint', function () {
 
 gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
-
-        .pipe(sourcemaps.init())
-        .pipe(annotate())
-        .pipe(uglify({preserveComments: true}))
-        .pipe(sourcemaps.write('maps'))
+    // .pipe(annotate())
+    //.pipe(gulp.dest('app'))
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(uglify())
+        .pipe(sourcemaps.write({
+            addComment: false
+        }))
         .pipe(gulp.dest('build'))
         .pipe(notify("entry ok!"));
 });
@@ -110,10 +113,13 @@ gulp.task('libScripts', function () {
 
 gulp.task('scripts', ['libScripts'], function () {
     return gulp.src(['app/scripts/**/*.js', 'app/scripts/**/**/*.js'])
-        .pipe(sourcemaps.init())
-        .pipe(annotate())
-        .pipe(uglify({preserveComments: true}))
-        .pipe(sourcemaps.write('maps'))
+    //   .pipe(annotate())
+    //   .pipe(gulp.dest('app/scripts'))
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(uglify())
+        .pipe(sourcemaps.write({
+            addComment: true
+        }))
         .pipe(gulp.dest('build/js'))
         .pipe(notify("scripts ok!"));
 });
@@ -199,9 +205,9 @@ gulp.task('watch', ['lint'], function () {
         'inject'
     ]);
 
-    gulp.watch(['app/*.html', 'app/**/*.html'], [
-        'inject'
-    ]);
+    // gulp.watch(['app/*.html', 'app/**/*.html'], [
+    //     'inject'
+    // ]);
 
     gulp.watch(['./build/**/*.html', './build/**/*.js'], {debounceDelay: 4000}).on('change', refresh.changed);
 

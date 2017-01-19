@@ -23,7 +23,8 @@ define([
     "config",
     "userSession",
     "httpProviderConfig",
-    'analytics/analytics'
+    "analytics/analytics",
+    "strings"
 
 
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
@@ -63,13 +64,17 @@ define([
      * configure the main app module
      * @type {*|module}
      */
-    var app = angular.module("com.tinizine.azoomee.parent.main", ["ngAnimate", "ngCookies", "ngResource", "ngSanitize", "ngTouch",
-        "ui.router",
-        "routeResolver",
-        "lazyLoad",
-        //
-        //'com.tinizine.azoomee.userSession'
-    ])
+    var app = angular.module("com.tinizine.azoomee.parent.main",
+        [
+            "ngAnimate",
+            "com.tinizine.azoomee.parent.strings",
+            "ngCookies", "ngResource", "ngSanitize", "ngTouch",
+            "ui.router",
+            "routeResolver",
+            "lazyLoad",
+            //
+            //'com.tinizine.azoomee.userSession'
+        ])
     // **********
     //
     // added from Azoomee v1
@@ -299,9 +304,35 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('subscriptionstatus', {
+                    url: '/subscriptionstatus',
+                    files: {
+                        s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
+                    },
+                    resolve: {}
+                })
+                .state('cardrejection', {
+                    url: '/cardrejection',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('addCard', {
+                    url: '/addcard',
+                    controller: 'AddcardCtrl',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('signupsubscriptionoffer', {
+                    url: '/signup/signupsubscriptionoffer',
+                    files: ['first.service'],
+                    resolve: {}
+                })
                 .state('subscriptionOffer', {
                     url: '/subscriptionoffer',
-                    files: ['first.service'],
+                    files: {
+                        s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
+                    },
+                    controller: 'SubscriptionofferCtrl',
                     resolve: {}
                 })
                 .state('signupend', {

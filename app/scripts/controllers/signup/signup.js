@@ -89,7 +89,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
         }
 
         function navigateToSubscriptionOffer() {
-            $location.path('/signup/subscriptionOffer');
+            $location.path('/signupsubscriptionoffer');
         }
 
         function navigateToSignupEnd() {
@@ -108,7 +108,6 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
                     }
                 }
             }
-
             $scope.loading = false;
             return $q.reject(err);
         }

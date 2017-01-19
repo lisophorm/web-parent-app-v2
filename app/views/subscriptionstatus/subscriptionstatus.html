@@ -1,0 +1,35 @@
+<p>This is the subscription status view.</p>
+<div ng-show = "!signupJourney" class = "viewHeader">{[{strings.title}]}</div>
+<div class = "alreadySubscribed {[{signupJourney ? 'signupJourney' : ''}]}" ng-show = "displayStatus">
+
+    <div ng-show = "signupJourney" class = "logoWrapper">
+        <div class = "logo">
+        </div>
+    </div>
+
+    <div class = "subscriptionStatus">
+        <div class = "oomee1"></div>
+        <div class = "oomee2"></div>
+        <div class = "userType">{[{subscriptionType}]}</div>
+        <div id = "renewalDetails" class = "renewalDetails" ng-show = "billingStatus">
+            {[{strings.yourPlanWillStart(billingStatus.billingCycle, billingStatus.nextBillDate)}]}&nbsp;
+        </div>
+        <br/>
+        <div ng-show = "justSubscribed">{[{strings.mayTakeFifteen}]}</div>
+    </div>
+
+    <div id = "cardDetails" class = "cardDetails" ng-show = "!updatingDetails && billingStatus">
+        <div>{[{strings.cardWillBeCharged(billingStatus.paymentCardBrand, billingStatus.paymentCardNumber)}]}</div>
+    </div>
+
+    <button ng-show = "!signupJourney && !updatingDetails" id = "updateDetailsButton" class = "updateDetailsButton"
+            ng-click = "updatingDetails = true">{[{strings.updateDetails}]}
+    </button>
+    <div ng-if = "!signupJourney && updatingDetails" ng-include = "'views/addCard/addCard.html'"></div>
+    <a ng-show = "!signupJourney && !updatingDetails"
+       href = "mailto:support@azoomee.com?subject={[{strings.cancelEmailSubject}]}">{[{strings.cancelSubscription}]}</a>
+
+    <div ng-show = "signupJourney" class = "continueButtonWrapper">
+        <button class = "continueButton" ng-click = "navigateToSignupEnd()">{[{strings.continue}]}</button>
+    </div>
+</div>

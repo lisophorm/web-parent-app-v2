@@ -18,7 +18,8 @@ require.config({
         'userSession': 'lib/userSession',
         'httpProviderConfig': 'lib/httpProviderConfig',
         "app": "app",
-        "analytics": "js/analytics"
+        "analytics": "js/analytics",
+        "addCard": "/js/controllers/addCard/addCard"
     },
     shim: {
         "angular": {
