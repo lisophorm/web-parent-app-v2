@@ -21,7 +21,8 @@ require.config({
         'httpProviderConfig': 'lib/httpProviderConfig',
         "app": "app",
         "analytics": "js/analytics",
-        "addCard": "/js/controllers/addCard/addCard"
+        "addCard": "/js/controllers/addCard/addCard",
+        "azStatusBoard": "/js/directives/azstatusboard"
     },
     shim: {
         "angular": {
