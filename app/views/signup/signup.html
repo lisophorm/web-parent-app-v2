@@ -1,0 +1,73 @@
+<div class = "signup">
+    <span ng-show = "loading" class = "loading">
+        <img src = "images/three-dots.svg" class = "signupEndLoadingIcon"/>
+    </span>
+    <div class = "contents" ng-show = "!loading">
+
+        <div class = "createAccountIntro" ng-if = "totstoo && !passwordStage">
+            Tots Too have teamed up with Azoomee to give your kids unlimited access to<br/>
+            1,200 age-appropriate games and videos on their mobile device.
+        </div>
+        <div class = "createAccount">
+            {[{passwordStage ? "Now create your password" : "Let's start with your email"}]}
+        </div>
+        <div class = "field">
+            <strong>
+                <div id = "errorMessage" ng-show = "errorMsg" class = "errorMsg fieldValue"
+                     ng-bind-html = "errorMsg"></div>
+            </strong>
+        </div>
+        <form name = "signupForm" class = "credentialsForm" ng-submit = "submitEmail()" ng-show = "!passwordStage"
+              novalidate>
+            <div class = "field signupEntryField">
+                <div class = "fieldValue">
+                    <input type = "email" class = "emailEntry" ng-model = "userId" placeholder = "Email" required
+                           id = "email">
+                    <input type = "submit" value = "Submit" class = "signUpButton" id = "submitEmailButton"/>
+                </div>
+            </div>
+            <div class = "terms">
+                By clicking the button above you accept the <a
+                href = "http://azoomee.com/index.php/terms-and-conditions/">General Conditions of Use</a> and <br/>
+                the use of your personal information as set forth in the <a
+                href = "http://azoomee.com/index.php/privacy-policy-2/">Privacy Policy</a>
+            </div>
+        </form>
+
+        <form class = "credentialsForm" ng-submit = "submitDetails()" ng-show = "passwordStage" novalidate>
+            <div class = "field">
+                <div class = "fieldValue">
+                    <div class = "valueWithTick">
+                        <input type = "password" ng-model = "password" placeholder = "PASSWORD" required id = "password"
+                               ng-disabled = "isAccountCreated()">
+                        <span ng-show = "voucherSent" class = "crossed"><i class = "fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class = "field stepMsg">
+                VOUCHER CODE
+            </div>
+            <div class = "field">
+                <div class = "fieldValue">
+                    <div class = "valueWithTick">
+                        <input type = "text" ng-model = "voucherCode" placeholder = "VOUCHER CODE" id = "voucherCode"
+                               ng-disabled = "voucherSent">
+                        <span ng-show = "voucherSent" class = "checked"><i class = "fa fa-check"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class = "submitButtonWrapper">
+                <input type = "submit" value = "SIGN UP" class = "continueButton" id = "submitPwdAndVoucherButton"/>
+            </div>
+        </form>
+
+        <div class = "alreadySignedUp">
+            Already an Azoomee user? <a ui-sref = "login" ng-show = "!inApp">Log in</a><a href = "azoomee://login"
+                                                                                          ng-show = "inApp"
+                                                                                          class = "submitButton">Log
+            in</a>
+        </div>
+
+    </div>
+</div>
+

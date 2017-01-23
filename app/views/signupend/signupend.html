@@ -1,0 +1,74 @@
+<p>This is the signupend view.</p>
+<div class = "signup thanksMessage" ng-if = "!totstoo">
+    <div class = "logoWrapper">
+
+    </div>
+
+    <div ng-show = "subscriptionStatus === 'SUBSCRIBED' && sponsor !== 'O2'" class = "stepMsg">
+        {[{strings.stepThreeOfThree}]}
+    </div>
+
+    <span ng-show = "loading">
+
+    </span>
+
+    <span ng-show = "!loading" id = "finalMessage" class = "finalMessageHolder">
+        <div ng-show = "subscriptionStatus === 'FREE_TRIAL'" class = "finalMessage">
+            <div class = "freePeriodMsg">{[{strings.thankYouRegistering}]}</div>
+            <div class = "freePeriodMsg periodMessage">{[{strings.unlimitedMode}]}</div>
+            <div class = "appLinkMsg" ng-show = "isDesktop()">{[{strings.enjoyApp}]}</div>
+        </div>
+
+        <div ng-show = "subscriptionStatus === 'SUBSCRIBED' && sponsor === 'O2'" class = "sponsoredByO2 finalMessage">
+            <div class = "o2Logo"></div>
+
+            <div class = "freePeriodMsg">{[{strings.thankYouRegistering}]}</div>
+            <div class = "freePeriodMsg periodMessage">{[{strings.periodFreeWithAzoomee(billingCycle, subscriptionDurationInCycles)}]}</div>
+            <div class = "appLinkMsg" ng-show = "isDesktop()">{[{strings.enjoyApp}]}</div>
+        </div>
+
+        <div ng-show = "subscriptionStatus === 'SUBSCRIBED' && sponsor === 'other'" class = "finalMessage">
+            <div class = "freePeriodMsg periodMessage">{[{strings.periodFreeWithAzoomee(billingCycle, subscriptionDurationInCycles)}]}</div>
+            <div class = "appLinkMsg" ng-show = "isDesktop()">{[{strings.enjoyApp}]}</div>
+        </div>
+
+        <div ng-show = "subscriptionStatus === 'FREE_REGISTERED' || subscriptionStatus === 'FREE_REGISTERED_PREMIUM'"
+             class = "finalMessage">
+            <div class = "freePeriodMsg">{[{strings.thankYouRegistering}]}</div>
+            <div class = "freePeriodMsg periodMessage">{[{strings.youCanAccessLimitedVersion}]}</div>
+            <div class = "appLinkMsg" ng-show = "isDesktop()">{[{strings.enjoyApp}]}</div>
+        </div>
+    </span>
+    <ng-include src = "'views/signup/applinks.tmpl.html'"></ng-include>
+    <img src = "images/signUp/forest_curve.png" class = "footerImage"/>
+</div>
+<div class = "contents signup thanksMessage" ng-if = "totstoo">
+    <div class = "logoWrapper">
+        <div class = "logo">
+            <img src = "images/logos/azoomee_logo.svg">
+        </div>
+    </div>
+    <span ng-show = "loading">
+        <img src = "images/three-dots.svg"/>
+    </span>
+    <span ng-show = "!loading" id = "finalMessage" class = "finalMessageHolder">
+        <div ng-show = "subscriptionStatus === 'FREE_TRIAL'" class = "finalMessage">
+            <div class = "freePeriodMsg">{[{strings.welcomeToPremium}]}</div>
+            <div class = "appLinkMsg" ng-show = "isDesktop()">{[{strings.enjoyApp}]}</div>
+            <ng-include src = "'views/signup/applinks.tmpl.html'"></ng-include>
+            <img src = "images/totstoo/oomee_02.png" class = "ommiee">
+        </div>
+        <div ng-show = "subscriptionStatus === 'FREE_REGISTERED' || subscriptionStatus === 'FREE_REGISTERED_PREMIUM'"
+             class = "finalMessage">
+            <div class = "freePeriodMsg">{[{strings.thankYouRegistering}]}</div>
+            <div class = "freePeriodMsg periodMessage">{[{strings.youCanAccessLimitedVersion}]}</div>
+            <div class = "appLinkMsg" ng-show = "isDesktop()">{[{strings.enjoyApp}]}</div>
+            <ng-include src = "'views/signup/applinks.tmpl.html'"></ng-include>
+        </div>
+        <div ng-show = "subscriptionStatus === 'SUBSCRIBED' && sponsor === 'other'" class = "finalMessage">
+            <div class = "freePeriodMsg periodMessage">{[{strings.periodFreeWithAzoomee(billingCycle, subscriptionDurationInCycles)}]}</div>
+            <div class = "appLinkMsg" ng-show = "isDesktop()">{[{strings.enjoyApp}]}</div>
+            <ng-include src = "'views/signup/applinks.tmpl.html'"></ng-include>
+        </div>
+    </span>
+</div>

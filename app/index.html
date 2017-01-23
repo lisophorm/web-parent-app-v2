@@ -9,6 +9,8 @@
 <ul class = "nav nav-tabs" role = "tablist">
     <li ng-class = "{active: $state.includes('home')}"><a ui-sref = "home">Home</a></li>
     <li ng-class = "{active: $state.includes('about')}"><a ui-sref = "about">about</a></li>
+    <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
+    </li>
     <li ng-click = "$root.logOut()">Logout</li>
 </ul>
 <div class = "container slide" ui-view></div>
@@ -21,6 +23,19 @@
     <!-- $state.$current is not a public api, we are using it to
          display the full url for learning purposes-->
 </pre>
+<script>
+    window.paceOptions = {
+        document: true, // disabled
+        eventLag: true,
+        restartOnPushState: true,
+        restartOnRequestAfter: true,
+        ajax: {
+            trackMethods: ['POST', 'GET']
+        }
+
+    }
+</script>
+<script src = "/js/load/pace.js"></script>
 <script src = "/lib/require.js" data-main = "/bundle.js"></script>
 <!-- inject:js -->
 <!-- endinject -->
@@ -42,5 +57,6 @@
     ga('send', 'pageview');
 
 </script>
+<cookie-consent></cookie-consent>
 </body>
 </html>

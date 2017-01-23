@@ -80,6 +80,7 @@ define(["angular"], function (angular) {
              */
             this.route = function (routeConfig) {
                 var wrapResolve = function (route) {
+                    var customCtrl = false;
                     if (route) {
                         // if loader provide check(), then check it
 
@@ -90,12 +91,21 @@ define(["angular"], function (angular) {
                             viewDir = routeConfig.getViewsDirectory() + state + "/",
                             controllDir = routeConfig.getControllerDirectory() + state + "/";
 
-                        route.templateUrl = viewDir + state + ".html";
+                        if (typeof route.templateUrl === 'undefined') {
+                            route.templateUrl = viewDir + state + ".html";
+                            console.log('**** templateUrl was undefined', route.templateUrl);
+
+                        }
+
+
+
 
                         console.log('**** actual route controller:', route.controller);
                         if (typeof route.controller === 'undefined') {
                             console.log('**** controller is undefined');
                             route.controller = state.charAt(0).toUpperCase() + state.slice(1) + "Ctrl as " + state;
+                        } else {
+                            customCtrl = true;
                         }
 
                         route.resolve = angular.extend(route.resolve || {}, {
@@ -105,7 +115,17 @@ define(["angular"], function (angular) {
                                  * init the dependencies array
                                  * @type {Array}
                                  */
-                                var dependencies = [controllDir + state + ".js"];
+                                console.log("*********** controller name", controllDir, customCtrl, route.controllerFile);
+
+                                if (typeof route.controllerFile === 'undefined') {
+                                    console.log("*********** controller file is 'undefined'");
+                                    var dependencies = [controllDir + state + ".js"];
+
+                                } else {
+                                    console.log("*********** controller file", route.controllerFile);
+
+                                    var dependencies = ['js/' + route.controllerFile];
+                                }
 
                                 /**
                                  * add services to dependencies array

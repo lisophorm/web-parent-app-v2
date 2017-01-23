@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title></title>
+    <script src = "/js/extractQueryParams.js"></script>
+    <script>
+        ;
+        (function () {
+            var queryParams = extractQueryParams();
+            if (parent && parent.cardAcceptedCallback) {
+                parent.cardAcceptedCallback(queryParams);
+            } else {
+                console.log("Card accepted callback was not found on parent window");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

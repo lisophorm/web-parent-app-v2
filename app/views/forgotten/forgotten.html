@@ -1,0 +1,27 @@
+<div class = "login">
+    <div class = "loginMsg">
+        Forgotten Password
+    </div>
+    <div class = "formWrapper" ng-show = "showForm">
+        <form name = "loginForm" class = "credentialsForm" ng-submit = "submit()" novalidate>
+            <div class = "field">
+                <div ng-show = "errorMsg" class = "errorMsg fieldValue"><strong>{{errorMsg}}</strong></div>
+            </div>
+            <div class = "field">
+                <div class = "fieldValue">
+                    <input type = "email" ng-model = "userId" placeholder = "email" required>
+                </div>
+            </div>
+
+            <div class = "submitButtonWrapper">
+                <input type = "submit" class = "autoSize forgottenPasswordButton" value = "SUBMIT"/>
+            </div>
+        </form>
+        <div>
+            Don't have an account? <a ui-sref = "signup">SIGN UP</a>
+        </div>
+    </div>
+    <div ng-show = "!showForm">
+        We have sent a new verification email, if you are still having problems please contact help@azoomee.com
+    </div>
+</div>

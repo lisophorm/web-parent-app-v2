@@ -1,0 +1,12 @@
+<div class = "verification">
+
+    <div ng-show = "loading">
+        <!--img src="images/three-dots.svg" class="verificationLoadingIcon"/-->
+    </div>
+    <div class = "board">
+        <div class = "message" ng-if = "message" ng-bind-html = "message"></div>
+        <button ng-if = "showRetry" class = "verificationButton az3dButton" id = "verifyButton" type = "button"
+                ng-show = "showVerificationButton" ng-click = "submitVerification()">{[{verificationButtonText}]}
+        </button>
+    </div>
+</div>

@@ -57,7 +57,7 @@ server.all('/*', function (req, res) {
 
 // Dev task
 gulp.task('dev', function (cb) {
-    runSequence('clean', ['inject', 'rjs'], cb);
+    runSequence('clean', ['inject', 'lint', 'copy', 'rjs'], cb);
 });
 
 // Clean task
@@ -66,12 +66,18 @@ gulp.task('clean', function (cb) {
         .pipe(rimraf());
 });
 
-
+// JSHint task
+gulp.task('lint', function () {
+    return gulp.src(['app/*.js', 'app/scripts/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(notify("jsHint ok!"));
+});
 
 gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
-    //      .pipe(annotate())
-    //      .pipe(gulp.dest('app'))
+    // .pipe(annotate())
+    //.pipe(gulp.dest('app'))
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
         .pipe(sourcemaps.write({
@@ -100,15 +106,21 @@ gulp.task('libScripts', function () {
         'bower_components/azoomee.web-components-jwt/Base64.js',
         'bower_components/crypto-js/crypto-js.js',
         'bower_components/moment/moment.js',
+        'bower_components/angular-scroll/angular-scroll.js',
+        'bower_components/jquery/dist/jquery.min.js'
     ])
         .pipe(gulp.dest('build/lib'));
 
 });
 
+gulp.task('copy', function () {
+    return gulp.src('app/images/**/*.*').pipe(gulp.dest('build/images'));
+});
+
 gulp.task('scripts', ['libScripts'], function () {
     return gulp.src(['app/scripts/**/*.js', 'app/scripts/**/**/*.js'])
-    //       .pipe(annotate())
-    //      .pipe(gulp.dest('app/scripts'))
+    //   .pipe(annotate())
+    //   .pipe(gulp.dest('app/scripts'))
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
         .pipe(sourcemaps.write({
@@ -180,7 +192,7 @@ gulp.task('views', function () {
 });
 
 
-gulp.task('watch', function () {
+gulp.task('watch', ['lint'], function () {
     // Start webserver
     server.listen(serverport);
     // Start live reload
@@ -190,6 +202,7 @@ gulp.task('watch', function () {
     gulp.watch(['bower_components/**/*.js', 'bower_components/**/release/*.js'], [
         'rjs'
     ]);
+    gulp.watch(['app/images/**/*.*'], {debounceDelay: 1000}, ['copy']);
 
     //watch our scripts, and when they change run lint and requirejs
     gulp.watch(['app/*.js', 'app/scripts/**/*.js', 'app/scripts/controllers/**/*.js'], {debounceDelay: 2000}, ['rjs']);
@@ -201,7 +214,7 @@ gulp.task('watch', function () {
 
     // gulp.watch(['app/*.html', 'app/**/*.html'], [
     //     'inject'
-    //  ]);
+    // ]);
 
     gulp.watch(['./build/**/*.html', './build/**/*.js'], {debounceDelay: 4000}).on('change', refresh.changed);
 

@@ -1,0 +1,80 @@
+<div class = "subscriptionOffer signupJourney">
+    <div class = "voucherAppliedMsg">
+        <i class = "fa fa-check"></i>&nbsp;{[{strings.isVoucherApplied}]}
+    </div>
+    <div class = "spacer"></div>
+
+    <div class = "logoWrapper">
+
+    </div>
+
+    <az-status-board status-object = "status" delay-error = "6000"></az-status-board>
+
+    <div class = "stepMsg">
+        {[{strings.stepTwoOfThree}]}
+    </div>
+
+    <div class = "planHolder">
+        <div class = "discount" ng-show = "voucherPercentageDiscount == 100">
+            {[{strings.voucherFreePeriod(voucherDurationInCycles, voucherBillingCycle)}]}
+            <div class = "arrow"></div>
+        </div>
+        <div class = "discount" ng-show = "voucherPercentageDiscount < 100">
+            {[{strings.voucherPercentageDiscount(voucherPercentageDiscount)}]}
+            <div class = "arrow"></div>
+        </div>
+        <div class = "planWrapper">
+            <div class = "plan">
+                <div class = "periodicityContainer" ng-show = "planTotalPrice">
+                    <div class = "amount" ng-show = "voucherPercentageDiscount < 100">
+                        <span class = "strikethroughLine">
+                            <span class = "figure">{[{money(planTotalPrice)}]}</span>
+                        </span>
+                        </span>
+                    </div>
+                    <div class = "amount">{[{voucherPercentageDiscount < 100 ? money(planDiscountPrice) :
+                        money(planTotalPrice)}]} {[{strings.period(voucherBillingCycle)}]}
+                    </div>
+                    <div class = "amount period" ng-if = "voucherPercentageDiscount < 100">
+                        {[{strings.forValidityPeriod(voucherBillingCycle, voucherDurationInCycles)}]}
+                    </div>
+                    <br/>
+                    <div class = "amount period {[{voucherPercentageDiscount < 100 ? 'planSmall':''}]}"><span
+                        ng-if = "voucherPercentageDiscount < 100">{[{strings.andThen}]}{[{money(planTotalPrice)}]} </span>{[{strings.period(planBillingCycle)}]}
+                    </div>
+                    {[{strings.cancelAnytime}]}
+                </div>
+                <div class = "offerContainer">
+                    <div class = "offerContent" ng-bind-html = "strings.planMessage1"></div>
+                    <div class = "offerContent" ng-bind-html = "strings.planMessage2"></div>
+                    <div class = "offerContent" ng-bind-html = "strings.planMessage3"></div>
+                    <div class = "donation" ng-if = "!totstoo">{[{strings.youWillDonateToNSPCC(planBillingCycle)}]}<br/>{[{strings.charityNumbers}]}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "skipPayment">
+            <input ng-click = "navigateToSignupEnd()" type = "button" value = "{[{strings.skipPayment}]}"
+                   class = "skipButton" id = "skipPayment">
+            <span ng-click = "navigateToSignupEnd()" class = "skipText" id = "skipPaymentText" ng-if = "totstoo">
+                {[{strings.skipPayment1}]}
+                <span class = "skipText2">
+                    {[{strings.skipPayment2}]}
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <span class = "paymentContainer">
+        <div ng-show = "!shouldRequestCardDetails()" class = "cardDetailsKnownBuySection">
+            <div>
+                {[{strings.cardWillBeCharged(billingStatus.paymentCardBrand, billingStatus.paymentCardNumber)}]}
+            </div>
+            <button ng-click = "changeCard = true" class = "changeCardDetailsButton">Pay with another card</button>
+            <button ng-click = "buy()" class = "buyButton">{[{strings.buy}]}</button>
+        </div>
+
+        <div ng-if = "shouldRequestCardDetails()" ng-include = "'views/addCard/addCard.html'"></div>
+    </span>
+
+</div>
