@@ -89,7 +89,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
         }
 
         function navigateToSubscriptionOffer() {
-            $location.path('/signupsubscriptionoffer');
+            $location.path('/signup/signupsubscriptionoffer');
         }
 
         function navigateToSignupEnd() {

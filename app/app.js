@@ -334,7 +334,9 @@ define([
                 })
                 .state('signupsubscriptionoffer', {
                     url: '/signup/signupsubscriptionoffer',
-                    files: ['first.service'],
+                    files: {
+                        s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
+                    },
                     resolve: {}
                 })
                 .state('subscriptionOffer', {
@@ -374,7 +376,12 @@ define([
                 })
                 .state('totstoo', {
                     url: '/totstoo',
-                    files: ['first.service'],
+                    templateUrl: 'views/signup/signup.html',
+                    controller: 'SignupCtrl',
+                    controllerFile: 'controllers/signup/signup.js',
+                    files: {
+                        s: ['first.service', 'rest/loginApi', 'rest/billingApi']
+                    },
                     resolve: {}
                 })
                 .state('verification', {

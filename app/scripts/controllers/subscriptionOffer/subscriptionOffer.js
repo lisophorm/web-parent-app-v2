@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name yoAngularifyApp.controller:SubscriptionofferCtrl
