@@ -1,6 +1,5 @@
-<p>This is the subscriptionOffer view.</p>
-<ng-include src = "'views/addCard/addCard.html'"></ng-include>
-
+<div
+    ng-include = "'views/addCard/addCard.html'"></div>
 <ng-include src = "'views/locked/locked.tmpl.html'" ng-if = "showVerificationWarning && displaySideNav"></ng-include>
 <div class = "viewHeader">{[{strings.title}]}</div>
 <div class = "subscriptionOffer">
@@ -56,7 +55,9 @@
             </div>
         </div>
     </div>
+    in mezzo
     <span ng-show = "!nothingToBePaid()">
+        carta
         <div ng-show = "!shouldRequestCardDetails() && (selectedPlan !== -1)" class = "cardDetailsKnownBuySection">
             <div>
                 {[{strings.cardWillBeCharged(billingStatus.paymentCardBrand, billingStatus.paymentCardNumber)}]}
@@ -65,6 +66,6 @@
             <button ng-click = "buy()" class = "buyButton">{[{strings.buy}]}</button>
         </div>
         <div ng-if = "shouldRequestCardDetails() && (selectedPlan !== -1)"
-             ng-include = "'views/addCard/addCard.tmpl.html'"></div>
+             ng-include = "'views/addCard/addCard.html'"></div>
     </span>
 </div>

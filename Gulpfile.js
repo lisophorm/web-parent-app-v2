@@ -57,7 +57,7 @@ server.all('/*', function (req, res) {
 
 // Dev task
 gulp.task('dev', function (cb) {
-    runSequence('clean', ['inject', 'lint', 'rjs'], cb);
+    runSequence('clean', ['inject', 'lint', 'copy', 'rjs'], cb);
 });
 
 // Clean task
@@ -109,6 +109,10 @@ gulp.task('libScripts', function () {
     ])
         .pipe(gulp.dest('build/lib'));
 
+});
+
+gulp.task('copy', function () {
+    return gulp.src('app/images/**/*.*').pipe(gulp.dest('build/images'));
 });
 
 gulp.task('scripts', ['libScripts'], function () {
@@ -196,6 +200,7 @@ gulp.task('watch', ['lint'], function () {
     gulp.watch(['bower_components/**/*.js', 'bower_components/**/release/*.js'], [
         'rjs'
     ]);
+    gulp.watch(['app/images/**/*.*'], {debounceDelay: 1000}, ['copy']);
 
     //watch our scripts, and when they change run lint and requirejs
     gulp.watch(['app/*.js', 'app/scripts/**/*.js', 'app/scripts/controllers/**/*.js'], {debounceDelay: 2000}, ['rjs']);

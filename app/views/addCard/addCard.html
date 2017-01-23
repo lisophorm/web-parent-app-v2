@@ -1,3 +1,21 @@
-<p ng-controller = "AddcardCtrl">This is the addCard view.</p>
-<script src = "/js/extractQueryParams.js"></script>
-<p>{[{title}]}</p>
+{[{availableCardTypes}]}
+<div id = "addCard" class = "addCard" ng-show = "!loading" ng-controller = "AddCardCtrl">
+    <div id = "cardOptionsHeader" class = "cardOptionsHeader">{[{strings.payWith}]}:</div>
+    <div class = "selectCardType customRadioGroup">
+        <div ng-repeat = "cardType in availableCardTypes" class = "cardBrand">
+            <input type = "radio" id = "{[{'radioCard' + $index}]}" name = "selectedCard"
+                   ng-model = "$parent.selectedCard" value = "{[{cardType.id}]}" class = "cardTypeRadioButton">
+            <label for = "{[{'radioCard' + $index}]}" class = "cardTypeLabel">
+                <img ng-src = "{[{cardType.logoUrl}]}">
+            </label>
+        </div>
+    </div>
+
+    <iframe class = "paymentIFrame" ng-if = "showIFrame" ng-src = "{[{iFrameUrl}]}"></iframe>
+
+    <az-status-board status-object = "status" delay-success = "2000"></az-status-board>
+
+</div>
+<div class = "addCard" ng-show = "loading">
+    {[{strings.loading}]}
+</div>

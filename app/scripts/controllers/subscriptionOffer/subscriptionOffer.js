@@ -108,6 +108,7 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
             }
 
             function buy() {
+                console.log('called buy function');
                 var selectedPlanIdx = parseFloat($scope.selectedPlan),
                     planToBuy = $scope.plans[selectedPlanIdx];
                 billingApi.updateBillingCycle(planToBuy.billingCycle)
@@ -126,9 +127,9 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
 
             function navigateToSubscriptionStatus() {
                 if ($scope.signupJourney) {
-                    $location.path("/signup/subscriptionStatus").search({justSubscribed: true});
+                    $location.path("/signup/subscriptionstatus").search({justSubscribed: true});
                 } else {
-                    $location.path("/subscriptionStatus").search({justSubscribed: true});
+                    $location.path("/subscriptionstatus").search({justSubscribed: true});
                 }
             }
 

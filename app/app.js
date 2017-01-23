@@ -306,6 +306,7 @@ define([
             $stateProvider
                 .state('subscriptionstatus', {
                     url: '/subscriptionstatus',
+                    controller: 'SubscriptionstatusCtrl',
                     files: {
                         s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
                     },
@@ -318,7 +319,7 @@ define([
                 })
                 .state('addCard', {
                     url: '/addcard',
-                    controller: 'AddcardCtrl',
+                    controller: 'AddCardCtrl',
                     files: ['first.service'],
                     resolve: {}
                 })
