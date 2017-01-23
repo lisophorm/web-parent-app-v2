@@ -24,7 +24,8 @@ define([
     "userSession",
     "httpProviderConfig",
     "analytics/analytics",
-    "strings"
+    "strings",
+    "angularScroll"
 
 
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
@@ -68,10 +69,16 @@ define([
         [
             "ngAnimate",
             "com.tinizine.azoomee.parent.strings",
-            "ngCookies", "ngResource", "ngSanitize", "ngTouch",
+            "ngCookies",
+            "ngResource",
+            "ngSanitize",
+            "ngTouch",
             "ui.router",
             "routeResolver",
             "lazyLoad",
+            "duScroll"
+
+
             //
             //'com.tinizine.azoomee.userSession'
         ])
@@ -320,7 +327,9 @@ define([
                 .state('addCard', {
                     url: '/addcard',
                     controller: 'AddCardCtrl',
-                    files: ['first.service'],
+                    files: {
+                        s: ['first.service', 'rest/billingApi']
+                    },
                     resolve: {}
                 })
                 .state('signupsubscriptionoffer', {

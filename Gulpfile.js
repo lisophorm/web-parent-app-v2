@@ -106,6 +106,8 @@ gulp.task('libScripts', function () {
         'bower_components/azoomee.web-components-jwt/Base64.js',
         'bower_components/crypto-js/crypto-js.js',
         'bower_components/moment/moment.js',
+        'bower_components/angular-scroll/angular-scroll.js',
+        'bower_components/jquery/dist/jquery.min.js'
     ])
         .pipe(gulp.dest('build/lib'));
 

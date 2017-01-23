@@ -12,6 +12,8 @@ require.config({
         "ngSanitize": 'lib/angular-sanitize.min',
         "ngTouch": 'lib/angular-touch.min',
         "routeResolver": "js/load/route-resolver",
+        "jquery": "lib/jquery.min",
+        "angularScroll": "lib/angular-scroll",
         "moment": "lib/moment",
         "lazyLoad": "js/load/lazy-load",
         // alan shit
