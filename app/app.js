@@ -311,6 +311,19 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('voucherredeem', {
+                    url: '/voucherredeem',
+                    files: ['first.service'],
+                    resolve: {}
+                })
+                .state('voucherredemption', {
+                    url: '/voucherredemption',
+                    controller: 'VoucherredemptionCtrl',
+                    files: {
+                        s: ['first.service', 'rest/loginApi', 'rest/userApi']
+                    },
+                    resolve: {}
+                })
                 .state('subscriptionstatus', {
                     url: '/subscriptionstatus',
                     controller: 'SubscriptionstatusCtrl',

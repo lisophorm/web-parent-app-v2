@@ -8,8 +8,9 @@
 <body ng-controller = "MainCtrl">
 <ul class = "nav nav-tabs" role = "tablist">
     <li ng-class = "{active: $state.includes('home')}"><a ui-sref = "home">Home</a></li>
-    <li ng-class = "{active: $state.includes('about')}"><a ui-sref = "about">about</a></li>
     <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
+    <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
+
     </li>
     <li ng-click = "$root.logOut()">Logout</li>
 </ul>

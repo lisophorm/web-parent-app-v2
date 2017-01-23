@@ -28,6 +28,7 @@ define([
             }
             if ($stateParams.token) {
                 $scope.loading = true;
+                Pace.restart();
                 loginApi.loginUsingToken($scope.userId, $stateParams.token).then(
                     loginSuccess,
                     function (err) {
@@ -40,6 +41,7 @@ define([
             $scope.submit = function () {
                 console.log('LOGIN FUNCTION');
                 $scope.loading = true;
+                Pace.restart();
                 loginApi.login($scope.userId, $scope.pwd)
                     .then(
                         loginSuccess,
@@ -70,6 +72,7 @@ define([
                 console.log('LOGIN ERROR');
                 analytics.sendEvent({type: 'parentAppLoginFailure'});
                 $scope.loading = false;
+                Pace.stop();
                 //$scope.loginForm.$setUntouched();
                 $scope.pwd = "";
                 $scope.errorMsg = "LOGIN ERROR";

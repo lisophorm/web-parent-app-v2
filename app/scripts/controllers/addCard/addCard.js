@@ -16,6 +16,7 @@ define(['app', 'angular', 'config', 'azStatusBoard'], function (app, angular, co
             $scope.showIFrame = false;
             //$scope.submitCardType = controller.submitCardType;
             $scope.loading = false;
+            Pace.stop();
             $scope.strings = addCardStrings;
             $scope.$watch("selectedCard", cardSelected);
             function cardSelected(newCard, oldCard) {
@@ -44,6 +45,7 @@ define(['app', 'angular', 'config', 'azStatusBoard'], function (app, angular, co
                 removeCallbackMethods();
                 $timeout(function () {
                     $scope.loading = true;
+                    Pace.start();
                     updateCard(responseData);
                 });
             }
@@ -56,7 +58,7 @@ define(['app', 'angular', 'config', 'azStatusBoard'], function (app, angular, co
                 };
                 billingApi.updateCardDetails(cardDetails).then(function () {
                     $scope.loading = false;
-
+                    Pace.stop();
                     $scope.showIFrame = false;
                     $scope.status.setSuccessMsg(addCardStrings.updateSuccess);
                     if (paymentDetailsChangedListener) {
@@ -73,6 +75,7 @@ define(['app', 'angular', 'config', 'azStatusBoard'], function (app, angular, co
                 removeCallbackMethods();
                 $timeout(function () {
                     $scope.loading = false;
+                    Pace.stop();
                     $scope.showIFrame = false;
                     $scope.status.setErrorMsg(addCardStrings.updateFailure);
                     if (paymentDetailsChangedListener) {
