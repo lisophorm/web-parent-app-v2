@@ -1,0 +1,32 @@
+<ng-include src = "'views/locked/locked.tmpl.html'" ng-if = "showVerificationWarning && displaySideNav"></ng-include>
+<div class = "viewHeader">{[{strings.title}]}</div>
+<div class = "voucherRedemption">
+    <div ng-show = "loading" class = "loading">
+        <img src = "images/three-dots.svg" class = "voucherRedemptionLoadingIcon"/>
+    </div>
+    <form class = "voucherForm" ng-show = "!loading" ng-submit = "submit()" novalidate>
+        <div class = "field mainHeader">
+            {[{strings.redeemYourVoucher}]}
+        </div>
+        <div class = "field secondaryHeader">
+            {[{strings.enterCodeBelow}]}
+        </div>
+        <div class = "field instructions">
+            {[{strings.enterPinForGiftCard}]}
+        </div>
+        <div class = "field instructions">
+            {[{strings.enterStorePremiumCode}]}
+        </div>
+        <div class = "field">
+            <input class = "voucherCodeField" type = "text" ng-model = "voucherCode"
+                   placeholder = "{[{strings.voucherCode}]}" id = "voucherCode" required>
+        </div>
+        <div class = "field">
+            <div ng-show = "errorMsg" class = "errorMsg fieldValue" id = "errorMessage"><strong>{[{errorMsg}]}</strong>
+            </div>
+        </div>
+        <div class = "submitButtonWrapper">
+            <input type = "submit" value = "{[{strings.continue}]}" class = "continueButton"/>
+        </div>
+    </form>
+</div>
