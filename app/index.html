@@ -8,7 +8,8 @@
 <body ng-controller = "MainCtrl">
 Logged in: {[{$root.loggedIn}]}
 <ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
-    <li ng-class = "{active: $state.includes('home')}"><a ui-sref = "home">Home</a></li>
+    <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
+        Profile</a></li>
     <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
     <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
     <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>

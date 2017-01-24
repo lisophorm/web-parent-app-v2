@@ -522,6 +522,7 @@ define([
         $rootScope.caccamo = "tre";
         userSession.setOnSessionAvailable(sessionCallBack);
         userSession.setOnSessionExpired(sessionCallBack);
+        $rootScope.userID = $rootScope.linkJWT();
 
         function sessionCallBack() {
             var loggedIn = false;
