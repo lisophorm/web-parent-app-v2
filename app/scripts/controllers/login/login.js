@@ -34,6 +34,7 @@ define([
                     function (err) {
                         console.log("Error login in with token", err);
                         $scope.loading = false;
+                        Pace.stop();
                     }
                 );
             }
@@ -41,7 +42,7 @@ define([
             $scope.submit = function () {
                 console.log('LOGIN FUNCTION');
                 $scope.loading = true;
-                Pace.restart();
+                Pace.start();
                 loginApi.login($scope.userId, $scope.pwd)
                     .then(
                         loginSuccess,

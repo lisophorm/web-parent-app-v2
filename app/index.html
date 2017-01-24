@@ -6,7 +6,8 @@
     <!-- endinject -->
 </head>
 <body ng-controller = "MainCtrl">
-<ul class = "nav nav-tabs" role = "tablist">
+Logged in: {[{$root.loggedIn}]}
+<ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
     <li ng-class = "{active: $state.includes('home')}"><a ui-sref = "home">Home</a></li>
     <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
     <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>

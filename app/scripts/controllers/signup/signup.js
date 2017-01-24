@@ -30,6 +30,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
             var submitVoucherPromise;
             $scope.errorMsg = "";
             $scope.loading = true;
+            Pace.start();
 
             if (isAccountCreated()) {
                 submitVoucherPromise = submitVoucher();
@@ -109,6 +110,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
                 }
             }
             $scope.loading = false;
+            Pace.stop()
             return $q.reject(err);
         }
 
@@ -118,6 +120,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
             }
 
             $scope.loading = false;
+            Pace.stop()
         }
 
         function createAccount(userCredentials) {

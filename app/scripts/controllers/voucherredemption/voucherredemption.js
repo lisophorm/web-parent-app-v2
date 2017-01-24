@@ -20,6 +20,7 @@ define(['app', 'angular'], function (app, angular) {
             }
             $scope.errorMsg = "";
             $scope.loading = true;
+            Pace.start();
             billingApi.addVoucher($scope.voucherCode)
                 .then(
                     voucherSuccess,
@@ -39,14 +40,15 @@ define(['app', 'angular'], function (app, angular) {
         }
 
         function navigateToSubscriptionOffer() {
-            $location.path('/subscriptionOffer');
+            $location.path('/subscriptionoffer');
         }
 
         function navigateToSubscriptionStatus() {
-            $location.path('/subscriptionStatus');
+            $location.path('/subscriptionstatus');
         }
 
         function voucherFailure(err) {
+            console.log("****** network error");
             analytics.sendEvent({type: 'invalidVoucherCodeOnRedemption', eventData: {httpStatus: err.status}});
             if (err) {
                 if (err.status === 409) {
@@ -58,6 +60,7 @@ define(['app', 'angular'], function (app, angular) {
                 }
             }
             $scope.loading = false;
+            Pace.stop();
             return $q.reject(err);
         }
     }]);

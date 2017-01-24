@@ -268,8 +268,24 @@ define([
         //
         // form the original project
         .run(
-            ["$rootScope", "$state", "$stateParams", "routeResolver",
-                function ($rootScope, $state, $stateParams, routeResolver) {
+            ["$rootScope", "$state", "$stateParams", "routeResolver", "userSession",
+                function ($rootScope, $state, $stateParams, routeResolver, userSession) {
+                    console.log('******** RUN');
+                    $rootScope.loggedIn = false;
+                    $rootScope.linkJWT = userSession.getJWTUser;
+                    if ($rootScope.linkJWT() !== 'undefined') {
+                        console.log('******** RUN user is logged in');
+
+                        $rootScope.loggedIn = true;
+
+                    } else {
+                        console.log('******** RUN user is NOT logged in');
+
+                        $rootScope.loggedIn = false;
+                    }
+
+                    console.log(userSession.getJWTUser());
+
                     $rootScope.$state = $state;
                     $rootScope.$stateParams = $stateParams;
                     $rootScope.$on("$stateChangeStart", function (e, target) {
@@ -311,11 +327,12 @@ define([
             // url can be camelcase
             //
             $stateProvider
+
                 .state('voucherredemption', {
                     url: '/voucherredemption',
                     controller: 'VoucherredemptionCtrl',
                     files: {
-                        s: ['first.service', 'rest/loginApi', 'rest/userApi']
+                        s: ['first.service', 'rest/loginApi', 'rest/userApi', 'rest/billingApi']
                     },
                     resolve: {}
                 })
@@ -480,6 +497,31 @@ define([
                 this.$apply(fn);
             }
         };
+        $rootScope.caccamo = "tre";
+        userSession.setOnSessionAvailable(sessionCallBack);
+        userSession.setOnSessionExpired(sessionCallBack);
+
+        function sessionCallBack() {
+            var loggedIn = false;
+            console.log("******* CALLBACK USER SESSION TYPE");
+            console.log($rootScope.linkJWT());
+            if ($rootScope.linkJWT() === 'undefined') {
+                console.log('******** user is NOT logged in');
+
+                loggedIn = false;
+
+            } else {
+                console.log('******** user is logged in');
+                loggedIn = true;
+
+            }
+            $rootScope.safeApply(function () {
+                console.log('******** SAFE APPLY', loggedIn);
+                $rootScope.loggedIn = loggedIn;
+            })
+        }
+
+        console.log("******* USER SESSION TYPE", userSession.getAuthSession());
 
         // bloody requireJS too complex using the rest services here
         //
@@ -515,9 +557,9 @@ define([
             userSession.sessionChanged("", "", true);
             //analytics.sendEvent({ type: "logout" });
             //analytics.clearUserId();
-            //if (window.trackJs) {
-            //trackJs.removeMetadata("user");
-            //}
+            if (window.trackJs) {
+                trackJs.removeMetadata("user");
+            }
             //dataStore.clearResources();
             $location.url('/#/login');
         }

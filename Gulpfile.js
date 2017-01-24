@@ -29,11 +29,11 @@ var express = require('express'),
 var rjsConfig = {
     mainConfigFile: "build/main.js",
     //optimize: "none",
-    optimize: "uglify2",
+    optimize: "none",
     baseUrl: "build",
     name: "main",
     out: "build/bundle.js",
-    removeCombined: true,
+    removeCombined: false,
     generateSourceMaps: true,
     preserveLicenseComments: true,
     findNestedDependencies: true

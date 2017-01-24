@@ -35,6 +35,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
                     verificationFailure
                 );
             $scope.loading = true;
+            Pace.start();
         }
 
         function shouldHideVerification(resp) {
@@ -47,6 +48,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
         function verificationSuccess(resp) {
             $scope.success = true;
             $scope.loading = false;
+            Pace.stop()
             if (window.fbq) {
                 window.fbq('track', 'CompleteRegistration');
             }
@@ -76,6 +78,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
             $scope.showVerificationButton = true;
             $scope.verificationButtonText = "Retry";
             $scope.loading = false;
+            Pace.stop();
             if (emptyToken && emptyToken.status === 410) {
                 $scope.message = "Your e-mail address has already been verified,<br /><a ui-sref='login'>Try logging in now!</a> ";
                 $scope.showRetry = false;

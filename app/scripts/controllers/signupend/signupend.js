@@ -21,11 +21,13 @@ define(['app', 'angular'], function (app, angular) {
         $scope.strings = signupEndStrings;
 
         $scope.loading = true;
+        Pace.start();
         $scope.isDesktop = checkIsDesktop;
 
         billingApi.getBillingStatus()
             .then(function (billingStatus) {
                 $scope.loading = false;
+                Pace.stop();
                 $scope.subscriptionStatus = billingStatus.billingStatus;
                 $scope.paidSubscriber = billingStatus.isPaidSubscriber;
                 $scope.billingCycle = billingStatus.billingCycle;
