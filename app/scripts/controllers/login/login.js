@@ -42,7 +42,7 @@ define([
             $scope.submit = function () {
                 console.log('LOGIN FUNCTION');
                 $scope.loading = true;
-                Pace.start();
+                Pace.restart();
                 loginApi.login($scope.userId, $scope.pwd)
                     .then(
                         loginSuccess,
@@ -50,6 +50,7 @@ define([
             }
 
             function loginSuccess() {
+                Pace.stop();
                 console.log('LOGIN SUCCESS');
                 console.log(userSession.getJWTUser());
                 $rootScope.userUpdated();
@@ -66,7 +67,7 @@ define([
                     $location.url(searchParams.goto);
                     return;
                 }
-                $location.url("/home");
+                $location.url("/profile/adult/" + userSession.getJWTUser());
             }
 
             function loginError(resp) {

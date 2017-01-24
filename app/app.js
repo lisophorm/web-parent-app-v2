@@ -271,11 +271,17 @@ define([
             ["$rootScope", "$state", "$stateParams", "routeResolver", "userSession",
                 function ($rootScope, $state, $stateParams, routeResolver, userSession) {
                     console.log('******** RUN');
+                    console.log(userSession.getJWTUser());
                     $rootScope.loggedIn = false;
                     $rootScope.linkJWT = userSession.getJWTUser;
-                    if ($rootScope.linkJWT() !== 'undefined') {
-                        console.log('******** RUN user is logged in');
+                    if (typeof $rootScope.linkJWT() === 'undefined') {
+                        $rootScope.loggedIn = false;
+                    } else if (!$rootScope.linkJWT()) {
+                        console.log('******** usersession is NULL');
+                        $rootScope.loggedIn = false;
 
+                    } else if ($rootScope.linkJWT() !== 'undefined') {
+                        console.log('******** RUN user is logged in');
                         $rootScope.loggedIn = true;
 
                     } else {
@@ -327,6 +333,15 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('editadultprofile', {
+                    url: '/profile/adult/:profileId/edit',
+                    controller: 'EditadultprofileCtrl',
+                    templateUrl: 'views/profile/editadultprofile.html',
+                    files: {
+                        s: ['rest/userApi']
+                    },
+                    resolve: {}
+                })
                 .state('displayprofile', {
                     url: '/profile/:profileType/:profileId',
                     templateUrl: 'views/profile/displayprofile.html',
@@ -411,7 +426,9 @@ define([
                 .state('change_password', {
                     url: '/change_password',
                     controller: 'ChangePasswordCtrl',
-                    files: ['first.service'],
+                    files: {
+                        s: ['first.service', 'rest/passwordApi']
+                    },
                     resolve: {}
                 })
                 .state('passwordreset', {
