@@ -31,6 +31,17 @@ define([
                             return Promise.reject(err);
                         });
                 },
+                updateAdultProfile: function (updatedProfile) {
+                    console.log("*********** update adult profile", updatedProfile);
+                    return $http({
+                        url: config.userUrl + '/adult/' + updatedProfile.id,
+                        method: "PATCH",
+                        data: updatedProfile
+                    }).then(null, function (err) {
+                        console.log('failed to update adult profile', profilePatch);
+                        return Promise.reject(err);
+                    });
+                }
             };
 
         function ensureAvatarIsSet(profile) {

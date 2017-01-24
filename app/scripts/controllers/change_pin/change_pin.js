@@ -8,7 +8,7 @@
  * Controller of the yoAngularifyApp
  */
 
-define(['app', 'angular', 'underscore'], function (app, angular, _) {
+define(['app', 'angular', 'underscore', 'azStatusBoard'], function (app, angular, _) {
     app.controller('ChangePinCtrl', ['$scope', 'pinFormStrings', 'userApi', '$timeout', '$location', 'analytics',
         function ($scope, pinFormStrings, userApi, $timeout, $location, analytics) {
             console.log("*** change pin controller");

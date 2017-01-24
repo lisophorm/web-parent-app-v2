@@ -327,6 +327,14 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('displayprofile', {
+                    url: '/profile/:profileType/:profileId',
+                    templateUrl: 'views/profile/displayprofile.html',
+                    files: {
+                        s: ['rest/userApi']
+                    },
+                    resolve: {}
+                })
                 .state('change_pin', {
                     url: '/change_pin',
                     controller: 'ChangePinCtrl',
