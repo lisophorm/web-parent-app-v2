@@ -120,7 +120,7 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
             }
 
             function paymentFailed() {
-                $location.path("/cardRejection");
+                $location.path("/cardrejection");
             }
 
             function navigateToSubscriptionStatus() {
