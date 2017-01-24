@@ -12,7 +12,7 @@ require.config({
         "ngSanitize": 'lib/angular-sanitize.min',
         "ngTouch": 'lib/angular-touch.min',
         "routeResolver": "js/load/route-resolver",
-        "jquery": "lib/jquery.min",
+        "jquery": "/lib/jquery.min",
         "angularScroll": "lib/angular-scroll",
         "moment": "lib/moment",
         "lazyLoad": "js/load/lazy-load",
@@ -22,7 +22,10 @@ require.config({
         "app": "app",
         "analytics": "js/analytics",
         "addCard": "/js/controllers/addCard/addCard",
-        "azStatusBoard": "/js/directives/azstatusboard"
+        "azStatusBoard": "/js/directives/azstatusboard",
+        'slick-carousel': '/lib/slick',
+        'underscore': '/lib/underscore',
+
     },
     shim: {
         "angular": {

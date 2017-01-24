@@ -78,11 +78,10 @@ gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
     // .pipe(annotate())
     //.pipe(gulp.dest('app'))
-        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.init())
+        .pipe(annotate())
         .pipe(uglify())
-        .pipe(sourcemaps.write({
-            addComment: false
-        }))
+        .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('build'))
         .pipe(notify("entry ok!"));
 });
@@ -107,7 +106,10 @@ gulp.task('libScripts', function () {
         'bower_components/crypto-js/crypto-js.js',
         'bower_components/moment/moment.js',
         'bower_components/angular-scroll/angular-scroll.js',
-        'bower_components/jquery/dist/jquery.min.js'
+        'bower_components/jquery/dist/jquery.min.js',
+        'bower_components/underscore/underscore.js',
+        'bower_components/slick-carousel/slick/slick.js',
+        'bower_components/slick-carousel/slick/slick.css',
     ])
         .pipe(gulp.dest('build/lib'));
 
@@ -121,11 +123,10 @@ gulp.task('scripts', ['libScripts'], function () {
     return gulp.src(['app/scripts/**/*.js', 'app/scripts/**/**/*.js'])
     //   .pipe(annotate())
     //   .pipe(gulp.dest('app/scripts'))
-        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.init())
+        .pipe(annotate())
         .pipe(uglify())
-        .pipe(sourcemaps.write({
-            addComment: true
-        }))
+        .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('build/js'))
         .pipe(notify("scripts ok!"));
 });

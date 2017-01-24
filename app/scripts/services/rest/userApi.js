@@ -16,10 +16,26 @@ define([
                         }
                         return true;
                     });
-                }
+                },
+                getAdultProfile: function () {
+                    var profileId = userSession.getJWTUser();
+                    return $http({
+                        url: config.userUrl + '/adult/' + profileId,
+                        method: "GET"
+                    })
+                        .then(function (adultProfile) {
+                            ensureAvatarIsSet(adultProfile.data);
+                            return adultProfile.data;
+                        }, function (err) {
+                            console.log("Failed to retrieve adult profile", profileId, err);
+                            return Promise.reject(err);
+                        });
+                },
             };
 
         function ensureAvatarIsSet(profile) {
+            console.log("*** ENSURE AVATAR IS SET");
+            console.log(profile);
             if (!profile.avatar) {
                 profile.avatar = config.defaultAvatar;
             }

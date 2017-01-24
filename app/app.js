@@ -327,6 +327,20 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('change_pin', {
+                    url: '/change_pin',
+                    controller: 'ChangePinCtrl',
+                    templateUrl: 'views/pin/pinForm.html',
+                    files: {
+                        s: ['rest/userApi']
+                    },
+                    resolve: {}
+                })
+                .state('learnmore', {
+                    url: '/learnmore',
+                    files: ['first.service'],
+                    resolve: {}
+                })
 
                 .state('voucherredemption', {
                     url: '/voucherredemption',
