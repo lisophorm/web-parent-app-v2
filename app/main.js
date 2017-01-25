@@ -25,7 +25,8 @@ require.config({
         "azStatusBoard": "/js/directives/azstatusboard",
         'slick-carousel': '/lib/slick',
         'underscore': '/lib/underscore',
-
+        'ModalService': 'lib/angular-modal-service',
+        'ModalcontrollerCtrl': "/js/controllers/modalcontroller/modalcontroller"
     },
     shim: {
         "angular": {

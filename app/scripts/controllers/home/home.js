@@ -8,8 +8,8 @@
  * Controller of the com.tinizine.azoomee.parent.main
  */
 
-define(['app', 'angular', 'config'], function (app, angular, config) {
-    app.controller('HomeCtrl', ["$scope", "servo01", "factory01", 'userSession', '$http', 'forgottenPasswordStrings', function ($scope, servo01, factory01, userSession, $http, forgottenPasswordStrings) {
+define(['app', 'angular', 'config', 'ModalcontrollerCtrl'], function (app, angular, config) {
+    app.controller('HomeCtrl', ["$scope", "servo01", "factory01", 'userSession', '$http', 'forgottenPasswordStrings', 'ModalService', function ($scope, servo01, factory01, userSession, $http, forgottenPasswordStrings, ModalService) {
         $scope.title = "Home page";
         $scope.dummy = servo01.getGreet();
         $scope.userID = userSession.getJWTUser();
@@ -29,6 +29,22 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
         }, function (erro) {
             console.log('USER ERROR', erro);
         });
+        $scope.showModal = function () {
+            console.log('show modal');
+            ModalService.showModal({
+                templateUrl: "/views/modals/template.html",
+                controller: "ModalcontrollerCtrl"
+            }).then(function (modal) {
+                console.log("modal then", modal);
+                //it's a bootstrap element, use 'modal' to show it
+                //modal.element.modal();
+                modal.close.then(function (result) {
+
+                    console.log('result passed by modal');
+                    console.log(result);
+                });
+            });
+        }
     }]);
     // ...
     //or use angular.module to create a new module

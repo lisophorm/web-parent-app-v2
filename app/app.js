@@ -25,7 +25,8 @@ define([
     "httpProviderConfig",
     "analytics/analytics",
     "strings",
-    "angularScroll"
+    "angularScroll",
+    "ModalService"
 
 
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
@@ -76,7 +77,8 @@ define([
             "ui.router",
             "routeResolver",
             "lazyLoad",
-            "duScroll"
+            "duScroll",
+            "angularModalService"
 
 
             //

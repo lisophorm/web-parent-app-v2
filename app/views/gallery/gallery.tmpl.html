@@ -1,0 +1,14 @@
+<div class = "modal" tabindex = "-1" role = "dialog">
+    <div class = "modal-dialog modal-lg">
+        <div class = "modal-content galleryDialog">
+            <div class = "modal-body">
+                <div class = "imageList">
+                    <div id = "gallery-image-container-{{$index}}" class = "imageListItem"
+                         ng-click = "imageSelected(image)" ng-repeat = "image in images track by $index">
+                        <img id = "gallery-image-{{$index}}" class = "image" ng-src = "{{image.url}}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
