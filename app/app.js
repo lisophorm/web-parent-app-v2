@@ -335,6 +335,13 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('editprofile', {
+                    url: '/profile/child/:profileId/edit',
+                    controller: "EditprofileCtrl",
+                    files: ['first.service'],
+                    templateUrl: 'views/profile/editprofile.html',
+                    resolve: {}
+                })
                 .state('editadultprofile', {
                     url: '/profile/adult/:profileId/edit',
                     controller: 'EditadultprofileCtrl',
@@ -526,8 +533,10 @@ define([
             }
         }]);
     analytics(app); //Attach analytics factory to app
-    app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', '$http', '$q', function ($scope, $rootScope, externalPaths, userSession, $location, $http, $q) {
+    app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', '$http', '$q', 'notVerifiedStrings', function ($scope, $rootScope, externalPaths, userSession, $location, $http, $q, notVerifiedStrings) {
         console.log('********** MAIN CONTROLLER');
+        $rootScope.notVerifiedStrings = notVerifiedStrings;
+
         $rootScope.safeApply = function (fn) {
             var phase = this.$root.$$phase;
             if (phase == '$apply' || phase == '$digest') {
@@ -576,6 +585,14 @@ define([
                 method: "GET"
             }).then(function (res) {
                 console.log('user success', res.data);
+                if (res.data.actorStatus == "VERIFIED") {
+
+                    $rootScope.showVerificationWarning = false;
+
+                } else {
+                    $rootScope.showVerificationWarning = true;
+
+                }
                 $scope.profileName = res.data.profileName;
                 defer.resolve(res);
             }, function (erro) {
@@ -585,6 +602,8 @@ define([
             return defer.promise;
 
         }
+
+        $rootScope.userUpdated();
 
         /*     $rootScope.userUpdated = function () {
          return userApi.isUserVerified().then(function (isUserVerified) {

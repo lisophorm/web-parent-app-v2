@@ -6,7 +6,16 @@
     <!-- endinject -->
 </head>
 <body ng-controller = "MainCtrl">
-Logged in: {[{$root.loggedIn}]}
+<div ng-if = "$root.showVerificationWarning && $root.loggedIn" class = "verificationWarning">
+    {[{notVerifiedStrings.message1}]}
+    <span class = "fullMessage">
+            {[{notVerifiedStrings.message2}]}
+            <a ui-sref = "resendverification">
+                {[{notVerifiedStrings.messageLinkText}]}
+            </a>
+        </span>
+</div>
+Logged in: {[{$root.loggedIn}]} verification warning: {[{$root.showVerificationWarning}]}
 <ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
     <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
         Profile</a></li>
@@ -17,7 +26,9 @@ Logged in: {[{$root.loggedIn}]}
     <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
     <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>
 
-        <!--li>Manage Kids Accounts</li-->
+        <ul>Manage Kids Accounts
+            <li></li>
+        </ul>
     <li></li>
 
     </li>

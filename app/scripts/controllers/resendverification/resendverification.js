@@ -11,7 +11,8 @@
 define(['app', 'angular'], function (app, angular) {
     app.controller('ResendVerificationCtrl', ["$scope", function ($scope) {
         console.log('within resend notification controller');
-        $scope.title = "Resendverification page"
+        $scope.title = "Resendverification page";
+        console.log("resend verification page");
     }]);
     // ...
     //or use angular.module to create a new module

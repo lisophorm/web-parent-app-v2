@@ -1,0 +1,16 @@
+<strong>gallery modal template gallery/gallery.modal.html</strong>
+<div class = "modal" tabindex = "-1" role = "dialog">
+    <div class = "modal-dialog modal-lg">
+        <div class = "modal-content galleryDialog">
+            <div class = "modal-body">
+                <div class = "imageList">
+                    <!-- ng-click = "imageSelected(image);close()" -->
+                    <div id = "gallery-image-container-{[{$index}]}" class = "imageListItem"
+                         ng-click = "close(image)" ng-repeat = "image in images track by $index">
+                        <img id = "gallery-image-{[{$index}]}" class = "image" ng-src = "{[{image.url}]}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

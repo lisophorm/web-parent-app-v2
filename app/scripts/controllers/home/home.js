@@ -33,7 +33,8 @@ define(['app', 'angular', 'config', 'ModalcontrollerCtrl'], function (app, angul
             console.log('show modal');
             ModalService.showModal({
                 templateUrl: "/views/modals/template.html",
-                controller: "ModalcontrollerCtrl"
+                controller: "ModalcontrollerCtrl",
+                scope: $scope
             }).then(function (modal) {
                 console.log("modal then", modal);
                 //it's a bootstrap element, use 'modal' to show it
