@@ -8,13 +8,14 @@
  * Controller of the web-parent-app-v2
  */
 
-define(['app', 'angular'], function (app, angular) {
+define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
     app.controller('ChangePasswordCtrl', ['$scope', 'passwordStrings', 'passwordApi', '$location', function ($scope, passwordStrings, passwordApi, $location) {
         $scope.strings = passwordStrings;
         $scope.changingPassword = false;
         $scope.changePassword = changePassword;
         //
         function changePassword() {
+            Pace.restart();
             console.log("change password");
             if ($scope.newPassword !== $scope.confirmedPassword) {
                 console.log("pwd mismatch");
@@ -22,8 +23,10 @@ define(['app', 'angular'], function (app, angular) {
             }
             passwordApi.changePassword($scope.oldPassword, $scope.newPassword)
                 .then(function () {
+                    Pace.stop();
                     $scope.status.setSuccessMsg(passwordStrings.success);
                 }, function (err) {
+                    Pace.stop();
                     $scope.status.setErrorMsg(passwordStrings.serverRequestError);
                 });
         }
