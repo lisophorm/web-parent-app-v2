@@ -335,6 +335,15 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('choosepin', {
+                    url: '/profile/child/:profileId/choosePinFirst',
+                    templateUrl: 'views/signup/choosepin.html',
+                    controller: 'ChoosepinCtrl',
+                    files: {
+                        s: ['rest/userApi']
+                    },
+                    resolve: {}
+                })
                 .state('editprofile', {
                     url: '/profile/child/:profileId/edit',
                     controller: "EditprofileCtrl",
@@ -429,7 +438,9 @@ define([
                 .state('resendverification', {
                     url: '/verification/resend',
                     controller: 'ResendVerificationCtrl',
-                    files: ['first.service'],
+                    files: {
+                        s: ['first.service', 'rest/userApi']
+                    },
                     resolve: {}
                 })
                 .state('change_password', {

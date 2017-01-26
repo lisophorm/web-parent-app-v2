@@ -78,11 +78,12 @@ gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
     // .pipe(annotate())
     //.pipe(gulp.dest('app'))
-        .pipe(sourcemaps.init())
         .pipe(annotate())
+        .pipe(sourcemaps.init())
+
         .pipe(uglify())
         .pipe(sourcemaps.write('maps'))
-        .pipe(gulp.dest('build'))
+        .pipe(gulp.dest('./build/'))
         .pipe(notify("entry ok!"));
 });
 
@@ -125,11 +126,11 @@ gulp.task('scripts', ['libScripts'], function () {
     return gulp.src(['app/scripts/**/*.js', 'app/scripts/**/**/*.js'])
     //   .pipe(annotate())
     //   .pipe(gulp.dest('app/scripts'))
-        .pipe(sourcemaps.init())
         .pipe(annotate())
+        .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write('maps'))
-        .pipe(gulp.dest('build/js'))
+        .pipe(gulp.dest('./build/js/'))
         .pipe(notify("scripts ok!"));
 });
 

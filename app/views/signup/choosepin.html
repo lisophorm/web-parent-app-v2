@@ -1,0 +1,44 @@
+<div ng-show = "!signupJourney" class = "viewHeader">{[{strings.choosePin}]}</div>
+
+
+<div class = "choosePin" ng-show = "enabled" ng-class = "{'signupJourney': signupJourney}">
+    <!-- Alan Churley has suggested this hack, it avoids getting whitespace at the top of screen as the div needs some content other than the form-->
+    &nbsp;
+    <!-- /hack -->
+    <div ng-show = "signupJourney" class = "signUpViewHeader">
+        <div class = "logoWrapper">
+            <div class = "logo">
+                <img src = "images/logos/azoomee_parents_blue.svg">
+            </div>
+        </div>
+    </div>
+    <div ng-show = "signupJourney" class = "directions">
+        {[{strings.lastSteps}]}
+    </div>
+    <form ng-submit = "updatePin()">
+        <div class = "directionsWithPadding">
+            {[{signupJourney ? strings.addPinSignup : strings.addPin}]}
+        </div>
+
+        <div class = "directionsUpperCased">
+            <b>{[{strings.chooseMemorablePIN}]}</b>
+        </div>
+        <az-status-board status-object = "status" delay-success = "2000" delay-error = "2000"
+                         id = "statusBoard"></az-status-board>
+        <div class = "pin">
+            <input id = "pinEntry" type = "tel" class = "fourPinDigits" ng-model = "pin" pattern = "[0-9]{4}"
+                   placeholder = "{[{strings.pinPlaceholder}]}" maxlength = "4" required/>
+        </div>
+        <div class = "directionsUpperCased">
+            <b>{[{strings.confirmPin}]}</b>
+        </div>
+        <div class = "pin">
+            <input id = "pinVerifyEntry" type = "tel" class = "fourPinDigits" ng-model = "confirmedPin"
+                   pattern = "[0-9]{4}" placeholder = "{[{strings.pinPlaceholder}]}" maxlength = "4" required/>
+        </div>
+        <input id = "pinSubmit" type = "submit" class = "saveButton" value = "{[{strings.save}]}"/>
+    </form>
+    <div class = "noChildren" ng-show = "signupJourney">
+        {[{strings.noChildren}]} <a href = "#/chats">{[{strings.noChildrenLinkMessage}]}</a>
+    </div>
+</div>

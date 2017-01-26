@@ -1,0 +1,81 @@
+<ng-include src = "'views/locked/locked.tmpl.html'" ng-if = "showVerificationWarning && displaySideNav"></ng-include>
+<div ng-show = "!signupJourney" class = "viewHeader">{[{strings.editProfile}]}</div>
+
+<form class = "profileEditor" ng-submit = "saveProfile()" novalidate ng-class = "{'signupJourney': signupJourney}">
+    <div ng-show = "signupJourney" class = "signUpViewHeader">
+        <div class = "logoWrapper">
+            <div class = "logo">
+                <img src = "images/logos/azoomee_parents_blue.svg">
+            </div>
+        </div>
+    </div>
+    <az-status-board status-object = "status" delay-error = "2000"></az-status-board>
+    <div id = "editHeader" class = "profileHeader" ng-show = "!signupJourney">
+        {[{profile.profileName}]}
+    </div>
+    <div id = "signupHeader" class = "profileHeader" ng-show = "signupJourney">
+        {[{strings.createText}]} <a href = "#/chats">{[{strings.skipText}]}</a>
+    </div>
+    <div class = "contactImageFrameHugeContainer" ng-click = "showAvatarOptions()">
+        <div class = "contactImageFrameHuge">
+            <img id = "avatarImage" ng-src = "{[{profile.avatar}]}">
+            <div class = "editTextOverlay">Edit</div>
+        </div>
+        <div class = "editIcon"></div>
+    </div>
+    <div class = "profileValues">
+        <fieldset class = "profileData">
+            <div class = "form-group profileSex customRadioGroup" ng-if = "!signupJourney">
+                <input type = "radio" id = "radioMale" ng-model = "profile.sex" value = "MALE">
+                <label for = "radioMale">{[{strings.MALE}]}</label>
+                <input type = "radio" id = "radioFemale" ng-model = "profile.sex" value = "FEMALE">
+                <label for = "radioFemale">{[{strings.FEMALE}]}</label>
+            </div>
+            <div class = "form-group">
+                <input ng-model = "profile.profileName" type = "text" class = "profileName" required autofocus
+                       placeholder = "{[{strings.name}]}"/>
+            </div>
+            <div class = "form-group" ng-if = "!signupJourney">
+                <input bs-datepicker ng-model = "profile.dob" type = "text" class = "profileAge"
+                       placeholder = "{[{strings.age}]}" required/>
+            </div>
+            <div class = "form-group" ng-if = "signupJourney">
+                <div class = "birthdayTitle">{[{strings.birthdayString}]} <span class = "birthdayExplanation">{[{strings.birthdayExplanation}]}</span>
+                </div>
+                <div class = "birthdaySelectGroup">
+                    <select name = "birthday" id = "birthday" ng-model = "profile.birthday">
+                        <option value = "" disabled selected hidden class = "invalid">{[{strings.daysPlaceholder}]}
+                        </option>
+                        <option value = "{[{d < 10 ? '0' + d : d}]}" ng-repeat = "d in strings.days">{[{d}]}</option>
+                    </select>
+                    <select name = "birthmonth" id = "birthmonth" ng-model = "profile.birthmonth">
+                        <option value = "" disabled selected hidden class = "invalid">{[{strings.monthsPlaceholder}]}
+                        </option>
+                        <option value = "{[{$index < 9 ? ('0' + ($index + 1)) : $index + 1}]}"
+                                ng-repeat = "m in strings.months">{[{m}]}
+                        </option>
+                    </select>
+                    <select name = "birthyear" id = "birthyear" ng-model = "profile.birthyear">
+                        <option value = "" disabled selected hidden class = "invalid">{[{strings.yearsPlaceholder}]}
+                        </option>
+                        <option value = "{[{y}]}" ng-repeat = "y in strings.years">{[{y}]}</option>
+                    </select>
+                </div>
+            </div>
+            <div class = "form-group" style = "display:none">
+                <input ng-model = "profile.password" type = "password" class = "profilePassword"
+                       placeholder = "{[{strings.password}]}"/>
+            </div>
+            <div class = "form-group profileSex customRadioGroup" ng-if = "signupJourney">
+                <input type = "radio" id = "radioMale" ng-model = "profile.sex" value = "MALE">
+                <label for = "radioMale">{[{strings.MALE}]}</label>
+                <input type = "radio" id = "radioFemale" ng-model = "profile.sex" value = "FEMALE">
+                <label for = "radioFemale">{[{strings.FEMALE}]}</label>
+            </div>
+        </fieldset>
+    </div>
+    <input type = "submit" class = "saveButton" value = "{[{creating() ? strings.add : strings.save}]}"
+           ng-disabled = "showVerificationWarning"/>
+    <a ng-if = "!creating();" ng-click = "showRemoveChildConfirmation();">{[{strings.deleteChild}]}</a>
+
+</form>

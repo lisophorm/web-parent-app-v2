@@ -1,2 +1,38 @@
-<p>This is the resendVerification view.</p>
-<p>{[{title}]}</p>
+<div class = "login">
+    <div class = "logoWrapper">
+        <div class = "logo">
+            <img src = "images/logos/azoomee_logo.svg">
+        </div>
+    </div>
+    <div class = "loginMsg">
+        {[{strings.resendTitle}]}
+    </div>
+    <div class = "formWrapper" ng-show = "showForm">
+        <form name = "loginForm" class = "credentialsForm" ng-submit = "submit()" novalidate>
+            <div class = "field">
+                <div id = "errorMessageOutput" ng-show = "errorMsg" class = "errorMsg fieldValue">
+                    <strong>{[{errorMsg}]}</strong></div>
+            </div>
+            <div class = "field">
+                <div class = "fieldValue">
+                    <input id = "emailInput" type = "email" ng-model = "userId" placeholder = "{[{strings.email}]}"
+                           required>
+                </div>
+            </div>
+
+            <div class = "submitButtonWrapper">
+                <input id = "submitButton" type = "submit" class = "autoSize forgottenPasswordButton"
+                       value = "{[{strings.submit}]}"/>
+            </div>
+        </form>
+        <div>
+            Don't have an account? <a href = "#/signup">SIGN UP</a>
+        </div>
+    </div>
+    <div ng-show = "!showForm" id = "successMessage">
+        {[{strings.confirmation}]}<br/>
+        <a href = "#/login" ng-show = "!inApp" class = "submitButton">{[{strings.logIn}]}</a><a href = "azoomee://login"
+                                                                                                ng-show = "inApp"
+                                                                                                class = "submitButton">{[{strings.logIn}]}</a>
+    </div>
+</div>
