@@ -8,8 +8,8 @@
  * Controller of the yoAngularifyApp
  */
 
-define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"], function (app, angular, _) {
-    app.controller('EditprofileCtrl', ["$scope", 'editProfileStrings', '$stateParams', '$location', function ($scope, editProfileStrings, $stateParams, $location) {
+define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"], function (app, angular, config, _) {
+    app.controller('EditprofileCtrl', ["$scope", 'editProfileStrings', '$stateParams', '$location', 'userApi', function ($scope, editProfileStrings, $stateParams, $location, userApi) {
 
         $scope.strings = editProfileStrings;
         console.log("$stateParams of editprofile", $stateParams);
@@ -26,7 +26,28 @@ define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"],
         $scope.showAvatarOptions = showAvatarOptions;
         attachAvailableAvatarsToScope();
         $scope.saveProfile = saveProfile;
+        $scope.cancelEditing = cancelEditing;
+        $scope.showRemoveChildConfirmation = showRemoveChildConfirmation;
 
+
+        function showRemoveChildConfirmation() {
+            if (confirm(editProfileStrings.deleteChildConfirm)) {
+                removeCurrentChild();
+            }
+        }
+
+        function removeCurrentChild() {
+            var childId = $routeParams.profileId;
+            return userApi.getChildProfile(childId).then(function (childProfile) {
+                userApi.deleteChildProfile(childProfile).then(function () {
+                    $location.path(config.defaultHomePage);
+                });
+            });
+        }
+
+        function cancelEditing() {
+            $window.history.back();
+        }
 
         function checkPinIsSet() {
             getPin(function (pinNumber) {
@@ -76,6 +97,10 @@ define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"],
                     {url: "http://media.azoomee.com/static/thumbs/oomee_0" + i + ".png"}
                 );
             }
+        }
+
+        function creating() {
+            return $routeParams.profileId === newProfileId || $scope.signupJourney;
         }
 
         function saveProfile() {

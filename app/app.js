@@ -347,7 +347,9 @@ define([
                 .state('editprofile', {
                     url: '/profile/child/:profileId/edit',
                     controller: "EditprofileCtrl",
-                    files: ['first.service'],
+                    files: {
+                        s: ['rest/userApi']
+                    },
                     templateUrl: 'views/profile/editprofile.html',
                     resolve: {}
                 })

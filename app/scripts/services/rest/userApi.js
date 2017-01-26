@@ -41,6 +41,29 @@ define([
                         console.log('failed to update adult profile', profilePatch);
                         return Promise.reject(err);
                     });
+                },
+                addChildProfile: function (newProfile) {
+                    var profileToPost = {
+                        profileName: newProfile.profileName,
+                        dob: formatDate(newProfile.dob),
+                        sex: newProfile.sex,
+                        avatar: newProfile.avatar,
+                        password: newProfile.password
+                    };
+                    return $http({
+                        url: config.userUrl + '/child/',
+                        method: "POST",
+                        data: profileToPost
+                    })
+                        .then(function (newProfile) {
+                            console.log('new profile', newProfile);
+                            //refreshChildren();
+                            //sharingApi.refreshConversations();
+                            return newProfile;
+                        }, function (err) {
+                            console.log('failed to create child profile', newProfile);
+                            return Promise.reject(err);
+                        })
                 }
             };
 
