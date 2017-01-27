@@ -26,7 +26,8 @@ define([
     "analytics/analytics",
     "strings",
     "angularScroll",
-    "ModalService"
+    "ModalService",
+    "ngToast"
 
 
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
@@ -78,8 +79,8 @@ define([
             "routeResolver",
             "lazyLoad",
             "duScroll",
-            "angularModalService"
-
+            "angularModalService",
+            "ngToast"
 
             //
             //'com.tinizine.azoomee.userSession'

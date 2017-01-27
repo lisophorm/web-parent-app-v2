@@ -8,8 +8,8 @@
  * Controller of the yoAngularifyApp
  */
 
-define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"], function (app, angular, _) {
-    app.controller('EditadultprofileCtrl', ['$scope', 'editAdultProfileStrings', '$stateParams', 'userApi', '$window', '$location', 'analytics', 'ModalService', function ($scope, editAdultProfileStrings, $stateParams, userApi, $window, $location, analytics, ModalService) {
+define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl", "ngToast"], function (app, angular, _) {
+    app.controller('EditadultprofileCtrl', ['$scope', 'editAdultProfileStrings', '$stateParams', 'userApi', '$window', '$location', 'analytics', 'ModalService', "ngToast", function ($scope, editAdultProfileStrings, $stateParams, userApi, $window, $location, analytics, ModalService, ngToast) {
         $scope.title = "Editadultprofile page";
         $scope.strings = editAdultProfileStrings;
         attachAvailableAvatarsToScope();
@@ -17,7 +17,13 @@ define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"],
         $scope.cancelEditing = cancelEditing;
         $scope.saveProfile = saveProfile;
 
-        userApi.getAdultProfile().then(attachProfileToScope)
+        userApi.getAdultProfile().then(attachProfileToScope);
+
+        $scope.showToast = function () {
+            console.log("* show toast");
+            ngToast.warning('La marianna la va in campagna...');
+
+        }
 
         function attachAvailableAvatarsToScope() {
             $scope.images = [];

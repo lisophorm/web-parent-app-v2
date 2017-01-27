@@ -42,6 +42,21 @@ define([
                         return Promise.reject(err);
                     });
                 },
+                getChildProfile: function (profileId) {
+                    var defer = $q.defer();
+                    $http({
+                        url: config.userUrl + '/adult/' + profileId,
+                        method: "GET"
+                    })
+                        .then(function (result) {
+                            console.log("retrieved chid profile", result.data);
+                            deferred.resolve(result.data);
+                        }, function (err) {
+                            console.log("Failed to retrieve child profile", profileId, err);
+                            defer.reject(err);
+                        });
+                    return defer.promise;
+                },
                 addChildProfile: function (newProfile) {
                     var profileToPost = {
                         profileName: newProfile.profileName,
@@ -56,10 +71,10 @@ define([
                         data: profileToPost
                     })
                         .then(function (newProfile) {
-                            console.log('new profile', newProfile);
+                            console.log('new profile', newProfile.data);
                             //refreshChildren();
                             //sharingApi.refreshConversations();
-                            return newProfile;
+                            return newProfile.data;
                         }, function (err) {
                             console.log('failed to create child profile', newProfile);
                             return Promise.reject(err);

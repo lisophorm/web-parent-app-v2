@@ -21,16 +21,25 @@ define(['app', 'angular', 'moment'], function (app, angular, moment) {
             $scope.navigateToChangePin = navigateToChangePin;
             $scope.editProfile = editProfile;
             $scope.displayingAdultProfile = displayingAdultProfile;
-
             if (displayingAdultProfile()) {
                 retrieveProfile = userApi.getAdultProfile;
+                console.log("this is adult profile", userApi.getAdultProfile);
             } else {
                 retrieveProfile = userApi.getChildProfile;
+                console.log("this is child profile", userApi.getChildProfile);
+
             }
+
+            console.log("i am here", retrieveProfile);
+            console.log(userApi);
             retrieveProfile($stateParams.profileId)
                 .then(function (profile) {
                     $scope.profile = profile;
+                }, function (error) {
+                    console.log('error', error);
+                    alert(error);
                 });
+
             if (displayingAdultProfile()) {
                 analytics.newPage("displayAdultProfile");
             } else {

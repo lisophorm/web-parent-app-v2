@@ -9,7 +9,7 @@
  */
 
 define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"], function (app, angular, config, _) {
-    app.controller('EditprofileCtrl', ["$scope", 'editProfileStrings', '$stateParams', '$location', 'userApi', function ($scope, editProfileStrings, $stateParams, $location, userApi) {
+    app.controller('EditprofileCtrl', ["$scope", "ModalService", 'editProfileStrings', '$stateParams', '$location', 'userApi', 'analytics', function ($scope, ModalService, editProfileStrings, $stateParams, $location, userApi, analytics) {
 
         $scope.strings = editProfileStrings;
         console.log("$stateParams of editprofile", $stateParams);
@@ -32,8 +32,8 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
         if (creating()) {
             attachProfileToScope(createEmptyProfile());
         } else {
-            userApi.getChildProfile($routeParams.profileId)
-                .then(controller.attachProfileToScope);
+            userApi.getChildProfile($stateParams.profileId)
+                .then(attachProfileToScope);
         }
         analytics.newPage("editChildProfile");
 
@@ -63,7 +63,7 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
         }
 
         function removeCurrentChild() {
-            var childId = $routeParams.profileId;
+            var childId = $stateParams.profileId;
             return userApi.getChildProfile(childId).then(function (childProfile) {
                 userApi.deleteChildProfile(childProfile).then(function () {
                     $location.path(config.defaultHomePage);
@@ -78,7 +78,7 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
         function checkPinIsSet() {
             getPin(function (pinNumber) {
                 if (!pinNumber) {
-                    $location.url('/profile/child/' + $routeParams.profileId + '/choosePinFirst');
+                    $location.url('/profile/child/' + $stateParams.profileId + '/choosePinFirst');
                 }
             })
         }
@@ -126,7 +126,7 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
         }
 
         function creating() {
-            return $routeParams.profileId === config.newProfileId || $scope.signupJourney;
+            return $stateParams.profileId === config.newProfileId || $scope.signupJourney;
         }
 
         function saveProfile() {
@@ -142,12 +142,12 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
             }
             console.log("saving profile", $scope.profile);
 
-            save = controller.creating() ? userApi.addChildProfile : userApi.updateChildProfile;
+            save = creating() ? userApi.addChildProfile : userApi.updateChildProfile;
 
             save($scope.profile)
                 .then(function (profile) {
-                    console.log("saved profile: ", $scope.profile, profile);
-                    if (controller.creating()) {
+                    console.log("saved profile: ", profile);
+                    if (creating()) {
                         if (window.fbq) {
                             window.fbq('track', 'Purchase', {value: '0.00', currency: 'USD'});
                         }
@@ -159,7 +159,7 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
                     }
                 }, function (err) {
                     console.log("Error while saving profile ", $scope.profile, err);
-                    $scope.status.setErrorMsg(controller.creating() ? editProfileStrings.errorCreatingProfile : editProfileStrings.errorEditingProfile);
+                    $scope.status.setErrorMsg(creating() ? editProfileStrings.errorCreatingProfile : editProfileStrings.errorEditingProfile);
                 });
         }
 

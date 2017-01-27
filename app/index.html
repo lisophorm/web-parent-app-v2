@@ -11,6 +11,7 @@
     </style>
 </head>
 <body ng-controller = "MainCtrl">
+<toast></toast>
 <div ng-if = "$root.showVerificationWarning && $root.loggedIn" class = "verificationWarning">
     {[{notVerifiedStrings.message1}]}
     <span class = "fullMessage">
@@ -21,7 +22,7 @@
         </span>
 </div>
 <div ng-cloak>CAZZAR:A</div>
-<div ng-cloak>Logged in {[{$root.loggedIn}]} verification warning: {[{$root.showVerificationWarning}]}</div>
+<div ng-cloak>Logged in {[{$root.loggedIn}]}</div>
 <ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
     <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
         Profile</a></li>

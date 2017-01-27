@@ -16,7 +16,7 @@ require.config({
         "angularScroll": "lib/angular-scroll",
         "moment": "lib/moment",
         "lazyLoad": "js/load/lazy-load",
-        // alan shit
+        "ngToast": 'lib/ngToast',
         'userSession': 'lib/userSession',
         'httpProviderConfig': 'lib/httpProviderConfig',
         "app": "app",
@@ -35,6 +35,9 @@ require.config({
         , "uiRouter": {
             deps: ["angular"],
             exports: "uiRouter"
+        }, "ngToast": {
+            deps: ["angular"],
+            exports: "ngToast"
         }
         , "ngAnimate": {
             deps: ["angular"],

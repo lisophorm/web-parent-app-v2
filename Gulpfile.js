@@ -100,6 +100,8 @@ gulp.task('libScripts', function () {
         'bower_components/angular/**.js',
         'bower_components/requirejs/**.js',
         'bower_components/angular-ui-router/release/**.js',
+        'bower_components/ngToast/dist/ngToast.js',
+
         // alan shit here
         'bower_components/azoomee.web-components-jwt/userSession.js',
         'bower_components/azoomee.web-components-jwt/httpProviderConfig.js',
