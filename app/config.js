@@ -33,6 +33,7 @@ define("config", [], function () {
         'tokenLoginEndpoint': baseUrl + '/auth/transferSession/token',
         'billingUrl': baseUrl + '/billing',
         'privacyPolicyUrl': 'http://azoomee.com/index.php/privacy-policy-2/',
+        'newProfileId': 'create',
         'payment': {
             addCardUrl: baseUrl + "/billing/card"
         },

@@ -9,7 +9,7 @@
  */
 
 define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
-    app.controller('ChangePasswordCtrl', ['$scope', 'passwordStrings', 'passwordApi', '$location', function ($scope, passwordStrings, passwordApi, $location) {
+    app.controller('ChangePasswordCtrl', ['$scope', '$rootScope', 'passwordStrings', 'passwordApi', '$location', function ($scope, $rootScope, passwordStrings, passwordApi, $location) {
         $scope.strings = passwordStrings;
         $scope.changingPassword = false;
         $scope.changePassword = changePassword;
@@ -24,6 +24,7 @@ define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
             passwordApi.changePassword($scope.oldPassword, $scope.newPassword)
                 .then(function () {
                     Pace.stop();
+                    $rootScope.loggedIn = false;
                     $scope.status.setSuccessMsg(passwordStrings.success);
                 }, function (err) {
                     Pace.stop();

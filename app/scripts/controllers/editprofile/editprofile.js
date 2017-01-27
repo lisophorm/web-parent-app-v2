@@ -29,6 +29,32 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
         $scope.cancelEditing = cancelEditing;
         $scope.showRemoveChildConfirmation = showRemoveChildConfirmation;
 
+        if (creating()) {
+            attachProfileToScope(createEmptyProfile());
+        } else {
+            userApi.getChildProfile($routeParams.profileId)
+                .then(controller.attachProfileToScope);
+        }
+        analytics.newPage("editChildProfile");
+
+        //
+        // end of init
+        //
+
+        function createEmptyProfile() {
+            return {
+                profileName: "Child's Name",
+                dob: "2010-08-12",
+                sex: 'FEMALE',
+                avatar: "https://media.azoomee.com/static/thumbs/oomee_00.png",
+                password: ""
+            }
+        }
+
+
+        function attachProfileToScope(profile) {
+            $scope.profile = _.clone(profile);
+        }
 
         function showRemoveChildConfirmation() {
             if (confirm(editProfileStrings.deleteChildConfirm)) {
@@ -100,7 +126,7 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
         }
 
         function creating() {
-            return $routeParams.profileId === newProfileId || $scope.signupJourney;
+            return $routeParams.profileId === config.newProfileId || $scope.signupJourney;
         }
 
         function saveProfile() {
