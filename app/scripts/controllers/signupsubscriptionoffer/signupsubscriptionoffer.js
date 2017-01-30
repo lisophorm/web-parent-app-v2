@@ -8,8 +8,8 @@
 
 define(['app', 'angular', 'addCard'], function (app, angular) {
     app.controller('SignupsubscriptionofferCtrl',
-        ['$scope', 'signupSubscriptionOfferStrings', 'totstooSignupSubscriptionOfferStrings', 'billingApi', '$location', 'addCardService', '$q', '$timeout', 'analytics', '$rootScope',
-            function ($scope, signupSubscriptionOfferStrings, totstooSignupSubscriptionOfferStrings, billingApi, $location, addCardService, $q, $timeout, analytics, $rootScope) {
+        ['$scope', 'signupSubscriptionOfferStrings', 'totstooSignupSubscriptionOfferStrings', 'billingApi', '$state', 'addCardService', '$q', '$timeout', 'analytics', '$rootScope',
+            function ($scope, signupSubscriptionOfferStrings, totstooSignupSubscriptionOfferStrings, billingApi, $state, addCardService, $q, $timeout, analytics, $rootScope) {
                 // init
                 if ($rootScope.totstoo) {
                     signupSubscriptionOfferStrings = totstooSignupSubscriptionOfferStrings;
@@ -73,7 +73,7 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
 
                 function paymentFailed() {
                     analytics.sendEvent({type: 'paymentFailedOnSignup'});
-                    $location.path("/cardrejection");
+                    $state.go("cardrejection");
                 }
 
                 function registerListenerForPaymentDetailsChange() {
@@ -88,7 +88,7 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
                 }
 
                 function navigateToSignupEnd() {
-                    $location.path("/signup/end");
+                    $state.go("signupend");
                 }
             }]);
     // ...

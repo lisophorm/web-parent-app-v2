@@ -82,7 +82,6 @@ define([
             "duScroll",
             "angularModalService",
             "ngToast"
-
             //
             //'com.tinizine.azoomee.userSession'
         ])
@@ -394,6 +393,7 @@ define([
 
                 .state('voucherredemption', {
                     url: '/voucherredemption',
+                    templateUrl: 'views/voucherredemption/voucherredemption.html',
                     controller: 'VoucherredemptionCtrl',
                     files: {
                         s: ['first.service', 'rest/loginApi', 'rest/userApi', 'rest/billingApi']
@@ -527,7 +527,7 @@ define([
                 .state("Modal", {
                     views: {
                         "modal": {
-                            templateUrl: "modal.html"
+                            templateUrl: "views/modals/ui.router.modal.html"
                         }
                     },
                     onEnter: function ($state) {
@@ -555,7 +555,7 @@ define([
                 .state("Modal.confirmAddToCart", {
                     views: {
                         "modal": {
-                            templateUrl: "modals/confirm.html"
+                            templateUrl: "views/modals/confirm.html"
                         }
                     }
                 })
@@ -563,7 +563,7 @@ define([
                 .state("Modal.success", {
                     views: {
                         "modal": {
-                            templateUrl: "modals/success.html"
+                            templateUrl: "views/modals/success.html"
                         }
                     }
                 });            //

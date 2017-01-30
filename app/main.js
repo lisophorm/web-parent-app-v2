@@ -12,7 +12,7 @@ require.config({
         "ngSanitize": 'lib/angular-sanitize.min',
         "ngTouch": 'lib/angular-touch.min',
         "routeResolver": "js/load/route-resolver",
-        "jquery": "/lib/jquery.min",
+        "jquery": "lib/jquery.min",
         "angularScroll": "lib/angular-scroll",
         'angularStrapMain': 'lib/angular-strap',
         "moment": "lib/moment",
@@ -29,7 +29,8 @@ require.config({
         'underscore': '/lib/underscore',
         'ModalService': 'lib/angular-modal-service',
         'ModalcontrollerCtrl': "/js/controllers/modalcontroller/modalcontroller",
-        'userApi': 'js/services/rest/userApi'
+        'userApi': 'js/services/rest/userApi',
+        'ui.router.modal': 'lib/angular-ui-router-uib-modal',
     },
     shim: {
         "angular": {

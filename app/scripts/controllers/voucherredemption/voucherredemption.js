@@ -9,7 +9,7 @@
  */
 
 define(['app', 'angular'], function (app, angular) {
-    app.controller('VoucherredemptionCtrl', ['$scope', 'voucherRedemptionStrings', 'billingApi', '$location', '$q', 'analytics', function ($scope, voucherRedemptionStrings, billingApi, $location, $q, analytics) {
+    app.controller('VoucherredemptionCtrl', ['$scope', 'voucherRedemptionStrings', 'billingApi', '$state', '$q', 'analytics', function ($scope, voucherRedemptionStrings, billingApi, $state, $q, analytics) {
         $scope.strings = voucherRedemptionStrings;
         $scope.submit = submit;
         $scope.loading = false;
@@ -40,11 +40,11 @@ define(['app', 'angular'], function (app, angular) {
         }
 
         function navigateToSubscriptionOffer() {
-            $location.path('/subscriptionoffer');
+            $state.go('subscriptionOffer');
         }
 
         function navigateToSubscriptionStatus() {
-            $location.path('/subscriptionstatus');
+            $state.go('subscriptionstatus');
         }
 
         function voucherFailure(err) {

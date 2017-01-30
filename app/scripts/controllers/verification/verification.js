@@ -9,7 +9,7 @@
  */
 
 define(['app', 'angular', 'config'], function (app, angular, config) {
-    app.controller('VerificationCtrl', ["$scope", "$stateParams", '$rootScope', 'verificationApi', 'userSession', '$location', 'analytics', function ($scope, $stateParams, $rootScope, verificationApi, userSession, $location, analytics) {
+    app.controller('VerificationCtrl', ["$scope", "$stateParams", '$rootScope', 'verificationApi', 'userSession', '$state', 'analytics', function ($scope, $stateParams, $rootScope, verificationApi, userSession, $state, analytics) {
         $scope.title = "Verification page";
         console.log('within verification controller', $stateParams);
         $scope.submitVerification = submitVerification;
@@ -56,7 +56,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
             analytics.updateUserId(userSession.getJWTUser());
             analytics.setUserPropertiesOnce({"$first_name": userSession.getJWTUser()});
             analytics.sendEvent({type: "emailVerified"});
-            $location.search({});
+            ///$state.search({});
             if (window.isLocalStorageAvailable() && shouldHideVerification(resp)) {
                 localStorage.setItem("verificationTimeout", (new Date()).getTime() + (1 * config.apples));
             }
@@ -65,7 +65,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
                 $rootScope.showVerificationWarning = false;
             });
             $rootScope.userUpdated().then(function () {
-                $location.path("/home");
+                $state.go(config.defaultState);
             });
         }
 
