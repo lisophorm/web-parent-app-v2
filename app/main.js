@@ -14,6 +14,7 @@ require.config({
         "routeResolver": "js/load/route-resolver",
         "jquery": "/lib/jquery.min",
         "angularScroll": "lib/angular-scroll",
+        'angularStrapMain': 'lib/angular-strap',
         "moment": "lib/moment",
         "lazyLoad": "js/load/lazy-load",
         "ngToast": 'lib/ngToast',
@@ -22,11 +23,13 @@ require.config({
         "app": "app",
         "analytics": "js/analytics",
         "addCard": "/js/controllers/addCard/addCard",
+        "ThemainCtrl": "js/controllers/themain/themain",
         "azStatusBoard": "/js/directives/azstatusboard",
         'slick-carousel': '/lib/slick',
         'underscore': '/lib/underscore',
         'ModalService': 'lib/angular-modal-service',
-        'ModalcontrollerCtrl': "/js/controllers/modalcontroller/modalcontroller"
+        'ModalcontrollerCtrl': "/js/controllers/modalcontroller/modalcontroller",
+        'userApi': 'js/services/rest/userApi'
     },
     shim: {
         "angular": {

@@ -4,8 +4,8 @@
 @import "bower_components/ngToast/dist/ngToast.min";
 @import "bower_components/ngToast/dist/ngToast-animations.min";
 
-
 @import "pace-preloader.css";
+@import "modal.scss";
 
 
 body {
@@ -23,3 +23,9 @@ body {
     color: #cc0000;
 }
 
+.contactImageFrameSmall {
+    img {
+        width: 20px;
+
+    }
+}

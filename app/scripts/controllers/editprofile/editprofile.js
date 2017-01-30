@@ -9,7 +9,7 @@
  */
 
 define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"], function (app, angular, config, _) {
-    app.controller('EditprofileCtrl', ["$scope", "ModalService", 'editProfileStrings', '$stateParams', '$location', 'userApi', 'analytics', function ($scope, ModalService, editProfileStrings, $stateParams, $location, userApi, analytics) {
+    app.controller('EditprofileCtrl', ["$scope", "ModalService", 'editProfileStrings', '$stateParams', '$location', 'userApi', 'analytics', '$rootScope', '$state', function ($scope, ModalService, editProfileStrings, $stateParams, $location, userApi, analytics, $rootScope, $state) {
 
         $scope.strings = editProfileStrings;
         console.log("$stateParams of editprofile", $stateParams);
@@ -63,10 +63,16 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
         }
 
         function removeCurrentChild() {
+            console.log('removeCurrentChild');
             var childId = $stateParams.profileId;
             return userApi.getChildProfile(childId).then(function (childProfile) {
                 userApi.deleteChildProfile(childProfile).then(function () {
-                    $location.path(config.defaultHomePage);
+                    console.log('refreshChildProfiles');
+
+                    $rootScope.refreshChildProfiles();
+                    console.log('$location.path(config.defaultHomePage)');
+                    $state.go(config.defaultState);
+
                 });
             });
         }
@@ -146,6 +152,7 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
 
             save($scope.profile)
                 .then(function (profile) {
+                    $rootScope.refreshChildProfiles();
                     console.log("saved profile: ", profile);
                     if (creating()) {
                         if (window.fbq) {

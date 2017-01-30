@@ -23,6 +23,7 @@ define("config", [], function () {
         'authPage': '#/login/',
         'permissionPage': '#/login/403',
         'defaultHomePage': '#/home/',
+        'defaultState': 'home',
         'userUrl': baseUrl + '/user',
         'statsUrl': baseUrl + '/stats',
         'authUrl': baseUrl + '/auth',

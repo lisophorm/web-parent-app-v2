@@ -9,8 +9,8 @@
  */
 
 define(['app', 'angular', 'moment'], function (app, angular, moment) {
-    app.controller('DisplayprofileCtrl', ['$scope', '$stateParams', 'userApi', 'displayProfileStrings', '$location', 'analytics',
-        function ($scope, $stateParams, userApi, displayProfileStrings, $location, analytics) {
+    app.controller('DisplayprofileCtrl', ['$scope', '$stateParams', 'userApi', 'displayProfileStrings', '$location', 'analytics', 'userSession',
+        function ($scope, $stateParams, userApi, displayProfileStrings, $location, analytics, userSession) {
             console.log("displayprofile controller");
             var retrieveProfile;
             $scope.strings = displayProfileStrings;
@@ -21,6 +21,12 @@ define(['app', 'angular', 'moment'], function (app, angular, moment) {
             $scope.navigateToChangePin = navigateToChangePin;
             $scope.editProfile = editProfile;
             $scope.displayingAdultProfile = displayingAdultProfile;
+            userApi.getChildProfiles(userSession.getJWTUser()).then(function (res) {
+                console.log('CHILD PROFILES:', res)
+            }, function (err) {
+                console.log('ERRORCHILD PROFILES:', err)
+
+            })
             if (displayingAdultProfile()) {
                 retrieveProfile = userApi.getAdultProfile;
                 console.log("this is adult profile", userApi.getAdultProfile);
@@ -37,7 +43,7 @@ define(['app', 'angular', 'moment'], function (app, angular, moment) {
                     $scope.profile = profile;
                 }, function (error) {
                     console.log('error', error);
-                    alert(error);
+                    //alert(error);
                 });
 
             if (displayingAdultProfile()) {

@@ -81,7 +81,7 @@ gulp.task('entry', function () {
         .pipe(annotate())
         .pipe(sourcemaps.init())
 
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('./build/'))
         .pipe(notify("entry ok!"));
@@ -101,6 +101,8 @@ gulp.task('libScripts', function () {
         'bower_components/requirejs/**.js',
         'bower_components/angular-ui-router/release/**.js',
         'bower_components/ngToast/dist/ngToast.js',
+        'bower_components/angular-strap/dist/angular-strap.js',
+
 
         // alan shit here
         'bower_components/azoomee.web-components-jwt/userSession.js',
@@ -130,7 +132,7 @@ gulp.task('scripts', ['libScripts'], function () {
     //   .pipe(gulp.dest('app/scripts'))
         .pipe(annotate())
         .pipe(sourcemaps.init())
-        .pipe(uglify())
+        //    .pipe(uglify())
         .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('./build/js/'))
         .pipe(notify("scripts ok!"));

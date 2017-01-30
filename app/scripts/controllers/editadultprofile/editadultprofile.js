@@ -8,7 +8,7 @@
  * Controller of the yoAngularifyApp
  */
 
-define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl", "ngToast"], function (app, angular, _) {
+define(['app', 'angular', 'jquery', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl", "ngToast"], function (app, angular, jQuery, _) {
     app.controller('EditadultprofileCtrl', ['$scope', 'editAdultProfileStrings', '$stateParams', 'userApi', '$window', '$location', 'analytics', 'ModalService', "ngToast", function ($scope, editAdultProfileStrings, $stateParams, userApi, $window, $location, analytics, ModalService, ngToast) {
         $scope.title = "Editadultprofile page";
         $scope.strings = editAdultProfileStrings;
@@ -66,13 +66,16 @@ define(['app', 'angular', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl", 
         function showAvatarOptions() {
             console.log('show modal');
             ModalService.showModal({
+                //templateUrl: "/views/modals/template.html",
                 templateUrl: "/views/gallery/gallery.modal.html",
                 controller: "ModalcontrollerCtrl",
                 scope: $scope
             }).then(function (modal) {
                 console.log("modal then", modal);
                 //it's a bootstrap element, use 'modal' to show it
-                //modal.element.modal();
+                // modal.element.modal();
+                jQuery('.modal').removeClass("fade");
+                jQuery('.modal').fadeIn();
                 modal.close.then(function (result) {
 
                     console.log('result passed by modal');

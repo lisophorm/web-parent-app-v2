@@ -1,4 +1,4 @@
-console.log('within userAPI')
+console.log('within userAPI');
 define([
     'app',
     'config',
@@ -42,15 +42,35 @@ define([
                         return Promise.reject(err);
                     });
                 },
+                getChildProfiles: function (adultProfileId) {
+                    console.log('getting CHILDS for ', adultProfileId);
+                    var defer = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: config.userUrl + '/adult/' + adultProfileId + '/owns',
+                        params: {
+                            expand: 'true',
+                            activeOnly: 'true'
+                        }
+                    })
+                        .then(function (result) {
+                            console.log("retrieved chid profileS", result.data);
+                            defer.resolve(result.data);
+                        }, function (err) {
+                            console.log("Failed to retrieve child profileS", err);
+                            defer.reject(err);
+                        });
+                    return defer.promise;
+                },
                 getChildProfile: function (profileId) {
                     var defer = $q.defer();
                     $http({
-                        url: config.userUrl + '/adult/' + profileId,
+                        url: config.userUrl + '/child/' + profileId,
                         method: "GET"
                     })
                         .then(function (result) {
                             console.log("retrieved chid profile", result.data);
-                            deferred.resolve(result.data);
+                            defer.resolve(result.data);
                         }, function (err) {
                             console.log("Failed to retrieve child profile", profileId, err);
                             defer.reject(err);
@@ -79,7 +99,52 @@ define([
                             console.log('failed to create child profile', newProfile);
                             return Promise.reject(err);
                         })
-                }
+                },
+                deleteChildProfile: function (profileToDelete) {
+                    var profilePatch = {
+                        id: profileToDelete.id,
+                        profileName: profileToDelete.profileName,
+                        dob: formatDate(profileToDelete.dob),
+                        sex: profileToDelete.sex,
+                        avatar: profileToDelete.avatar,
+                        status: 'DELETED'
+                    };
+                    return $http({
+                        url: config.userUrl + '/child/' + profileToDelete.id,
+                        method: "PATCH",
+                        data: profilePatch
+                    }).then(function (newProfile) {
+                        console.log('deleted child profile', newProfile.data);
+                        //refreshChildren();
+                        //sharingApi.refreshConversations();
+                        return Promise.resolve(newProfile.data);
+                    }, function (err) {
+                        console.log('failed to update child profile for deletion', profilePatch);
+                        return Promise.reject(err);
+                    });
+                },
+                updateChildProfile: function (updatedProfile) {
+                    var profilePatch = {
+                        id: updatedProfile.id,
+                        profileName: updatedProfile.profileName,
+                        dob: formatDate(updatedProfile.dob),
+                        sex: updatedProfile.sex,
+                        avatar: updatedProfile.avatar
+                    };
+                    return $http({
+                        url: config.userUrl + '/child/' + updatedProfile.id,
+                        method: "PATCH",
+                        data: profilePatch
+                    }).then(function (newProfile) {
+                        console.log('updated child profile', newProfile.data);
+                        //refreshChildren();
+                        //sharingApi.refreshConversations();
+                        return Promise.resolve(newProfile.data);
+                    }, function (err) {
+                        console.log('failed to update child profile', profilePatch);
+                        return Promise.reject(err);
+                    });
+                },
             };
 
         function ensureAvatarIsSet(profile) {

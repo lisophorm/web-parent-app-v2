@@ -1,5 +1,5 @@
 'use strict';
-
+console.log("**********  loaded APP.JS");
 /**
  * @ngdoc overview
  * @name web-parent-app-v2
@@ -27,7 +27,8 @@ define([
     "strings",
     "angularScroll",
     "ModalService",
-    "ngToast"
+    "ngToast",
+    'jquery'
 
 
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
@@ -336,6 +337,11 @@ define([
             // url can be camelcase
             //
             $stateProvider
+                .state('change_passwordgulp', {
+                    url: '/change_passwordgulp',
+                    files: ['first.service'],
+                    resolve: {}
+                })
                 .state('choosepin', {
                     url: '/profile/child/:profileId/choosePinFirst',
                     templateUrl: 'views/signup/choosepin.html',
@@ -515,6 +521,52 @@ define([
                     },
                     resolve: {} //the default value  {}
                 })
+                // ui router modal
+                .state("Base", {})
+
+                .state("Modal", {
+                    views: {
+                        "modal": {
+                            templateUrl: "modal.html"
+                        }
+                    },
+                    onEnter: function ($state) {
+                        // Hitting the ESC key closes the modal
+                        $(document).on('keyup', function (e) {
+                            if (e.keyCode == 27) {
+                                $(document).off('keyup')
+                                $state.go('Base')
+                            }
+                        });
+
+                        // Clicking outside of the modal closes it
+                        $(document).on('click', '.Modal-backdrop, .Modal-holder', function () {
+                            $state.go('Base');
+                        });
+
+                        // Clickin on the modal or it's contents doesn't cause it to close
+                        $(document).on('click', '.Modal-box, .Modal-box *', function (e) {
+                            e.stopPropagation();
+                        });
+                    },
+                    abstract: true
+                })
+
+                .state("Modal.confirmAddToCart", {
+                    views: {
+                        "modal": {
+                            templateUrl: "modals/confirm.html"
+                        }
+                    }
+                })
+
+                .state("Modal.success", {
+                    views: {
+                        "modal": {
+                            templateUrl: "modals/success.html"
+                        }
+                    }
+                });            //
         }]);
 
     angular.module('com.tinizine.azoomee.userSession', [])
@@ -599,6 +651,7 @@ define([
                 method: "GET"
             }).then(function (res) {
                 console.log('user success', res.data);
+                $rootScope.refreshChildProfiles();
                 if (res.data.actorStatus == "VERIFIED") {
 
                     $rootScope.showVerificationWarning = false;
@@ -618,6 +671,34 @@ define([
         }
 
         $rootScope.userUpdated();
+
+        $rootScope.refreshChildProfiles = function () {
+
+
+            var adultProfileId = userSession.getJWTUser();
+            console.log('refresh CHILDS for ', adultProfileId);
+            var defer = $q.defer();
+            $http({
+                method: 'GET',
+                url: config.userUrl + '/adult/' + adultProfileId + '/owns',
+                params: {
+                    expand: 'true',
+                    activeOnly: 'true'
+                }
+            })
+                .then(function (result) {
+                    console.log("retrieved chid profileS", result.data);
+                    $rootScope.safeApply(function () {
+                        $rootScope.childProfiles = result.data;
+                        console.log("safe apply of", $rootScope.childProfiles);
+
+                    })
+                }, function (err) {
+                    console.log("Failed to retrieve child profileS", err);
+                    defer.reject(err);
+                });
+            return defer.promise;
+        },
 
         /*     $rootScope.userUpdated = function () {
          return userApi.isUserVerified().then(function (isUserVerified) {

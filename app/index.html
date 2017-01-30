@@ -12,7 +12,7 @@
 </head>
 <body ng-controller = "MainCtrl">
 <toast></toast>
-<div ng-if = "$root.showVerificationWarning && $root.loggedIn" class = "verificationWarning">
+<div ng-cloak ng-if = "$root.showVerificationWarning && $root.loggedIn" class = "verificationWarning">
     {[{notVerifiedStrings.message1}]}
     <span class = "fullMessage">
             {[{notVerifiedStrings.message2}]}
@@ -21,27 +21,38 @@
             </a>
         </span>
 </div>
-<div ng-cloak>CAZZAR:A</div>
 <div ng-cloak>Logged in {[{$root.loggedIn}]}</div>
+<div>I am main controllero lallara</div>
 <ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
-    <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
-        Profile</a></li>
-    <li ng-class = "{active: $state.includes('editadultprofile')}"><a
-        href = "/#!/profile/adult/{[{$root.userID}]}/edit">Edit Adult
-        Profile (in progress)</a></li>
-    <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
-    <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
-    <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>
+    <ul>
+        <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
+            Profile</a></li>
+        <li ng-class = "{active: $state.includes('editadultprofile')}"><a
+            href = "/#!/profile/adult/{[{$root.userID}]}/edit">Edit Adult Profile</a></li>
+        <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
+        <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
+        <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>
 
-        <ul>Manage Kids Accounts
-            <li><a ui-sref = "editprofile({profileId:'create'})">Add Kid Account</a></li>
-        </ul>
-    <li></li>
+            <ul>Manage Kids Accounts
+                <li ng-repeat = "profile in $root.childProfiles" id = "child-nav-{{$index}}">
+                    <a ui-sref = "editprofile({profileId:profile.id})">
+                        <div class = "contactImageFrameSmall">
+                            <img ng-src = "{[{profile.avatar}]}"/>
+                        </div>
+                        {[{profile.profileName}]}
+                    </a>
+                </li>
+                <li><a ui-sref = "editprofile({profileId:'create'})">Add Kid Account</a></li>
 
-    </li>
-    <li ng-click = "$root.logOut()">Logout</li>
+            </ul>
+        <li></li>
+
+        </li>
+        <li ng-click = "$root.logOut()">Logout</li>
+    </ul>
 </ul>
 <div class = "container slide" ui-view></div>
+<div ui-view = "modal" autoscroll = "false"></div>
 <hr/>
 <pre ng-cloak>
       <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
