@@ -28,7 +28,9 @@ define([
     "angularScroll",
     "ModalService",
     "ngToast",
-    'jquery'
+    'jquery',
+    'anim-in-out'
+
 
 
 ], function (angular, uiRouter, routeResolver, lazyLoad, ngAnimate, ngCookies, ngResource, ngSanitize, ngTouch,
@@ -77,6 +79,7 @@ define([
             "ngSanitize",
             "ngTouch",
             "ui.router",
+            'anim-in-out',
             "routeResolver",
             "lazyLoad",
             "duScroll",
@@ -618,6 +621,18 @@ define([
         userSession.setOnSessionExpired(sessionCallBack);
         $rootScope.userID = $rootScope.linkJWT();
 
+        // In your main controller
+        $rootScope.$on('animStart', function ($event, element, speed) {
+            // do something
+            console.log("*********** ANIMSTART");
+        });
+
+        $rootScope.$on('animEnd', function ($event, element, speed) {
+            // do something
+            console.log("*********** ANIMEND");
+
+        });
+
         function sessionCallBack() {
             var loggedIn = false;
             console.log("******* CALLBACK USER SESSION TYPE");
@@ -643,9 +658,15 @@ define([
         // bloody requireJS too complex using the rest services here
         //
         $rootScope.userUpdated = function () {
-            var defer = $q.defer();
             $scope.userID = userSession.getJWTUser();
-            console.log('user url:', config.userUrl);
+            console.log('user url:', $scope.userID);
+            if ($scope.userID === 'undefined' || typeof $scope.userID === 'undefined') {
+                console.log('NO SHIT');
+
+                $rootScope.loggedIn = false;
+
+                return false;
+            }
             $http({
                 url: config.userUrl + '/adult/' + $scope.userID,
                 method: "GET"
@@ -661,12 +682,9 @@ define([
 
                 }
                 $scope.profileName = res.data.profileName;
-                defer.resolve(res);
             }, function (erro) {
                 console.log('USER ERROR', erro);
-                defer.reject(erro);
             });
-            return defer.promise;
 
         }
 
@@ -700,25 +718,25 @@ define([
             return defer.promise;
         },
 
-        /*     $rootScope.userUpdated = function () {
-         return userApi.isUserVerified().then(function (isUserVerified) {
-         $rootScope.showVerificationWarning = !isUserVerified;
-         }, function () {
-         $rootScope.showVerificationWarning = false;
-         });
-         };*/
+            /*     $rootScope.userUpdated = function () {
+             return userApi.isUserVerified().then(function (isUserVerified) {
+             $rootScope.showVerificationWarning = !isUserVerified;
+             }, function () {
+             $rootScope.showVerificationWarning = false;
+             });
+             };*/
 
-        $rootScope.logOut = function () {
-            console.log('************ LOGOUT');
-            userSession.sessionChanged("", "", true);
-            //analytics.sendEvent({ type: "logout" });
-            //analytics.clearUserId();
-            if (window.trackJs) {
-                trackJs.removeMetadata("user");
+            $rootScope.logOut = function () {
+                console.log('************ LOGOUT');
+                userSession.sessionChanged("", "", true);
+                //analytics.sendEvent({ type: "logout" });
+                //analytics.clearUserId();
+                if (window.trackJs) {
+                    trackJs.removeMetadata("user");
+                }
+                //dataStore.clearResources();
+                $location.url('/#/login');
             }
-            //dataStore.clearResources();
-            $location.url('/#/login');
-        }
 
     }]);
 

@@ -1,8 +1,11 @@
 @import "bower_components/slick-carousel/slick/slick.scss";
 @import "bower_components/slick-carousel/slick/slick-theme.scss";
+@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "bower_components/ngToast/dist/ngToast.min";
 @import "bower_components/ngToast/dist/ngToast-animations.min";
+@import "bower_components/angular-ui-router-anim-in-out/scss/anim-in-out";
+
 
 @import "pace-preloader.css";
 @import "modal.scss";
@@ -28,4 +31,8 @@ body {
         width: 20px;
 
     }
+}
+
+[ui-view] {
+    position: absolute;
 }

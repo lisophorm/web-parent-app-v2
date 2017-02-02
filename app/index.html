@@ -8,6 +8,8 @@
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
             display: none !important;
         }
+
+
     </style>
 </head>
 <body ng-controller = "MainCtrl">
@@ -22,8 +24,7 @@
         </span>
 </div>
 <div ng-cloak>Logged in {[{$root.loggedIn}]}</div>
-<div>I am main controllero lallara</div>
-<ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
+<!--ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
     <ul>
         <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
             Profile</a></li>
@@ -50,9 +51,9 @@
         </li>
         <li ng-click = "$root.logOut()">Logout</li>
     </ul>
-</ul>
-<div class = "container slide" ui-view></div>
-<hr/>
+</ul-->
+<!--  container slide -->
+<div class = "anim-in-out anim-slide-left" data-anim-speed = "1000" ui-view></div>
 <pre ng-cloak>
       <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
       $state = {[{$state.current.name}]}

@@ -50,7 +50,7 @@ server.use(livereload({port: livereloadport}));
 // Use our 'build' folder as rootfolder
 server.use(express.static('./build'));
 // Because I like HTML5 pushstate .. this redirects everything back to our index.html
-/#!/;
+
 server.all('/*', function (req, res) {
     res.sendFile('index.html', {root: 'build'});
 });
@@ -78,11 +78,11 @@ gulp.task('entry', function () {
     return gulp.src(['app/*.js'])
     // .pipe(annotate())
     //.pipe(gulp.dest('app'))
-        .pipe(annotate())
-        .pipe(sourcemaps.init())
+    //  .pipe(annotate())
+    //   .pipe(sourcemaps.init())
 
         // .pipe(uglify())
-        .pipe(sourcemaps.write('maps'))
+    //   .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('./build/'))
         .pipe(notify("entry ok!"));
 });
@@ -102,6 +102,10 @@ gulp.task('libScripts', function () {
         'bower_components/angular-ui-router/release/**.js',
         'bower_components/ngToast/dist/ngToast.js',
         'bower_components/angular-strap/dist/angular-strap.js',
+        'bower_components/angular-ui-router-anim-in-out/anim-in-out.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+        'bower_components/angular-strap/dist/angular-strap.js',
+        'bower_components/angular-strap/dist/angular-strap.tpl.js',
 
 
         // alan shit here
@@ -130,10 +134,10 @@ gulp.task('scripts', ['libScripts'], function () {
     return gulp.src(['app/scripts/**/*.js', 'app/scripts/**/**/*.js'])
     //   .pipe(annotate())
     //   .pipe(gulp.dest('app/scripts'))
-        .pipe(annotate())
-        .pipe(sourcemaps.init())
+    //  .pipe(annotate())
+    //  .pipe(sourcemaps.init())
         //    .pipe(uglify())
-        .pipe(sourcemaps.write('maps'))
+    //    .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('./build/js/'))
         .pipe(notify("scripts ok!"));
 });

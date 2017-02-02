@@ -11,7 +11,7 @@
 define(['app', 'angular', 'config'], function (app, angular, config) {
 
     app.controller('AboutCtrl', ["$scope", "first", '$cookies', '$http', 'userSession', function ($scope, first, $cookies, $http, userSession) {
-        console.log('within about controller');
+
         $scope.title = "About page";
         $scope.sayHello = first.getGreet();
         $scope.userID = userSession.getJWTUser();
@@ -19,10 +19,10 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
             url: config.userUrl + '/adult/' + $scope.userID,
             method: "GET"
         }).then(function (res) {
-            console.log('user success', res.data);
+
             $scope.profileName = res.data.profileName;
         }, function (erro) {
-            console.log('USER ERROR', erro);
+
         });
     }]);
 
