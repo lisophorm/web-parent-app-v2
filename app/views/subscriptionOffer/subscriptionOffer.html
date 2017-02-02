@@ -1,60 +1,62 @@
-<ng-include src = "'views/locked/locked.tmpl.html'" ng-if = "showVerificationWarning && displaySideNav"></ng-include>
-<div class = "viewHeader">{[{strings.title}]}</div>
-<div class = "subscriptionOffer">
+<div class = "wrapper">
+    <ng-include src = "'views/locked/locked.tmpl.html'"
+                ng-if = "showVerificationWarning && displaySideNav"></ng-include>
+    <div class = "viewHeader">{[{strings.title}]}</div>
+    <div class = "subscriptionOffer">
 
-    <div class = "offerText">
-        <div class = "offerHeader">{[{strings.startSubscription}]}</div>
-        <div class = "offerContent">{[{strings.planMessage1}]}</div>
-        <div class = "offerContent">{[{strings.planMessage2}]}</div>
-        <div class = "offerContent">{[{strings.planMessage3}]}</div>
-        <div class = "offerContentImportant">{[{strings.planMessage4}]}</div>
-        <div class = "offerContent donation" ng-show = "selectedPlan !== -1">
-            {[{strings.youWillDonateToNSPCC[plans[selectedPlan].billingCycle]}]}
+        <div class = "offerText">
+            <div class = "offerHeader">{[{strings.startSubscription}]}</div>
+            <div class = "offerContent">{[{strings.planMessage1}]}</div>
+            <div class = "offerContent">{[{strings.planMessage2}]}</div>
+            <div class = "offerContent">{[{strings.planMessage3}]}</div>
+            <div class = "offerContentImportant">{[{strings.planMessage4}]}</div>
+            <div class = "offerContent donation" ng-show = "selectedPlan !== -1">
+                {[{strings.youWillDonateToNSPCC[plans[selectedPlan].billingCycle]}]}
+            </div>
         </div>
-    </div>
 
-    <div class = "plansHeading">{[{strings.premiumPlans}]}</div>
+        <div class = "plansHeading">{[{strings.premiumPlans}]}</div>
 
-    <div class = "plansHolder customRadioGroup">
-        <div class = "columnSection" ng-repeat = "pl in plans">
-            <div class = "planWrapper {[{isPlanDisabled($index) ? 'disabled' : ''}]}"
-                 ng-class = "($index == selectedPlan) ? 'selected' : ''">
-                <label for = "{[{'radioPlan' + $index}]}">
-                    <div class = "plan" id = "{[{'plan' + $index}]}">
-                        <div class = "periodicityContainer">
-                            <div class = "periodicity">{[{pl.periodicity}]}</div>
+        <div class = "plansHolder customRadioGroup">
+            <div class = "columnSection" ng-repeat = "pl in plans">
+                <div class = "planWrapper {[{isPlanDisabled($index) ? 'disabled' : ''}]}"
+                     ng-class = "($index == selectedPlan) ? 'selected' : ''">
+                    <label for = "{[{'radioPlan' + $index}]}">
+                        <div class = "plan" id = "{[{'plan' + $index}]}">
+                            <div class = "periodicityContainer">
+                                <div class = "periodicity">{[{pl.periodicity}]}</div>
+                            </div>
+
+                            <input type = "radio" id = "{[{'radioPlan' + $index}]}" name = "selectedPlan"
+                                   ng-model = "$parent.selectedPlan" value = "{[{$index}]}" ng-checked = "pl.bestValue"
+                                   ng-disabled = "isPlanDisabled($index)"/>
+                            <div class = "priceContainer">
+                                <div class = "amount {[{pl.discountPrice < pl.totalPrice ? 'discounted': ''}]}">
+                                    {[{money(pl.totalPrice)}]}
+                                </div>
+                                <div class = "amount">{[{pl.discountPrice < pl.totalPrice ? money(pl.discountPrice) :
+                                    ""}]}
+                                </div>
+
+                                <div class = "amount period" ng-if = "pl.discountPrice >= pl.totalPrice">
+                                    {[{strings.period[pl.billingCycle]}]}
+                                </div>
+                                <div class = "amount period" ng-if = "pl.discountPrice < pl.totalPrice">
+                                    {[{strings.forValidityPeriod(pl.billingCycle, pl.discountDurationInCycles)}]}
+                                </div>
+                            </div>
                         </div>
-
-                        <input type = "radio" id = "{[{'radioPlan' + $index}]}" name = "selectedPlan"
-                               ng-model = "$parent.selectedPlan" value = "{[{$index}]}" ng-checked = "pl.bestValue"
-                               ng-disabled = "isPlanDisabled($index)"/>
-                        <div class = "priceContainer">
-                            <div class = "amount {[{pl.discountPrice < pl.totalPrice ? 'discounted': ''}]}">
-                                {[{money(pl.totalPrice)}]}
-                            </div>
-                            <div class = "amount">{[{pl.discountPrice < pl.totalPrice ? money(pl.discountPrice) :
-                                ""}]}
-                            </div>
-
-                            <div class = "amount period" ng-if = "pl.discountPrice >= pl.totalPrice">
-                                {[{strings.period[pl.billingCycle]}]}
-                            </div>
-                            <div class = "amount period" ng-if = "pl.discountPrice < pl.totalPrice">
-                                {[{strings.forValidityPeriod(pl.billingCycle, pl.discountDurationInCycles)}]}
-                            </div>
-                        </div>
+                    </label>
+                    <div class = "discount"
+                         ng-show = "pl.discount && !isPlanDisabled($index) && pl.discountPrice === pl.totalPrice">
+                        {[{strings.discount(pl.discount)}]}
+                        <div class = "arrow"></div>
                     </div>
-                </label>
-                <div class = "discount"
-                     ng-show = "pl.discount && !isPlanDisabled($index) && pl.discountPrice === pl.totalPrice">
-                    {[{strings.discount(pl.discount)}]}
-                    <div class = "arrow"></div>
                 </div>
             </div>
         </div>
-    </div>
-    in mezzo
-    <span ng-show = "!nothingToBePaid()">
+        in mezzo
+        <span ng-show = "!nothingToBePaid()">
         carta
         <div ng-show = "!shouldRequestCardDetails() && (selectedPlan !== -1)" class = "cardDetailsKnownBuySection">
             <div>
@@ -66,4 +68,5 @@
         <div ng-if = "shouldRequestCardDetails() && (selectedPlan !== -1)"
              ng-include = "'views/addCard/addCard.html'"></div>
     </span>
+    </div>
 </div>

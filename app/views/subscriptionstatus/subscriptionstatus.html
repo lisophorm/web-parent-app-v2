@@ -1,4 +1,4 @@
-<p>This is the subscription status view.</p>
+<div class = "wrapper">
 <div ng-show = "!signupJourney" class = "viewHeader">{[{strings.title}]}</div>
 <div class = "alreadySubscribed {[{signupJourney ? 'signupJourney' : ''}]}" ng-show = "displayStatus">
 
@@ -32,4 +32,5 @@
     <div ng-show = "signupJourney" class = "continueButtonWrapper">
         <button class = "continueButton" ng-click = "navigateToSignupEnd()">{[{strings.continue}]}</button>
     </div>
+</div>
 </div>

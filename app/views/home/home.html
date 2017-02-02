@@ -1,33 +1,36 @@
-<p>This is the home (o casa) view.</p>
-<p>{[{title}]}</p>
-<p>{[{dummy}]}</p>
-<p>User id: <strong>{[{userID}]}</strong></p>
-<p>Profile name: <strong>{[{profileName}]}</strong></p>
-<button ng-click = "showModal()">Show Modal</button>
+<div class = "wrapper">
+    <p>This is the home (o casa) view.</p>
+    <p>{[{title}]}</p>
+    <p>{[{dummy}]}</p>
+    <p>User id: <strong>{[{userID}]}</strong></p>
+    <p>Profile name: <strong>{[{profileName}]}</strong></p>
+    <button ng-click = "showModal()">Show Modal</button>
 
-<ul>
-    <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
-        Profile</a></li>
-    <li ng-class = "{active: $state.includes('editadultprofile')}"><a
-        href = "/#!/profile/adult/{[{$root.userID}]}/edit">Edit Adult Profile</a></li>
-    <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
-    <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
-    <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>
+    <ul>
+        <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
+            Profile</a></li>
+        <li ng-class = "{active: $state.includes('editadultprofile')}"><a
+            href = "/#!/profile/adult/{[{$root.userID}]}/edit">Edit Adult Profile</a></li>
+        <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a
+            ui-sref = "subscriptionstatus">Subscription</a>
+        <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
+        <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>
 
-        <ul>Manage Kids Accounts
-            <li ng-repeat = "profile in $root.childProfiles" id = "child-nav-{{$index}}">
-                <a ui-sref = "editprofile({profileId:profile.id})">
-                    <div class = "contactImageFrameSmall">
-                        <img ng-src = "{[{profile.avatar}]}"/>
-                    </div>
-                    {[{profile.profileName}]}
-                </a>
-            </li>
-            <li><a ui-sref = "editprofile({profileId:'create'})">Add Kid Account</a></li>
+            <ul>Manage Kids Accounts
+                <li ng-repeat = "profile in $root.childProfiles" id = "child-nav-{{$index}}">
+                    <a ui-sref = "editprofile({profileId:profile.id})">
+                        <div class = "contactImageFrameSmall">
+                            <img ng-src = "{[{profile.avatar}]}"/>
+                        </div>
+                        {[{profile.profileName}]}
+                    </a>
+                </li>
+                <li><a ui-sref = "editprofile({profileId:'create'})">Add Kid Account</a></li>
 
-        </ul>
-    <li></li>
+            </ul>
+        <li></li>
 
-    </li>
-    <li ng-click = "$root.logOut()">Logout</li>
-</ul>
+        </li>
+        <li ng-click = "$root.logOut()">Logout</li>
+    </ul>
+</div>
