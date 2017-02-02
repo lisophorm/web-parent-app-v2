@@ -9,6 +9,8 @@
 
 @import "pace-preloader.css";
 @import "modal.scss";
+@import "modules/cookieConsent";
+
 
 
 body {
@@ -35,4 +37,10 @@ body {
 
 [ui-view] {
     position: absolute;
+}
+
+pre {
+    position: absolute !important;
+    width: 100%;
+    bottom: 0;
 }
