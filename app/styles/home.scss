@@ -11,7 +11,10 @@
 @import "modal.scss";
 @import "modules/cookieConsent";
 
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
 
+}
 
 body {
     position: absolute;

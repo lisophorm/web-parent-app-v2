@@ -31,7 +31,8 @@ require.config({
         'ModalService': 'lib/angular-modal-service',
         'ModalcontrollerCtrl': "/js/controllers/modalcontroller/modalcontroller",
         'userApi': 'js/services/rest/userApi',
-        'anim-in-out': 'lib/anim-in-out'
+        'anim-in-out': 'lib/anim-in-out',
+        'matchMedia': 'lib/match-media'
     },
     optimize: "none",
 

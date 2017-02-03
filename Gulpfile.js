@@ -107,8 +107,8 @@ gulp.task('libScripts', function () {
         'bower_components/angular-strap/dist/angular-strap.js',
         'bower_components/angular-strap/dist/angular-strap.tpl.js',
 
+        'bower_components/angular-media-queries/match-media.js',
 
-        // alan shit here
         'bower_components/azoomee.web-components-jwt/userSession.js',
         'bower_components/azoomee.web-components-jwt/httpProviderConfig.js',
         'bower_components/azoomee.web-components-jwt/Base64.js',

@@ -29,7 +29,8 @@ define([
     "ModalService",
     "ngToast",
     'jquery',
-    'anim-in-out'
+    'anim-in-out',
+    'matchMedia'
 
 
 
@@ -84,7 +85,8 @@ define([
             "lazyLoad",
             "duScroll",
             "angularModalService",
-            "ngToast"
+            "ngToast",
+            'matchMedia'
             //
             //'com.tinizine.azoomee.userSession'
         ])
@@ -274,8 +276,8 @@ define([
         //
         // form the original project
         .run(
-            ["$rootScope", "$state", "$stateParams", "routeResolver", "userSession",
-                function ($rootScope, $state, $stateParams, routeResolver, userSession) {
+            ["$rootScope", "$state", "$stateParams", "routeResolver", "userSession", "screenSize",
+                function ($rootScope, $state, $stateParams, routeResolver, userSession, screenSize) {
                     console.log('******** RUN');
                     console.log(userSession.getJWTUser());
                     $rootScope.loggedIn = false;
@@ -295,6 +297,21 @@ define([
 
                         $rootScope.loggedIn = false;
                     }
+
+                    $rootScope.isMobile = screenSize.on('xs, sm', function (isMatch) {
+                        console.log("********** screen resolution", isMatch);
+                        $rootScope.screenRes = isMatch;
+                    });
+                    $rootScope.desktop = screenSize.on('md, lg', function (match) {
+                        if (match) {
+                            console.log("********** DESKTOP resolution");
+
+                        } else {
+                            console.log("********** MOBILE resolution");
+
+                        }
+                        $rootScope.desktop = match;
+                    });
 
                     console.log(userSession.getJWTUser());
 
@@ -356,6 +373,8 @@ define([
                 .state('editprofile', {
                     url: '/profile/child/:profileId/edit',
                     controller: "EditprofileCtrl",
+                    controllerFile: 'controllers/editprofile.js',
+
                     files: {
                         s: ['rest/userApi']
                     },
@@ -364,6 +383,8 @@ define([
                 })
                 .state('editadultprofile', {
                     url: '/profile/adult/:profileId/edit',
+                    controllerFile: 'controllers/editadultprofile.js',
+
                     controller: 'EditadultprofileCtrl',
                     templateUrl: 'views/profile/editadultprofile.html',
                     files: {
@@ -374,6 +395,8 @@ define([
                 .state('displayprofile', {
                     url: '/profile/:profileType/:profileId',
                     templateUrl: 'views/profile/displayprofile.html',
+                    controllerFile: 'controllers/displayprofile.js',
+
                     files: {
                         s: ['rest/userApi']
                     },
@@ -382,6 +405,8 @@ define([
                 .state('change_pin', {
                     url: '/change_pin',
                     controller: 'ChangePinCtrl',
+                    controllerFile: 'controllers/change_pin.js',
+
                     templateUrl: 'views/pin/pinForm.html',
                     files: {
                         s: ['rest/userApi']
@@ -389,6 +414,8 @@ define([
                     resolve: {}
                 })
                 .state('learnmore', {
+                    controllerFile: 'controllers/learnmore.js',
+
                     url: '/learnmore',
                     files: ['first.service'],
                     resolve: {}
@@ -396,6 +423,8 @@ define([
 
                 .state('voucherredemption', {
                     url: '/voucherredemption',
+                    controllerFile: 'controllers/voucherredemption.js',
+
                     templateUrl: 'views/voucherredemption/voucherredemption.html',
                     controller: 'VoucherredemptionCtrl',
                     files: {
@@ -406,6 +435,8 @@ define([
                 .state('subscriptionstatus', {
                     url: '/subscriptionstatus',
                     controller: 'SubscriptionstatusCtrl',
+                    controllerFile: 'controllers/subscriptionstatus.js',
+
                     files: {
                         s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
                     },
@@ -426,6 +457,7 @@ define([
                 })
                 .state('signupsubscriptionoffer', {
                     url: '/signup/signupsubscriptionoffer',
+                    controllerFile: 'controllers/signupsubscriptionoffer.js',
                     files: {
                         s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
                     },
@@ -433,6 +465,7 @@ define([
                 })
                 .state('subscriptionOffer', {
                     url: '/subscriptionoffer',
+                    controllerFile: 'controllers/subscriptionOffer.js',
                     files: {
                         s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
                     },
@@ -442,6 +475,8 @@ define([
                 .state('signupend', {
                     url: '/signup/end',
                     controller: 'SignupendCtrl',
+                    controllerFile: 'controllers/signupend.js',
+
                     files: {
                         s: ['first.service', 'rest/billingApi']
                     },
@@ -450,6 +485,7 @@ define([
                 .state('resendverification', {
                     url: '/verification/resend',
                     controller: 'ResendVerificationCtrl',
+                    controllerFile: 'controllers/resendverification.js',
                     files: {
                         s: ['first.service', 'rest/userApi']
                     },
@@ -458,6 +494,8 @@ define([
                 .state('change_password', {
                     url: '/change_password',
                     controller: 'ChangePasswordCtrl',
+                    controllerFile: 'controllers/change_password.js',
+
                     files: {
                         s: ['first.service', 'rest/passwordApi']
                     },
@@ -465,7 +503,10 @@ define([
                 })
                 .state('passwordreset', {
                     url: '/passwordReset?token',
+
                     controller: 'ForgottenPasswordResetCtrl',
+                    controllerFile: 'controllers/passwordreset.js',
+
                     files: ['first.service'],
 
                     resolve: {}
@@ -474,7 +515,7 @@ define([
                     url: '/totstoo',
                     templateUrl: 'views/signup/signup.html',
                     controller: 'SignupCtrl',
-                    controllerFile: 'controllers/signup/signup.js',
+                    controllerFile: 'controllers/signup.js',
                     files: {
                         s: ['first.service', 'rest/loginApi', 'rest/billingApi']
                     },
@@ -483,12 +524,17 @@ define([
                 .state('verification', {
                     url: '/verification?token&reason',
                     files: ['rest/verificationApi'],
+                    controller: 'VerificationCtrl',
+                    controllerFile: 'controllers/verification.js',
+
                     resolve: {}
                 })
                 .state('forgotten', {
                     url: '/forgotten',
                     controller: 'ForgottenPasswordCtrl',
                     files: ['first.service'],
+                    controllerFile: 'controllers/signup.js',
+
                     resolve: {}
                 })
                 .state('signup', {
@@ -496,6 +542,8 @@ define([
                     files: {
                         s: ['first.service', 'rest/loginApi', 'rest/billingApi']
                     },
+                    controllerFile: 'controllers/signup.js',
+
                     resolve: {}
                 })
                 .state('login', {
@@ -503,10 +551,14 @@ define([
                     files: {
                         s: ['first.service', 'rest/loginApi']
                     },
+                    controllerFile: 'controllers/login.js',
+
                     resolve: {}
                 })
                 .state('home', {
                     url: '/home',
+                    controllerFile: 'controllers/home.js',
+
                     files: {
                         s: ['factory01.factory', 'first.service', 'servo01'],
                         d: ['tickyTag']
@@ -517,13 +569,7 @@ define([
                         }
                     }
                 })
-                .state('about', {
-                    url: '/about',
-                    files: {
-                        s: ['first.service', 'servo01']
-                    },
-                    resolve: {} //the default value  {}
-                })
+
                 // ui router modal
                 .state("Base", {})
 

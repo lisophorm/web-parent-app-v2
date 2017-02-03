@@ -32,7 +32,14 @@
 <!--  container slide -->
 <div id = "homeOverBut" class = "fadable" ng-hide = "$state.current.name=='home' || !$root.loggedIn"><a
     ui-sref = "home">HOME</a></div>
-<div id = "main" class = "anim-in-out anim-slide-left" data-anim-speed = "1000" ui-view></div>
+<div class = "row">
+    <div class = "col-md-6" ng-if = "$root.desktop">
+        <ng-include src = "'views/home/home.html'"></ng-include>
+    </div>
+    <div class = "col-md-6 col-sm-12">
+        <div id = "main" class = "anim-in-out anim-slide-left" data-anim-speed = "1000" ui-view></div>
+    </div>
+</div>
 
 <script>
     window.paceOptions = {
