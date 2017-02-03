@@ -33,6 +33,15 @@ body {
     }
 }
 
+#homeOverBut {
+    background-color: #00b3ee;
+    padding: 6px;
+    position: fixed;
+    z-index: 100;
+    top: 10px;
+    left: 10px;
+}
+
 #callMenu {
     height: 20px;
     position: absolute;
@@ -42,7 +51,7 @@ body {
 
 #main {
     position: absolute;
-    top: 40px;
+    top: 20px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -58,10 +67,9 @@ h1 {
     position: absolute;
     left: 10%;
     right: 10%;
-    top: 10%;
+    top: 40px;
     bottom: 10%;
     height: 10em;
-    margin: auto;
 }
 
 
@@ -84,4 +92,38 @@ pre {
     position: absolute !important;
     width: 100%;
     bottom: 0;
+}
+
+.verificationWarning {
+    position: fixed;
+    background-color: #5cb85c;
+    bottom: 0;
+    padding: 8px;
+    z-index: 1000;
+}
+
+/* fade in out */
+
+.fadable {
+    transition: 0s linear all;
+}
+
+.fadable.ng-hide-remove {
+    opacity: 0;
+    display: block !important;
+    transition: 0.5s linear all;
+}
+
+.fadable.ng-hide-remove.ng-hide-remove-active {
+    opacity: .5;
+}
+
+.fadable.ng-hide-add {
+    opacity: .5;
+    display: block !important;
+    transition: 0.5s linear all;
+}
+
+.fadable.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
 }

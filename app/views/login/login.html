@@ -1,41 +1,41 @@
-<div class = "login">
+<div class = "wrapper">
 
+    <div class = "row">
+        <div class = "loginMsg" ng-show = "userMessage">
+            {[{userMessage}]}
+        </div>
 
-    <div class = "loginMsg" ng-show = "userMessage">
-        {[{userMessage}]}
+        <div class = "loginMsg" ng-show = "!loading">
+            Log In
+        </div>
+        <form name = "loginForm" class = "credentialsForm" ng-submit = "submit()" novalidate ng-show = "!loading">
+            <div class = "field">
+                <div ng-show = "errorMsg" class = "errorMsg fieldValue" id = "errorMessage">
+                    <strong>
+                        {[{errorMsg}]}
+                    </strong>
+                </div>
+            </div>
+            <div class = "field">
+                <div class = "fieldValue">
+                    <input type = "email" ng-model = "userId" placeholder = "email" id = "profilename" required>
+                </div>
+            </div>
+            <div class = "field">
+                <div class = "fieldValue">
+                    <input type = "password" name = "password" ng-model = "pwd" placeholder = "password" id = "password"
+                           required>
+                </div>
+            </div>
+            <div class = "submitButtonWrapper">
+                <input type = "submit" value = "SUBMIT" class = "loginButton" id = "loginButton"/>
+            </div>
+        </form>
+        <!div ng-show="!loading">
+        Don't have an account?<a ui-sref = "signup">SIGN UP</a><br/>
+        <a ui-sref = "forgotten">Forgotten Password?</a><br/>
     </div>
-
-    <div class = "loginMsg" ng-show = "!loading">
-        Log In
+    <div ng-show = "loading" class = "loadingIcon">
+        Logging you in
     </div>
-    <form name = "loginForm" class = "credentialsForm" ng-submit = "submit()" novalidate ng-show = "!loading">
-        <div class = "field">
-            <div ng-show = "errorMsg" class = "errorMsg fieldValue" id = "errorMessage">
-                <strong>
-                    {[{errorMsg}]}
-                </strong>
-            </div>
-        </div>
-        <div class = "field">
-            <div class = "fieldValue">
-                <input type = "email" ng-model = "userId" placeholder = "email" id = "profilename" required>
-            </div>
-        </div>
-        <div class = "field">
-            <div class = "fieldValue">
-                <input type = "password" name = "password" ng-model = "pwd" placeholder = "password" id = "password"
-                       required>
-            </div>
-        </div>
-        <div class = "submitButtonWrapper">
-            <input type = "submit" value = "SUBMIT" class = "loginButton" id = "loginButton"/>
-        </div>
-    </form>
-    <!div ng-show="!loading">
-    Don't have an account?<a ui-sref = "signup">SIGN UP</a><br/>
-    <a ui-sref = "forgotten">Forgotten Password?</a><br/>
-</div>
-<div ng-show = "loading" class = "loadingIcon">
-    Logging you in
-</div>
 </div>

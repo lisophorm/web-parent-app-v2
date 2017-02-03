@@ -1,31 +1,32 @@
 <div class = "wrapper">
 <ng-include src = "'views/locked/locked.tmpl.html'"
             ng-if = "showVerificationWarning && displaySideNav && !displayingAdultProfile()"></ng-include>
-<div class = "viewHeader">{[{profile.profileName}]}</div>
-
+    <div class = "row">{[{profile.profileName}]}
     <div ng-show = "errorMsg" class = "errorMsg">{[{errorMsg}]}</div>
+    </div>
+    <div class = "row">
 
-    <div class = "profileSummary">
-        <div class = "avatarHolder">
-            <div class = "contactImageFrameHuge">
-                <img ng-src = "{[{profile.avatar}]}">
+        <div class = "profileSummary">
+            <div class = "avatarHolder">
+                <div class = "contactImageFrameHuge">
+                    <img class = "img-responsive" ng-src = "{[{profile.avatar}]}">
+                </div>
             </div>
-        </div>
-        <div class = "profileDetails">
-            <div>
-                <div class = "profileName">{[{profile.profileName}]}</div>
-                <div class = "youBrackets" ng-if = "displayingAdultProfile()">({[{strings.you}]})</div>
+            <div class = "profileDetails">
+                <div>
+                    <div class = "profileName">{[{profile.profileName}]}</div>
+                    <div class = "youBrackets" ng-if = "displayingAdultProfile()">({[{strings.you}]})</div>
+                </div>
+                <div ng-if = "!displayingAdultProfile()" class = "profileAge">{[{strings.age}]} {[{computeAgeInYears()}]}</div>
+                <div class = "inviteCode hidden">{[{profile.inviteCode}]}</div>
+                <div class = "spacer"></div>
+                <button class = "editButton" ng-click = "editProfile()">
+                    {[{strings.edit}]}
+                </button>
+                <div class = "spacer"></div>
             </div>
-            <div ng-if = "!displayingAdultProfile()" class = "profileAge">{[{strings.age}]} {[{computeAgeInYears()}]}</div>
-            <div class = "inviteCode hidden">{[{profile.inviteCode}]}</div>
-            <div class = "spacer"></div>
-            <button class = "editButton" ng-click = "editProfile()">
-                {[{strings.edit}]}
-            </button>
-            <div class = "spacer"></div>
-        </div>
 </div>
-
+    </div>
     <button ng-if = "!displayingAdultProfile()" ng-show = "false" class = "statsButton" ng-click = "navigateToStats()">
         {[{strings.viewStats}]}
 </button>

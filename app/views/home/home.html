@@ -1,36 +1,48 @@
 <div class = "wrapper">
-    <p>This is the home (o casa) view.</p>
-    <p>{[{title}]}</p>
-    <p>{[{dummy}]}</p>
-    <p>User id: <strong>{[{userID}]}</strong></p>
-    <p>Profile name: <strong>{[{profileName}]}</strong></p>
-    <button ng-click = "showModal()">Show Modal</button>
+    <div class = "row">
+        <div class = "col-md-12">
+            <div class = "list-group">
+                <button type = "button" ui-sref = "displayprofile({profileType:'adult',profileId:$root.userID})"
+                        class = "list-group-item list-group-item-action">
+                    Adult Profile
+                </button>
+                <button type = "button" ui-sref = "editadultprofile({profileId:$root.userID})"
+                        class = "list-group-item list-group-item-action">
+                    Edit Adult Profile
+                </button>
+                <button type = "button" class = "list-group-item list-group-item-action" ui-sref = "subscriptionstatus">
+                    Subscription
+                </button>
+                <button type = "button" class = "list-group-item list-group-item-action" ui-sref = "voucherredemption">
+                    Redeem
+                </button>
+                <div class = "list-group-item list-group-item-action active">Manage Kids Accounts
+                </div>
+                <button type = "button" class = "list-group-item list-group-item-action"
+                        ng-repeat = "profile in $root.childProfiles" ui-sref = "editprofile({profileId:profile.id})"
+                        id = "child-nav-{{$index}}">
 
-    <ul>
-        <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
-            Profile</a></li>
-        <li ng-class = "{active: $state.includes('editadultprofile')}"><a
-            href = "/#!/profile/adult/{[{$root.userID}]}/edit">Edit Adult Profile</a></li>
-        <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a
-            ui-sref = "subscriptionstatus">Subscription</a>
-        <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
-        <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>
-
-            <ul>Manage Kids Accounts
-                <li ng-repeat = "profile in $root.childProfiles" id = "child-nav-{{$index}}">
-                    <a ui-sref = "editprofile({profileId:profile.id})">
-                        <div class = "contactImageFrameSmall">
+                        <span class = "contactImageFrameSmall">
                             <img ng-src = "{[{profile.avatar}]}"/>
-                        </div>
+                        </span>
                         {[{profile.profileName}]}
-                    </a>
-                </li>
-                <li><a ui-sref = "editprofile({profileId:'create'})">Add Kid Account</a></li>
 
-            </ul>
-        <li></li>
-
-        </li>
-        <li ng-click = "$root.logOut()">Logout</li>
-    </ul>
+                </button>
+                <button type = "button" class = "list-group-item list-group-item-action"
+                        ui-sref = "editprofile({profileId:'create'})">Add Kid Account
+                </button>
+                <button type = "button" class = "list-group-item list-group-item-action" ng-click = "$root.logOut()">Log
+                    Out
+                </button>
+                <div class = "list-group-item list-group-item-action active">Support
+                </div>
+                <button type = "button" href = "#" class = "list-group-item list-group-item-action">
+                    FAQ
+                </button>
+                <button type = "button" class = "list-group-item list-group-item-action" href = "#">
+                    Contact US
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

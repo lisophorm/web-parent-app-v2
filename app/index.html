@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang = "en">
 <head>
+    <meta name = "viewport"
+          content = "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name = "HandheldFriendly" content = "true">
+
     <title>Azoomee Web Parent App v2</title>
     <!-- inject:css -->
     <!-- endinject -->
@@ -23,36 +27,11 @@
             </a>
         </span>
 </div>
-<div ng-cloak>Logged in {[{$root.loggedIn}]} <a ui-sref = "home">HOME</a></div>
-<!--ul ng-if = "$root.loggedIn" class = "nav nav-tabs" role = "tablist">
-    <ul>
-        <li ng-class = "{active: $state.includes('displayprofile')}"><a href = "/#!/profile/adult/{[{$root.userID}]}">Adult
-            Profile</a></li>
-        <li ng-class = "{active: $state.includes('editadultprofile')}"><a
-            href = "/#!/profile/adult/{[{$root.userID}]}/edit">Edit Adult Profile</a></li>
-        <li ng-class = "{active: $state.includes('subscriptionstatus')}"><a ui-sref = "subscriptionstatus">Subscription</a>
-        <li ng-class = "{active: $state.includes('voucherredemption')}"><a ui-sref = "voucherredemption">Redeem</a>
-        <li ng-class = "{active: $state.includes('change_pin')}"><a ui-sref = "change_pin">Change Pin</a>
+<!--div ng-cloak>Logged in {[{$root.loggedIn}]}</div-->
 
-            <ul>Manage Kids Accounts
-                <li ng-repeat = "profile in $root.childProfiles" id = "child-nav-{{$index}}">
-                    <a ui-sref = "editprofile({profileId:profile.id})">
-                        <div class = "contactImageFrameSmall">
-                            <img ng-src = "{[{profile.avatar}]}"/>
-                        </div>
-                        {[{profile.profileName}]}
-                    </a>
-                </li>
-                <li><a ui-sref = "editprofile({profileId:'create'})">Add Kid Account</a></li>
-
-            </ul>
-        <li></li>
-
-        </li>
-        <li ng-click = "$root.logOut()">Logout</li>
-    </ul>
-</ul-->
 <!--  container slide -->
+<div id = "homeOverBut" class = "fadable" ng-hide = "$state.current.name=='home' || !$root.loggedIn"><a
+    ui-sref = "home">HOME</a></div>
 <div id = "main" class = "anim-in-out anim-slide-left" data-anim-speed = "1000" ui-view></div>
 
 <script>
