@@ -1,31 +1,31 @@
 <div class = "wrapper">
     <div class = "row">
-
-    <button ng-click = "showToast()">Show Toast</button>
-
-    <div class = "viewHeader">{[{strings.editProfile}]}</div>
-
-    <form class = "profileEditor" ng-submit = "saveProfile()" novalidate>
-        <az-status-board status-object = "status" delay-error = "2000"></az-status-board>
-        <div class = "profileHeader">
-            {[{profile.profileName}]}
-        </div>
-        <div class = "contactImageFrameHugeContainer" ng-click = "showAvatarOptions()">
-            <div class = "contactImageFrameHuge">
-                <img class = "img-responsive" ng-src = "{[{profile.avatar}]}">
-                <div class = "editTextOverlay">Edit</div>
-            </div>
-            <div class = "editIcon"></div>
-        </div>
-        <div class = "profileValues">
-            <fieldset class = "profileData">
-                <div class = "form-group">
-                    <input ng-model = "profile.profileName" type = "text" class = "profileName" required autofocus
-                           placeholder = "{[{strings.name}]}"/>
+        <div class = "col-md-12">
+            <button ng-click = "showToast()">Show Toast</button>
+            <div class = "viewHeader">{[{strings.editProfile}]}</div>
+            <form class = "profileEditor" ng-submit = "saveProfile()" novalidate>
+                <az-status-board status-object = "status" delay-error = "2000"></az-status-board>
+                <div class = "profileHeader">
+                    {[{profile.profileName}]}
                 </div>
-            </fieldset>
+                <div class = "contactImageFrameHugeContainer" ng-click = "showAvatarOptions()">
+                    <div class = "contactImageFrameHuge">
+                        <img class = "img-responsive" ng-src = "{[{profile.avatar}]}">
+                        <div class = "editTextOverlay">Edit</div>
+                    </div>
+                    <div class = "editIcon"></div>
+                </div>
+                <div class = "profileValues">
+                    <fieldset class = "profileData">
+                        <div class = "form-group">
+                            <input ng-model = "profile.profileName" type = "text" class = "profileName" required
+                                   autofocus
+                                   placeholder = "{[{strings.name}]}"/>
+                        </div>
+                    </fieldset>
+                </div>
+                <input type = "submit" class = "saveButton" value = "{[{strings.save}]}"/>
+            </form>
         </div>
-        <input type = "submit" class = "saveButton" value = "{[{strings.save}]}"/>
-    </form>
-</div>
+    </div>
 </div>

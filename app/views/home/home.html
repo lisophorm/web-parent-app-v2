@@ -2,9 +2,9 @@
     <div class = "row">
         <div class = "col-md-12">
             <div class = "list-group">
-                <button type = "button" ui-sref = "editadultprofile({profileId:$root.userID})"
+                <button type = "button" ng-if = "ginoDesko" ui-sref = "editadultprofile({profileId:$root.userID})"
                         class = "list-group-item list-group-item-action">
-                    test valie - {[{ginoDesko}]}
+                    DESKTOP RESOLUTION
                 </button>
                 <img class = "img-responsive" src = "images/rollllzzz.jpg">
                 <button type = "button" ui-sref = "displayprofile({profileType:'adult',profileId:$root.userID})"
@@ -23,19 +23,21 @@
                 </button>
                 <div class = "list-group-item list-group-item-action active">Manage Kids Accounts
                 </div>
-                <button type = "button" class = "list-group-item list-group-item-action"
-                        ng-repeat = "profile in $root.childProfiles" ui-sref = "editprofile({profileId:profile.id})"
-                        id = "child-nav-{{$index}}">
-
-                        <span class = "contactImageFrameSmall">
+                <li class = "list-group-item list-group-item-action"
+                    ng-repeat = "profile in $root.childProfiles"
+                    id = "child-nav-{{$index}}">
+                    <a ui-sref = "editprofile({profileId:profile.id})">
+                        <div class = "contactImageFrameSmall">
                             <img ng-src = "{[{profile.avatar}]}"/>
-                        </span>
+                        </div>
                         {[{profile.profileName}]}
+                    </a>
 
-                </button>
-                <button type = "button" class = "list-group-item list-group-item-action"
-                        ui-sref = "editprofile({profileId:'create'})">Add Kid Account
-                </button>
+
+                </li>
+                <li class = "list-group-item list-group-item-action"
+                    ui-sref = "editprofile({profileId:'create'})">Add Kid Account
+                </li>
                 <button type = "button" class = "list-group-item list-group-item-action" ng-click = "$root.logOut()">Log
                     Out
                 </button>

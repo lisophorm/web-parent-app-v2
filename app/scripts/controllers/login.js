@@ -14,10 +14,12 @@ define([
     'config'
 ], function (app, angular, config) {
     app.controller('LoginCtrl',
-        ["$scope", "loginApi", 'userSession', '$location', 'analytics', '$stateParams', "$rootScope", function ($scope, loginApi, userSession, $location, analytics, $stateParams, $rootScope) {
+        ["$scope", "loginApi", 'userSession', '$location', 'analytics', '$stateParams', "$rootScope", "loginStrings", function ($scope, loginApi, userSession, $location, analytics, $stateParams, $rootScope, loginStrings) {
             $rootScope.userUpdated();
             $rootScope.totstoo = false;
             //dataStore.clearResources();
+            $scope.strings = loginStrings;
+
             console.log('LOGIN CONTROLLER');
             $scope.userId = userSession.getJWTUserName();
             $scope.userId = ($scope.userId === "verify") ? "" : $scope.userId;

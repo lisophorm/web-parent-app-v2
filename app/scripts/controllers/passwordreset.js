@@ -7,11 +7,13 @@
  * Controller of the web-parent-app-v2
  */
 define(['app', 'angular', 'config'], function (app, angular, config) {
-    app.controller('ForgottenPasswordResetCtrl', ["$scope", "$stateParams", "$http", "$location", function ($scope, $stateParams, $http, $location) {
+    app.controller('ForgottenPasswordResetCtrl', ["$scope", "$stateParams", "$http", "$location", "forgottenPasswordStrings", function ($scope, $stateParams, $http, $location, forgottenPasswordStrings) {
         $scope.title = "Passwordreset page";
         console.log('within password reset controller');
         console.log('state params:', $stateParams);
         $scope.token = $stateParams.token;
+        $scope.strings = forgottenPasswordStrings;
+
         $scope.showTokenField = true;
         if ($stateParams.token && $stateParams.token.length > 0) {
             $scope.showTokenField = false;

@@ -1,6 +1,13 @@
 <div class = "wrapper">
 
-    <div class = "row">
+
+    <div class = "login">
+        <div class = "logoWrapper">
+            <div class = "logo">
+                <img src = "images/logos/azoomee_logo.svg">
+            </div>
+        </div>
+
         <div class = "loginMsg" ng-show = "userMessage">
             {[{userMessage}]}
         </div>
@@ -18,24 +25,26 @@
             </div>
             <div class = "field">
                 <div class = "fieldValue">
-                    <input type = "email" ng-model = "userId" placeholder = "email" id = "profilename" required>
+                    <input type = "email" ng-model = "userId" placeholder = "{[{strings.email}]}" id = "profilename"
+                           required>
                 </div>
             </div>
             <div class = "field">
                 <div class = "fieldValue">
-                    <input type = "password" name = "password" ng-model = "pwd" placeholder = "password" id = "password"
-                           required>
+                    <input type = "password" name = "password" ng-model = "pwd" placeholder = "{[{strings.password}]}"
+                           id = "password" required>
                 </div>
             </div>
             <div class = "submitButtonWrapper">
-                <input type = "submit" value = "SUBMIT" class = "loginButton" id = "loginButton"/>
+                <input type = "submit" value = "{[{strings.submit}]}" class = "loginButton" id = "loginButton"/>
             </div>
         </form>
-        <!div ng-show="!loading">
-        Don't have an account?<a ui-sref = "signup">SIGN UP</a><br/>
-        <a ui-sref = "forgotten">Forgotten Password?</a><br/>
-    </div>
-    <div ng-show = "loading" class = "loadingIcon">
-        Logging you in
+        <div ng-show = "!loading">
+            {[{strings.noAccount}]} <a ui-sref = "signup">{[{strings.signUp}]}</a><br/>
+            <a ui-sref = "forgotten">{[{strings.forgottenPassword}]}</a><br/>
+        </div>
+        <div ng-show = "loading" class = "loadingIcon">
+            Logging you in
+        </div>
     </div>
 </div>

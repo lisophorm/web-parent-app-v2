@@ -24,6 +24,7 @@ $avatarFrameBorderWidth: 3px;
 
 .contactImageFrameSmall {
     @include avatarFrame($avatarSizeSmall);
+
 }
 
 .contactImageFrame {

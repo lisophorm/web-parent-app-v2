@@ -239,6 +239,9 @@ define([
                     $rootScope.desktop = screenSize.is('md, lg');
                     if ($rootScope.desktop) {
                         $rootScope.animType = "anim-fade";
+                        console.log("******* RRUBN", $state.current.name);
+
+                        //$state.go("subscriptionstatus");
 
                     } else {
                         $rootScope.animType = "anim-fade";
@@ -267,7 +270,18 @@ define([
                         $rootScope.screenRes = isMatch;
                     });
                     $rootScope.desktop = screenSize.on('md, lg', function (match) {
+                        if (match && $rootScope.animType != "anim-fade") {
+                            console.log("********* SWITCHED TO DESKTOP");
+                            console.log($state.current.name);
+                            if ($state.current.name == 'home') {
+                                $state.go("subscriptionstatus");
+
+
+                            }
+
+                        }
                         if (match) {
+
                             $rootScope.animType = "anim-fade";
 
                             console.log("********** DESKTOP resolution");
@@ -511,8 +525,9 @@ define([
                 .state('forgotten', {
                     url: '/forgotten',
                     controller: 'ForgottenPasswordCtrl',
+
                     files: ['first.service'],
-                    controllerFile: 'controllers/signup.js',
+                    controllerFile: 'controllers/forgotten.js',
 
                     resolve: {}
                 })

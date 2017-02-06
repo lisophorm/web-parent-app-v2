@@ -120,6 +120,8 @@ gulp.task('libScripts', function () {
         'bower_components/slick-carousel/slick/slick.js',
         'bower_components/slick-carousel/slick/slick.css',
         'bower_components/angular-modal-service/dst/angular-modal-service.js',
+        'bower_components/slick-carousel/slick/slick.js'
+
 
     ])
         .pipe(gulp.dest('build/lib'));
