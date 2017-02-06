@@ -57,7 +57,7 @@ server.all('/*', function (req, res) {
 
 // Dev task
 gulp.task('dev', function (cb) {
-    runSequence('clean', ['inject', 'lint', 'copy', 'rjs'], cb);
+    runSequence('clean', ['inject', 'lint', 'copy', 'fonts', 'rjs'], cb);
 });
 
 // Clean task
@@ -128,6 +128,10 @@ gulp.task('libScripts', function () {
 
 gulp.task('copy', function () {
     return gulp.src('app/images/**/*.*').pipe(gulp.dest('build/images'));
+});
+
+gulp.task('fonts', function () {
+    return gulp.src('app/fonts/**/*.*').pipe(gulp.dest('build/fonts'));
 });
 
 gulp.task('scripts', ['libScripts'], function () {

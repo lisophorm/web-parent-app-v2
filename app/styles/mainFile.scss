@@ -1,19 +1,50 @@
+$MainColour1: #55CDC3;
+$MainColour1_dark: #40ADA0;
+$MainColour2: #F96B23;
+$MainColour2_dark: #E05C03;
+$MainColour3: #36475B;
+$NeutralColour1: #D9E4E9;
+$NeutralColour2: #99A7B2;
+
+$NeutralColour3: #F0F0F0;
+$MainTextColor: #464646;
+
+$NeutralColour4: #F6F6EC;
+$NeutralColour4_dark: #EEEDE1;
+
+$buttonColour: #fab632;
+$buttonBackdropColour: #f2984e;
+
 @import "bower_components/slick-carousel/slick/slick.scss";
 @import "bower_components/slick-carousel/slick/slick-theme.scss";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "bower_components/ngToast/dist/ngToast.min";
 @import "bower_components/ngToast/dist/ngToast-animations.min";
+@import "bower_components/sass-flex-mixin/_flex";
 @import "bower_components/angular-ui-router-anim-in-out/scss/anim-in-out";
+
+@import "components/radioGroup";
+@import "components/statusBars";
+@import "components/dropShadows";
+@import "components/buttons";
+@import "components/avatarFrame";
+
 @import "pace-preloader.css";
 @import "modal.scss";
 @import "modules/cookieConsent";
+@import "modules/fonts";
+
+@import "modules/gallery";
 
 body {
     position: absolute;
     width: 100%;
     height: 100%;
     margin: 0;
+    font-family: 'Sofia Pro', sans-serif;
+    font-size: 14px;
+
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -91,7 +122,7 @@ body {
 
 #main {
     position: absolute;
-    top: 20px;
+    top: 0px;
     left: 0;
     width: 100%;
     height: 100%;

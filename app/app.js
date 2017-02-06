@@ -282,12 +282,22 @@ define([
 
                     console.log(userSession.getJWTUser());
 
+                    $rootScope.execDone = function () {
+                        console.log(' CHITEMMURT');
+                        setTimeout(function () {
+                            console.log('EXEC DONE CHITEMMURT doppio delay');
+
+                            $rootScope.doneFunc.apply();
+                        }, 0)
+                    }
+
                     $rootScope.$state = $state;
                     $rootScope.$stateParams = $stateParams;
                     $rootScope.$on("$stateChangeStart", function (e, target) {
-                        //e.preventDefault();
 
                         routeResolver.route.wrapResolve(target);
+
+
                     });
                 }
             ])

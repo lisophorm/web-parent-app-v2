@@ -1,0 +1,35 @@
+$avatarSizeMed: 60px;
+$avatarSizeSmall: 40px;
+$avatarSizeHuge: 120px;
+$avatarFrameBorderWidth: 3px;
+
+@mixin avatarFrame($avatarSize) {
+    min-width: $avatarSize;
+    width: $avatarSize;
+    height: $avatarSize;
+    border-radius: $avatarSize/2;
+    background-color: #ecf2f5;
+    overflow: hidden;
+    border: solid $avatarFrameBorderWidth #FFFFFF;
+
+    img {
+        margin-left: -$avatarFrameBorderWidth;
+        margin-top: auto;
+        width: $avatarSize;
+        position: relative;
+        top: -20%;
+        display: block;
+    }
+}
+
+.contactImageFrameSmall {
+    @include avatarFrame($avatarSizeSmall);
+}
+
+.contactImageFrame {
+    @include avatarFrame($avatarSizeMed);
+}
+
+.contactImageFrameHuge {
+    @include avatarFrame($avatarSizeHuge);
+}

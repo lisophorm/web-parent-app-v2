@@ -1,0 +1,28 @@
+.customRadioGroup {
+    $customRadioRadius: 15px;
+
+    input[type=radio] {
+        display: none;
+
+        & + label::before {
+            content: '';
+            width: 2 * $customRadioRadius;
+            height: 2 * $customRadioRadius;
+            border: $customRadioRadius*.5 solid #ffffff;
+            border-radius: $customRadioRadius;
+            background-color: #ffffff;
+            margin-right: 10px;
+        }
+
+        &:checked + label::before {
+            background-color: $MainColour1;
+        }
+    }
+
+    label {
+        cursor: pointer;
+        @include flexbox;
+        margin: 10px;
+        @include align-items(center);
+    }
+}

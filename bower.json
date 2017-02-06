@@ -21,7 +21,8 @@
         "bootstrap-sass": "^3.3.7",
         "angular-ui-router-anim-in-out": "^1.0.2",
         "angular-strap": "^2.3.12",
-        "angular-media-queries": "^0.6.1"
+        "angular-media-queries": "^0.6.1",
+        "sass-flex-mixin": "^1.0.3"
     },
     "devDependencies": {
         "angular-mocks": "1.6.1",

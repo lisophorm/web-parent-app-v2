@@ -1,0 +1,24 @@
+$statusBarHeight: 50px;
+
+.topBarStatusMsg {
+    background-color: $MainColour1;
+    color: $MainColour3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    height: $statusBarHeight;
+    position: fixed;
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+
+    .fa.fa-check {
+        color: #ffffff;
+        font-size: 24px;
+    }
+}
+

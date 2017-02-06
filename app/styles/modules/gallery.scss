@@ -1,0 +1,22 @@
+.modal-content.galleryDialog {
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+
+    .modal-body {
+
+        .imageList {
+            @extend .row;
+
+            .imageListItem {
+                @extend .col-md-2;
+                @extend .col-sm-3;
+                @extend .col-xs-4;
+
+                img {
+                    width: 100%;
+                }
+
+            }
+        }
+    }
+}

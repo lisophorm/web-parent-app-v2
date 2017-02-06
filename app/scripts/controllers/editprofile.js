@@ -8,7 +8,7 @@
  * Controller of the yoAngularifyApp
  */
 
-define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "ModalcontrollerCtrl"], function (app, angular, config, _) {
+define(['app', 'angular', 'config', 'underscore', 'jquery', 'azStatusBoard', "ModalcontrollerCtrl"], function (app, angular, config, _, jQuery) {
     app.controller('EditprofileCtrl', ["$scope", "ModalService", 'editProfileStrings', '$stateParams', '$location', 'userApi', 'analytics', '$rootScope', '$state', function ($scope, ModalService, editProfileStrings, $stateParams, $location, userApi, analytics, $rootScope, $state) {
 
         $scope.strings = editProfileStrings;
@@ -107,6 +107,8 @@ define(['app', 'angular', 'config', 'underscore', 'azStatusBoard', "Modalcontrol
                 console.log("modal then", modal);
                 //it's a bootstrap element, use 'modal' to show it
                 //modal.element.modal();
+                jQuery('.modal').removeClass("fade");
+                jQuery('.modal').fadeIn();
                 modal.close.then(function (result) {
                     console.log('result passed by modal');
                     console.log(result);
