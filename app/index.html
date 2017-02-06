@@ -30,14 +30,14 @@
 <!--div ng-cloak>Logged in {[{$root.loggedIn}]}</div-->
 
 <!--  container slide -->
-<div id = "homeOverBut" class = "fadable" ng-hide = "$state.current.name=='home' || !$root.loggedIn"><a
+<div id = "homeOverBut" class = "fadable" ng-hide = "$state.current.name=='home' || !$root.loggedIn || $root.desktop"><a
     ui-sref = "home">HOME</a></div>
-<div class = "row">
-    <div class = "col-md-6" ng-if = "$root.desktop">
+<div class = "row collo">
+    <div id = "left" ng-controller = "IsdesktopCtrl" class = "col-md-6" ng-if = "$root.desktop && $root.loggedIn">
         <ng-include src = "'views/home/home.html'"></ng-include>
     </div>
-    <div class = "col-md-6 col-sm-12">
-        <div id = "main" class = "anim-in-out anim-slide-left" data-anim-speed = "1000" ui-view></div>
+    <div class = "col-md-6 col-sm-12" id = "right">
+        <div id = "main" class = "anim-in-out {[{$root.animType}]}" data-anim-speed = "1000" ui-view></div>
     </div>
 </div>
 

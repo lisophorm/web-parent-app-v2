@@ -205,51 +205,7 @@ define([
             '/login', '/login/:reason', '/signup', '/verification', '/verification/resend', '/forgotten', '/passwordReset', '/learnMore'
         ])
         // dynamic strings
-        .constant('signupEndStrings', {
-            enjoyApp: "GO TO THE AZOOMEE APP AND LOG IN TO GET STARTED!",
-            unlimitedMode: "Your family can now enjoy the premium unlimited version of Azoomee.",
-            freeTrial: "Enjoy your 15 days FREE on us",
-            canCancel: "You can cancel any time.",
-            periodFreeWithAzoomee: function (billingCycle, numOfCycles) {
-                var messageBody = "Your family can now enjoy the premium, unlimited version of Azoomee for ";
-                switch (billingCycle) {
-                    case 'BIENNIAL':
-                        return messageBody + numOfCycles * 2 + " years!";
-                    case 'ANNUAL':
-                        return messageBody + numOfCycles + (numOfCycles > 1 ? " years!" : " year");
-                    case 'BIANNUAL':
-                        return messageBody + numOfCycles * 6 + " months!";
-                    case 'MONTHLY':
-                        return messageBody + numOfCycles + (numOfCycles > 1 ? " months" : " month");
-                }
-            },
-            thankYouRegistering: "Thanks for signing up.",
-            youCanAccessLimitedVersion: "Your family can now enjoy the basic version of Azoomee for free. Upgrade at any time for unlimited access",
-            goToApp: "Go to app"
-        })
-        .constant('totsTooSignupEndStrings', {
-            enjoyApp: "Download and log in to get started!",
-            unlimitedMode: "Your family now has unlimited access to Azoomee Premium.",
-            freeTrial: "Enjoy your 15 days FREE on us",
-            canCancel: "You can cancel any time.",
-            periodFreeWithAzoomee: function (billingCycle, numOfCycles) {
-                var messageBody = "Your family now has unlimited access to Azoomee Premium for ";
-                switch (billingCycle) {
-                    case 'BIENNIAL':
-                        return messageBody + numOfCycles * 2 + " years!";
-                    case 'ANNUAL':
-                        return messageBody + numOfCycles + (numOfCycles > 1 ? " years!" : " year");
-                    case 'BIANNUAL':
-                        return messageBody + numOfCycles * 6 + " months!";
-                    case 'MONTHLY':
-                        return messageBody + numOfCycles + (numOfCycles > 1 ? " months" : " month");
-                }
-            },
-            welcomeToPremium: "Welcome to Azoomee Premium!",
-            thankYouRegistering: "Thanks for signing up.",
-            youCanAccessLimitedVersion: "Your family can now enjoy the basic version of Azoomee for free. Upgrade at any time for unlimited access",
-            goToApp: "Go to app"
-        })
+
         //
         .directive('cookieConsent', ['$cookies', function ($cookies) {
             return {
@@ -276,10 +232,18 @@ define([
         //
         // form the original project
         .run(
-            ["$rootScope", "$state", "$stateParams", "routeResolver", "userSession", "screenSize",
-                function ($rootScope, $state, $stateParams, routeResolver, userSession, screenSize) {
+            ["$rootScope", "$state", "$stateParams", "routeResolver", "userSession", "screenSize", "$timeout",
+                function ($rootScope, $state, $stateParams, routeResolver, userSession, screenSize, $timeout) {
                     console.log('******** RUN');
                     console.log(userSession.getJWTUser());
+                    $rootScope.desktop = screenSize.is('md, lg');
+                    if ($rootScope.desktop) {
+                        $rootScope.animType = "anim-fade";
+
+                    } else {
+                        $rootScope.animType = "anim-fade";
+
+                    }
                     $rootScope.loggedIn = false;
                     $rootScope.linkJWT = userSession.getJWTUser;
                     if (typeof $rootScope.linkJWT() === 'undefined') {
@@ -304,9 +268,12 @@ define([
                     });
                     $rootScope.desktop = screenSize.on('md, lg', function (match) {
                         if (match) {
+                            $rootScope.animType = "anim-fade";
+
                             console.log("********** DESKTOP resolution");
 
                         } else {
+                            $rootScope.animType = "anim-slide-left";
                             console.log("********** MOBILE resolution");
 
                         }
@@ -318,6 +285,8 @@ define([
                     $rootScope.$state = $state;
                     $rootScope.$stateParams = $stateParams;
                     $rootScope.$on("$stateChangeStart", function (e, target) {
+                        //e.preventDefault();
+
                         routeResolver.route.wrapResolve(target);
                     });
                 }
@@ -751,6 +720,7 @@ define([
                 }
             })
                 .then(function (result) {
+
                     console.log("retrieved chid profileS", result.data);
                     $rootScope.safeApply(function () {
                         $rootScope.childProfiles = result.data;
@@ -784,7 +754,13 @@ define([
                 $location.url('/#/login');
             }
 
-    }]);
+    }])
+        .controller('IsdesktopCtrl', ["$scope", function ($scope) {
+            console.log("****************************** IS DESKTOPctrl");
+            $scope.ginoDesko = "Isdesktop page";
+            $scope.isDeskTop = true;
+        }]);
+    ;
 
     return app;
 });

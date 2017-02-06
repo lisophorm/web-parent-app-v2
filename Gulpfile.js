@@ -156,6 +156,7 @@ gulp.task('test', function () {
 gulp.task('styles', ['libStyles'], function () {
     return gulp.src(['app/styles/*.scss', 'app/styles/*.css'])
     // The onerror handler prevents Gulp from crashing when you make a mistake in your SASS
+        .pipe(sourcemaps.init())
         .pipe(sass({
             onError: function (e) {
                 console.log(e);
@@ -163,8 +164,9 @@ gulp.task('styles', ['libStyles'], function () {
         }))
         // Optionally add autoprefixer
         .pipe(autoprefixer('last 2 versions', '> 1%', 'ie 8'))
-        .pipe(minifyCSS({keepBreaks: true}))
+        //        .pipe(minifyCSS({keepBreaks: true}))
         // These last two should look familiar now :)
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('build/css/'))
         .pipe(notify("styles ok!"));
 

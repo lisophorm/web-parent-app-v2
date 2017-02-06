@@ -5,23 +5,16 @@
 @import "bower_components/ngToast/dist/ngToast.min";
 @import "bower_components/ngToast/dist/ngToast-animations.min";
 @import "bower_components/angular-ui-router-anim-in-out/scss/anim-in-out";
-
-
 @import "pace-preloader.css";
 @import "modal.scss";
 @import "modules/cookieConsent";
-
-/* Landscape phones and portrait tablets */
-@media (max-width: 767px) {
-
-}
 
 body {
     position: absolute;
     width: 100%;
     height: 100%;
     margin: 0;
-    overflow: auto;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -34,6 +27,50 @@ body {
         margin-top: 20px;
         font-size: 150%;
     }
+}
+
+@media (min-width: 768px) {
+    #left {
+        position: absolute;
+        top: 0px;
+        bottom: 0;
+        left: 0;
+        overflow-y: scroll;
+    }
+
+    #right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow-y: scroll;
+    }
+}
+
+#left {
+    background-color: #FC6E51;
+
+    height: 100%;
+}
+
+#right {
+    height: 100%;
+    background-color: #4FC1E9;
+
+}
+
+/* Small Devices, Tablets */
+@media (max-width: 991px) {
+    body {
+
+    }
+}
+
+@media (min-width: 992px) {
+    body {
+
+    }
+
 }
 
 #homeOverBut {
@@ -66,7 +103,7 @@ h1 {
     margin: 0;
 }
 
-#main .wrapper {
+#main .wrapper, .rightWrapper {
     position: absolute;
     left: 10%;
     right: 10%;
@@ -74,7 +111,6 @@ h1 {
     bottom: 10%;
     height: 10em;
 }
-
 
 .active {
     color: #cc0000;
@@ -130,3 +166,4 @@ pre {
 .fadable.ng-hide-add.ng-hide-add-active {
     opacity: 0;
 }
+

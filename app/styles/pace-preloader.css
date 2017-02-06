@@ -44,6 +44,20 @@
 }
 
 .pace .pace-activity::before {
+
+/* Small Devices, Tablets */
+@media (max-width: 768px) {
+    overflow: hidden
+
+!important;
+}
+
+@media (min-width: 768px) {
+    overflow: hidden
+
+!important;
+}
+
     margin-left: -40px;
     width: 80px;
     height: 80px;
@@ -81,3 +95,4 @@
         transform: rotate(359deg);
     }
 }
+

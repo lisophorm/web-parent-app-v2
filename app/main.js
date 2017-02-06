@@ -24,7 +24,6 @@ require.config({
         "app": "app",
         "analytics": "js/analytics",
         "addCard": "/js/controllers/addCard/addCard",
-        "ThemainCtrl": "js/controllers/themain/themain",
         "azStatusBoard": "/js/directives/azstatusboard",
         'slick-carousel': '/lib/slick',
         'underscore': '/lib/underscore',

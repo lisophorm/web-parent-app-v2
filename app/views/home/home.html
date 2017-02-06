@@ -1,7 +1,11 @@
-<div class = "wrapper">
+<div ng-class = "(isDeskTop?'rightWrapper':'wrapper')">
     <div class = "row">
         <div class = "col-md-12">
             <div class = "list-group">
+                <button type = "button" ui-sref = "editadultprofile({profileId:$root.userID})"
+                        class = "list-group-item list-group-item-action">
+                    test valie - {[{ginoDesko}]}
+                </button>
                 <img class = "img-responsive" src = "images/rollllzzz.jpg">
                 <button type = "button" ui-sref = "displayprofile({profileType:'adult',profileId:$root.userID})"
                         class = "list-group-item list-group-item-action">
