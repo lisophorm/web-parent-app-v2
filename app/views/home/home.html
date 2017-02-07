@@ -26,12 +26,17 @@
                 <li class = "list-group-item list-group-item-action"
                     ng-repeat = "profile in $root.childProfiles"
                     id = "child-nav-{{$index}}">
-                    <a ui-sref = "editprofile({profileId:profile.id})">
+                    <div class = "justify-content">
+
                         <div class = "contactImageFrameSmall">
-                            <img ng-src = "{[{profile.avatar}]}"/>
+                            <a ui-sref = "editprofile({profileId:profile.id})">
+                                <img ng-src = "{[{profile.avatar}]}"/>
+                            </a>
+
                         </div>
-                        {[{profile.profileName}]}
-                    </a>
+                        <div> {[{profile.profileName}]}
+                        </div>
+                    </div>
 
 
                 </li>

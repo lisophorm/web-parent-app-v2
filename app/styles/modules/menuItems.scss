@@ -1,0 +1,262 @@
+$navWidth: 250px;
+$viewHolderPadding: 30px;
+$viewHeaderHeight: 80px;
+
+$sectionHeadingBgnd: #495d71;
+$sectionHeadingColor: #ffffff;
+
+$sectionElementBgnd: $MainColour3;
+$sectionElementColor: #59ccc2;
+$sectionElementHighlightBgnd: #4a9598;
+$sectionElementHighlightColor: #ffffff;
+
+.hamburger {
+    width: 60px;
+    height: 50px;
+    position: fixed;
+    padding-left: 10px;
+    left: -10px;
+    top: ($viewHeaderHeight - 50px) / 2;
+    border-radius: 10px;
+    background-color: $sectionElementBgnd;
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+    border-style: none;
+    z-index: 1001;
+    transition: 0.5s;
+
+    &.popped {
+        left: $navWidth - 10px;
+    }
+
+    @media (min-width: 768px) {
+        left: $navWidth - 10px;
+        visibility: hidden;
+    }
+}
+
+.overlay {
+    @media (max-width: 767px) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        opacity: 0.4;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+    }
+    z-index: 500;
+}
+
+.navHolder {
+    position: fixed;
+    width: $navWidth;
+    left: 0;
+    background-color: $sectionElementBgnd;
+    padding-top: $viewHeaderHeight;
+    max-height: 100vh;
+    transition: 0.5s;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+
+    @media (max-width: 767px) {
+        left: -$navWidth;
+        &.popped {
+            left: 0;
+        }
+    }
+
+    .navHeader {
+        position: fixed;
+        left: inherit;
+        top: 0;
+        width: $navWidth;
+        height: $viewHeaderHeight;
+        z-index: 100;
+        background-image: url("images/logos/logo-side-nav.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-color: inherit;
+    }
+
+    ul {
+        padding-left: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .navigation {
+
+        > li {
+            margin-left: 0;
+
+            .sectionHeading {
+                background-color: $sectionHeadingBgnd;
+                color: $sectionHeadingColor;
+                padding: 10px 30px 10px 15px;
+                text-transform: uppercase;
+            }
+
+            li {
+                background-color: $sectionElementBgnd;
+                color: $sectionElementColor;
+                padding: 5px 30px 5px 15px;
+                height: 50px;
+                @include flexbox;
+                @include align-items(center);
+
+                .badge {
+                    color: #FFFFFF;
+                    background-color: #FF0000;
+                }
+
+                .bulletPoint {
+                    width: 20px;
+                    margin-left: 10px;
+                    margin-right: 20px;
+                    text-align: center;
+                    font-size: 15px;
+                    border-style: none;
+                    padding: 0;
+                }
+
+                .roundBulletPoint {
+                    @extend .bulletPoint;
+                    background-color: $sectionElementColor;
+                    color: $sectionElementBgnd;
+                    height: 20px;
+                    border-radius: 10px;
+                }
+
+                .mailIconBulletPoint {
+                    @extend .bulletPoint;
+                    background-color: inherit;
+                    font-size: 20px;
+                    height: 25px;
+                }
+
+                &:hover, &:focus {
+                    color: $sectionElementHighlightColor;
+                    background-color: $sectionElementHighlightBgnd;
+                    .roundBulletPoint {
+                        background-color: $sectionElementHighlightColor;
+                        color: $sectionElementHighlightBgnd;
+                    }
+                }
+
+                a {
+                    @include flexbox;
+                    @include align-items(center);
+                    @include flex-grow(1);
+                    @include align-self(stretch);
+                    color: inherit;
+
+                    &:hover, &:focus {
+                        color: inherit;
+                        text-decoration: none;
+                        outline: none;
+                    }
+
+                    div {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        @media (min-width: 768px) {
+            li {
+                float: none;
+            }
+            width: $navWidth;
+            height: 100%;
+        }
+
+        @media (max-width: 767px) {
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logoutButton {
+            @extend .azButton;
+        }
+    }
+}
+
+.navBottom {
+    width: $navWidth;
+    min-height: 100%;
+    position: fixed;
+    background-color: $sectionElementBgnd;
+    z-index: 600;
+    transition: 0.5s;
+    left: 0;
+
+    @media (max-width: 767px) {
+        left: -$navWidth;
+        &.popped {
+            left: 0;
+        }
+    }
+}
+
+.viewHolder {
+    height: 100%;
+    min-height: 100vh;
+    background-color: $NeutralColour4;
+    background-color: transparent;
+}
+
+.viewHolderBottom {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1000;
+    background-color: $NeutralColour1;
+    height: 100vh;
+}
+
+.viewHolderWithNav {
+    @extend .viewHolder;
+    background-color: $NeutralColour1;
+    padding-left: $viewHolderPadding;
+    padding-right: $viewHolderPadding;
+    padding-top: $viewHeaderHeight + 10px;
+    padding-bottom: $viewHolderPadding;
+    position: relative;
+
+    .viewContents {
+        margin: 0 auto;
+        max-width: 600px;
+    }
+
+    @media (min-width: 768px) {
+        margin-left: $navWidth;
+    }
+}
+
+.viewHeader {
+    background-color: $MainColour1;
+    color: #ffffff;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    height: $viewHeaderHeight;
+    position: fixed;
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+
+    @media (min-width: 768px) {
+        padding-left: $navWidth;
+    }
+}
+
