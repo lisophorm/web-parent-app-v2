@@ -1,10 +1,11 @@
 <div ng-class = "(isDeskTop?'rightWrapper':'wrapper')">
     <div class = "row">
         <div class = "col-md-12">
-            <div class = "list-group">
+            <div class = "list-group navigation">
                 <button type = "button" ng-if = "ginoDesko" ui-sref = "editadultprofile({profileId:$root.userID})"
                         class = "list-group-item list-group-item-action">
-                    DESKTOP RESOLUTION
+                    DESKTOP RESOLUTION <i class = "glyphicon glyphicon-remove"></i>
+
                 </button>
                 <img class = "img-responsive" src = "images/rollllzzz.jpg">
                 <button type = "button" ui-sref = "displayprofile({profileType:'adult',profileId:$root.userID})"
@@ -21,6 +22,8 @@
                 <button type = "button" class = "list-group-item list-group-item-action" ui-sref = "voucherredemption">
                     Redeem
                 </button>
+                <div class = "list-group-item list-group-item-action"><a href = "#">Value 1 <i
+                    class = " icon-remove pull-right"></i></a></div>
                 <div class = "list-group-item list-group-item-action active">Manage Kids Accounts
                 </div>
                 <li class = "list-group-item list-group-item-action"
@@ -34,18 +37,14 @@
                             </a>
 
                         </div>
-                        <div> {[{profile.profileName}]}
-                        </div>
+                        <div> {[{profile.profileName}]}</div>
                     </div>
-
 
                 </li>
                 <li class = "list-group-item list-group-item-action"
                     ui-sref = "editprofile({profileId:'create'})">Add Kid Account
                 </li>
-                <button type = "button" class = "list-group-item list-group-item-action" ng-click = "$root.logOut()">Log
-                    Out
-                </button>
+
                 <div class = "list-group-item list-group-item-action active">Support
                 </div>
                 <button type = "button" href = "#" class = "list-group-item list-group-item-action">
@@ -53,6 +52,9 @@
                 </button>
                 <button type = "button" class = "list-group-item list-group-item-action" href = "#">
                     Contact US
+                </button>
+                <button type = "button" class = "list-group-item list-group-item-action" ng-click = "$root.logOut()">Log
+                    Out
                 </button>
             </div>
         </div>

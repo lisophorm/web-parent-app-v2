@@ -108,7 +108,6 @@ gulp.task('libScripts', function () {
         'bower_components/angular-strap/dist/angular-strap.tpl.js',
 
         'bower_components/angular-media-queries/match-media.js',
-
         'bower_components/azoomee.web-components-jwt/userSession.js',
         'bower_components/azoomee.web-components-jwt/httpProviderConfig.js',
         'bower_components/azoomee.web-components-jwt/Base64.js',
@@ -133,7 +132,10 @@ gulp.task('copy', function () {
 });
 
 gulp.task('fonts', function () {
-    return gulp.src('app/fonts/**/*.*').pipe(gulp.dest('build/fonts'));
+    return gulp.src(['app/fonts/**/*.*',
+        // 'bower_components/components-font-awesome/fonts/**',
+        'bower_components/bootstrap-sass/assets/fonts/bootstrap/**']
+    ).pipe(gulp.dest('build/fonts'));
 });
 
 gulp.task('scripts', ['libScripts'], function () {

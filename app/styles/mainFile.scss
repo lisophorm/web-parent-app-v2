@@ -1,3 +1,6 @@
+/* to check if needed */
+
+
 $MainColour1: #55CDC3;
 $MainColour1_dark: #40ADA0;
 $MainColour2: #F96B23;
@@ -15,8 +18,20 @@ $NeutralColour4_dark: #EEEDE1;
 $buttonColour: #fab632;
 $buttonBackdropColour: #f2984e;
 
+/* the one I justy asffrf */
+
+$backgroundColoue01: #f1f1f1;
+$backgroundColoue02: #9dffe4;
+
+$screen-sm-min: 600px;
+
+$icon-font-path: "/fonts/";
+$fa-font-path: "/fonts";
+
 @import "bower_components/slick-carousel/slick/slick.scss";
 @import "bower_components/slick-carousel/slick/slick-theme.scss";
+@import "bower_components/components-font-awesome/scss/font-awesome";
+
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "bower_components/ngToast/dist/ngToast.min";
@@ -37,6 +52,9 @@ $buttonBackdropColour: #f2984e;
 
 @import "modules/gallery";
 @import "modules/paymentDetails";
+@import "modules/menuItems";
+
+
 
 body {
     position: absolute;
@@ -60,6 +78,14 @@ body {
         font-size: 150%;
     }
 }
+
+@media (max-width: $screen-md-min) {
+    #left, #right {
+        margin-top: $viewHeaderHeight;
+    }
+}
+
+
 
 @media (min-width: 768px) {
     #left {
