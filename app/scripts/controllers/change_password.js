@@ -33,6 +33,6 @@ define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
         }
     }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

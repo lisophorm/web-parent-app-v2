@@ -46,6 +46,6 @@ define(['app', 'angular', 'config', 'ModalcontrollerCtrl'], function (app, angul
         }
     }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

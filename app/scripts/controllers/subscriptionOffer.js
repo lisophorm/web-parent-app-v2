@@ -143,6 +143,6 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
             }
         }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

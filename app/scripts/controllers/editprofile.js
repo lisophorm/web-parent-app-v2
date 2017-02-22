@@ -174,6 +174,6 @@ define(['app', 'angular', 'config', 'underscore', 'jquery', 'azStatusBoard', "Mo
 
     }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

@@ -87,6 +87,6 @@ define(['app', 'angular', 'jquery', 'underscore', 'azStatusBoard', "Modalcontrol
 
     }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

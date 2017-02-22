@@ -102,6 +102,6 @@ define(['app', 'angular', 'config', 'azStatusBoard'], function (app, angular, co
 
         }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

@@ -88,6 +88,6 @@ define(['app', 'angular', 'moment'], function (app, angular, moment) {
             }
         }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

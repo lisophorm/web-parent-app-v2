@@ -51,6 +51,6 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
 
     }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 

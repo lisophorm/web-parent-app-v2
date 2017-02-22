@@ -25,6 +25,6 @@ define(['app', 'angular', 'jquery', 'slick-carousel'],
                 }, 0);
             }]);
         // ...
-        //or use angular.module to create a new module
+
     });
 

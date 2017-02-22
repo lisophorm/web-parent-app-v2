@@ -11,7 +11,6 @@
 define(['app', 'angular', 'underscore', 'azStatusBoard'], function (app, angular, _) {
     app.controller('ChangePinCtrl', ['$scope', 'pinFormStrings', 'userApi', '$timeout', '$location', 'analytics',
         function ($scope, pinFormStrings, userApi, $timeout, $location, analytics) {
-            console.log("*** change pin controller");
             $scope.strings = pinFormStrings;
             $scope.editing = false;
             $scope.editProfile = editProfile;
@@ -33,7 +32,6 @@ define(['app', 'angular', 'underscore', 'azStatusBoard'], function (app, angular
                         $scope.status.setErrorMsg(pinFormStrings.updateError);
                     })
             }
-
             function editProfile() {
                 $scope.originalProfile = $scope.profile;
                 $scope.profile = _.clone($scope.originalProfile);
@@ -50,6 +48,6 @@ define(['app', 'angular', 'underscore', 'azStatusBoard'], function (app, angular
             }
         }]);
     // ...
-    //or use angular.module to create a new module
+
 });
 
