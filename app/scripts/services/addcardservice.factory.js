@@ -9,7 +9,7 @@ define(['app', 'angular'], function (app, angular) {
     app.factory('addCardService', function () {
         // Service logic
         // ...
-        console.log('within addCardService');
+
         // Public API here
         return {
             setPaymentDetailsChangedListener: function (newListener) {

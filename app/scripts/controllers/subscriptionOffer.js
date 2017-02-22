@@ -10,7 +10,7 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
     app.controller('SubscriptionofferCtrl', ["$scope", 'subscriptionOfferStrings', 'billingApi', '$location', 'addCardService', '$q', '$timeout', 'analytics',
         function ($scope, subscriptionOfferStrings, billingApi, $location, addCardService, $q, $timeout, analytics) {
             $scope.title = "Subscriptionoffer page";
-            console.log('insid suscription offer');
+
             // init
             $scope.money = function (money) {
                 return "£" + new Number(money).toFixed(2);
@@ -106,7 +106,7 @@ define(['app', 'angular', 'addCard'], function (app, angular) {
             }
 
             function buy() {
-                console.log('called buy function');
+
                 var selectedPlanIdx = parseFloat($scope.selectedPlan),
                     planToBuy = $scope.plans[selectedPlanIdx];
                 billingApi.updateBillingCycle(planToBuy.billingCycle)

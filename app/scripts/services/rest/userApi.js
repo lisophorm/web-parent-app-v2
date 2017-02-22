@@ -1,4 +1,4 @@
-console.log('within userAPI');
+
 define([
     'app',
     'config',
@@ -32,18 +32,18 @@ define([
                         });
                 },
                 updateAdultProfile: function (updatedProfile) {
-                    console.log("*********** update adult profile", updatedProfile);
+
                     return $http({
                         url: config.userUrl + '/adult/' + updatedProfile.id,
                         method: "PATCH",
                         data: updatedProfile
                     }).then(null, function (err) {
-                        console.log('failed to update adult profile', profilePatch);
+
                         return Promise.reject(err);
                     });
                 },
                 getChildProfiles: function (adultProfileId) {
-                    console.log('getting CHILDS for ', adultProfileId);
+
                     var defer = $q.defer();
                     $http({
                         method: 'GET',
@@ -54,10 +54,10 @@ define([
                         }
                     })
                         .then(function (result) {
-                            console.log("retrieved chid profileS", result.data);
+
                             defer.resolve(result.data);
                         }, function (err) {
-                            console.log("Failed to retrieve child profileS", err);
+
                             defer.reject(err);
                         });
                     return defer.promise;
@@ -69,10 +69,10 @@ define([
                         method: "GET"
                     })
                         .then(function (result) {
-                            console.log("retrieved chid profile", result.data);
+
                             defer.resolve(result.data);
                         }, function (err) {
-                            console.log("Failed to retrieve child profile", profileId, err);
+
                             defer.reject(err);
                         });
                     return defer.promise;
@@ -91,12 +91,12 @@ define([
                         data: profileToPost
                     })
                         .then(function (newProfile) {
-                            console.log('new profile', newProfile.data);
+
                             //refreshChildren();
                             //sharingApi.refreshConversations();
                             return newProfile.data;
                         }, function (err) {
-                            console.log('failed to create child profile', newProfile);
+
                             return Promise.reject(err);
                         })
                 },
@@ -114,12 +114,12 @@ define([
                         method: "PATCH",
                         data: profilePatch
                     }).then(function (newProfile) {
-                        console.log('deleted child profile', newProfile.data);
+
                         //refreshChildren();
                         //sharingApi.refreshConversations();
                         return Promise.resolve(newProfile.data);
                     }, function (err) {
-                        console.log('failed to update child profile for deletion', profilePatch);
+
                         return Promise.reject(err);
                     });
                 },
@@ -136,20 +136,20 @@ define([
                         method: "PATCH",
                         data: profilePatch
                     }).then(function (newProfile) {
-                        console.log('updated child profile', newProfile.data);
+
                         //refreshChildren();
                         //sharingApi.refreshConversations();
                         return Promise.resolve(newProfile.data);
                     }, function (err) {
-                        console.log('failed to update child profile', profilePatch);
+
                         return Promise.reject(err);
                     });
                 },
             };
 
         function ensureAvatarIsSet(profile) {
-            console.log("*** ENSURE AVATAR IS SET");
-            console.log(profile);
+
+
             if (!profile.avatar) {
                 profile.avatar = config.defaultAvatar;
             }

@@ -202,7 +202,7 @@ define(["angular"], function (angular) {
                                     return;
                                 }
                                 loadTemplate(moduleConfig.template, function (template) {
-                                    console.log(Date.now());
+
                                     childScope = scope.$new();
                                     element.html(template);
                                     var content = element.contents();

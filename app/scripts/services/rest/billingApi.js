@@ -20,7 +20,7 @@ define([
                         billingStatus.isPaidSubscriber = billingStatus.billingStatus === "SUBSCRIBED" || billingStatus.billingStatus === "FREE_TRIAL";
                         return billingStatus;
                     }, function (err) {
-                        console.log("There was a problem retrieving the billing status", err);
+
                         return $q.reject(err);
                     });
             },
@@ -32,7 +32,7 @@ define([
                     .then(function (resp) {
                         return resp.data;
                     }, function (err) {
-                        console.log("There was a problem updating the billing cycle", err);
+
                         return $q.reject(err);
                     });
             },

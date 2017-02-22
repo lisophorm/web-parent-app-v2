@@ -16,7 +16,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
 
         $scope.title = "Signup page";
         $scope.passwordStage = false;
-        console.log('WITHIN SIGNUP');
+
         if ($location.path() === '/totstoo') {
             $rootScope.totstoo = true;
         }
@@ -129,10 +129,10 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
                     userSession.sessionChanged($scope.userId, "", true); //This signs out and changes the user name in the session
                     return resp;
                 }, function (err) {
-                    console.log("Sign up failed");
+
                     $scope.passwordStage = false;
                     if (err && err.status === 409) {
-                        console.log(err);
+
                         $scope.errorMsg = "Oops, this email address is already registered." + ' <a ui-sref="login" class="alert-danger">' + "Log in" + '</a>' + " or use another email address.";
                     } else {
                         $scope.errorMsg = "Oops, check your email address and type a valid email address";
@@ -142,7 +142,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
         }
 
         function isAccountCreated() {
-            console.log('checking isaccountcreaded:', account);
+
             return !!account;
         }
 

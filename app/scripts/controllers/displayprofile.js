@@ -11,7 +11,7 @@
 define(['app', 'angular', 'moment'], function (app, angular, moment) {
     app.controller('DisplayprofileCtrl', ['$scope', '$stateParams', 'userApi', 'displayProfileStrings', '$location', 'analytics', 'userSession',
         function ($scope, $stateParams, userApi, displayProfileStrings, $location, analytics, userSession) {
-            console.log("displayprofile controller");
+
             var retrieveProfile;
             $scope.strings = displayProfileStrings;
 
@@ -29,20 +29,20 @@ define(['app', 'angular', 'moment'], function (app, angular, moment) {
             })
             if (displayingAdultProfile()) {
                 retrieveProfile = userApi.getAdultProfile;
-                console.log("this is adult profile", userApi.getAdultProfile);
+
             } else {
                 retrieveProfile = userApi.getChildProfile;
-                console.log("this is child profile", userApi.getChildProfile);
+
 
             }
 
-            console.log("i am here", retrieveProfile);
-            console.log(userApi);
+
+
             retrieveProfile($stateParams.profileId)
                 .then(function (profile) {
                     $scope.profile = profile;
                 }, function (error) {
-                    console.log('error', error);
+
                     //alert(error);
                 });
 

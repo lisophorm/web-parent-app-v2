@@ -11,7 +11,7 @@
 define(['app', 'angular'], function (app, angular) {
     app.controller('SignupendCtrl', ["$scope", 'billingApi', 'analytics', '$rootScope', 'signupEndStrings', 'totsTooSignupEndStrings', function ($scope, billingApi, analytics, $rootScope, signupEndStrings, totsTooSignupEndStrings) {
         $scope.title = "Signupend page";
-        console.log('WITHIN SIGNUP END');
+
         var platformName,
             isDesktop;
 

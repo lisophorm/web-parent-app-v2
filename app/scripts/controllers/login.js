@@ -20,7 +20,7 @@ define([
             //dataStore.clearResources();
             $scope.strings = loginStrings;
 
-            console.log('LOGIN CONTROLLER');
+
             $scope.userId = userSession.getJWTUserName();
             $scope.userId = ($scope.userId === "verify") ? "" : $scope.userId;
             $scope.userMessage = false;
@@ -34,7 +34,7 @@ define([
                 loginApi.loginUsingToken($scope.userId, $stateParams.token).then(
                     loginSuccess,
                     function (err) {
-                        console.log("Error login in with token", err);
+
                         $scope.loading = false;
                         Pace.stop();
                     }
@@ -42,7 +42,7 @@ define([
             }
 
             $scope.submit = function () {
-                console.log('LOGIN FUNCTION');
+
                 $scope.loading = true;
                 Pace.restart();
                 loginApi.login($scope.userId, $scope.pwd)
@@ -53,8 +53,8 @@ define([
 
             function loginSuccess() {
                 Pace.stop();
-                console.log('LOGIN SUCCESS');
-                console.log(userSession.getJWTUser());
+
+
                 $rootScope.userUpdated();
                 analytics.updateUserId(userSession.getJWTUser());
                 analytics.sendEvent({type: 'parentAppLoginSuccess'});
@@ -73,7 +73,7 @@ define([
             }
 
             function loginError(resp) {
-                console.log('LOGIN ERROR');
+
                 analytics.sendEvent({type: 'parentAppLoginFailure'});
                 $scope.loading = false;
                 Pace.stop();

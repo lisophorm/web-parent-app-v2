@@ -17,10 +17,10 @@ define(['app', 'angular'], function (app, angular) {
                     delaySuccess: '='
                 },
                 controller: ['$scope', function ($scope) {
-                    console.log("********** azstatusboard loaded");
+
                     var controller = {
                         init: function () {
-                            console.log("********** azstatusboard INIT");
+
 
                             $scope.status = {
                                 setSuccessMsg: controller.setSuccessMsg,

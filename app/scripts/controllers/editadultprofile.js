@@ -20,7 +20,7 @@ define(['app', 'angular', 'jquery', 'underscore', 'azStatusBoard', "Modalcontrol
         userApi.getAdultProfile().then(attachProfileToScope);
 
         $scope.showToast = function () {
-            console.log("* show toast");
+
             ngToast.warning('La marianna la va in campagna...');
 
         }
@@ -35,7 +35,7 @@ define(['app', 'angular', 'jquery', 'underscore', 'azStatusBoard', "Modalcontrol
         }
 
         function saveProfile() {
-            console.log("saving profile", $scope.profile);
+
 
             userApi.updateAdultProfile($scope.profile)
                 .then(function (profile) {
@@ -71,15 +71,15 @@ define(['app', 'angular', 'jquery', 'underscore', 'azStatusBoard', "Modalcontrol
                 controller: "ModalcontrollerCtrl",
                 scope: $scope
             }).then(function (modal) {
-                console.log("modal then", modal);
+
                 //it's a bootstrap element, use 'modal' to show it
                 // modal.element.modal();
                 jQuery('.modal').removeClass("fade");
                 jQuery('.modal').fadeIn();
                 modal.close.then(function (result) {
 
-                    console.log('result passed by modal');
-                    console.log(result);
+
+
                     avatarSelected(result);
                 });
             });

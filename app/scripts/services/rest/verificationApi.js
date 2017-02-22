@@ -10,7 +10,7 @@ define([
                     .then(function (resp) {
                         return resp.data;
                     }, function (err) {
-                        console.log("Error while verifying e-mail address", err);
+
                         return Promise.reject(err);
                     });
             }

@@ -93,16 +93,16 @@ define(["angular"], function (angular) {
 
                         if (typeof route.templateUrl === 'undefined') {
                             route.templateUrl = viewDir + state + ".html";
-                            console.log('**** templateUrl was undefined', route.templateUrl);
+
 
                         }
 
 
 
 
-                        console.log('**** actual route controller:', route.controller);
+
                         if (typeof route.controller === 'undefined') {
-                            console.log('**** controller is undefined');
+
                             route.controller = state.charAt(0).toUpperCase() + state.slice(1) + "Ctrl as " + state;
                         } else {
                             customCtrl = true;
@@ -115,14 +115,14 @@ define(["angular"], function (angular) {
                                  * init the dependencies array
                                  * @type {Array}
                                  */
-                                console.log("*********** controller name", controllDir, customCtrl, route.controllerFile);
+
 
                                 if (typeof route.controllerFile === 'undefined') {
-                                    console.log("*********** controller file is 'undefined'");
+
                                     var dependencies = [controllDir + state + ".js"];
 
                                 } else {
-                                    console.log("*********** controller file", route.controllerFile);
+
 
                                     var dependencies = ['js/' + route.controllerFile];
                                 }

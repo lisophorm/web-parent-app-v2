@@ -11,8 +11,8 @@
 define(['app', 'angular', 'config'], function (app, angular, config) {
     app.controller('ResendVerificationCtrl', ['$scope', '$http', 'resendStrings', '$rootScope', 'analytics', 'userApi',
         function ($scope, $http, resendStrings, $rootScope, analytics, userApi) {
-        console.log('within resend notification controller');
-        console.log("resend verification page");
+
+
             var resendEndpoint = config.userUrl + "/requestVerificationEmail";
 
             $scope.strings = resendStrings;
@@ -39,7 +39,7 @@ define(['app', 'angular', 'config'], function (app, angular, config) {
                         $scope.showForm = false;
                     },
                     function (error) {
-                        console.log(error);
+
                         $scope.errorMsg = resendStrings.error;
                     }
                 );

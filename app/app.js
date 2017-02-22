@@ -1,5 +1,5 @@
 'use strict';
-console.log("**********  loaded APP.JS");
+
 /**
  * @ngdoc overview
  * @name web-parent-app-v2
@@ -122,7 +122,7 @@ define([
             }
         }])
         .factory('jwtInterceptor', ['userSession', '$injector', '$location', function (userSession, $injector, $location) {
-            console.log('I am within the declaration of jwtInterceptor ');
+
             var shouldRedirectToLogin = function () {
                     var currentPath = $location.path(),
                         noRedirectPaths = [
@@ -198,7 +198,7 @@ define([
             }());
         }])
         .config(['$httpProvider', function ($httpProvider) {
-            console.log('inietto qui');
+
             $httpProvider.interceptors.push('jwtInterceptor');
         }])
         .constant('externalPaths', [
@@ -234,12 +234,12 @@ define([
         .run(
             ["$rootScope", "$state", "$stateParams", "routeResolver", "userSession", "screenSize", "$timeout",
                 function ($rootScope, $state, $stateParams, routeResolver, userSession, screenSize, $timeout) {
-                    console.log('******** RUN');
-                    console.log(userSession.getJWTUser());
+
+
                     $rootScope.desktop = screenSize.is('md, lg');
                     if ($rootScope.desktop) {
                         $rootScope.animType = "anim-fade";
-                        console.log("******* RRUBN", $state.current.name);
+
 
                         //$state.go("subscriptionstatus");
 
@@ -252,27 +252,27 @@ define([
                     if (typeof $rootScope.linkJWT() === 'undefined') {
                         $rootScope.loggedIn = false;
                     } else if (!$rootScope.linkJWT()) {
-                        console.log('******** usersession is NULL');
+
                         $rootScope.loggedIn = false;
 
                     } else if ($rootScope.linkJWT() !== 'undefined') {
-                        console.log('******** RUN user is logged in');
+
                         $rootScope.loggedIn = true;
 
                     } else {
-                        console.log('******** RUN user is NOT logged in');
+
 
                         $rootScope.loggedIn = false;
                     }
 
                     $rootScope.isMobile = screenSize.on('xs, sm', function (isMatch) {
-                        console.log("********** screen resolution", isMatch);
+
                         $rootScope.screenRes = isMatch;
                     });
                     $rootScope.desktop = screenSize.on('md, lg', function (match) {
                         if (match && $rootScope.animType != "anim-fade") {
-                            console.log("********* SWITCHED TO DESKTOP");
-                            console.log($state.current.name);
+
+
                             if ($state.current.name == 'home') {
                                 $state.go("subscriptionstatus");
 
@@ -284,22 +284,22 @@ define([
 
                             $rootScope.animType = "anim-fade";
 
-                            console.log("********** DESKTOP resolution");
+
 
                         } else {
                             $rootScope.animType = "anim-slide-left";
-                            console.log("********** MOBILE resolution");
+
 
                         }
                         $rootScope.desktop = match;
                     });
 
-                    console.log(userSession.getJWTUser());
+
 
                     $rootScope.execDone = function () {
-                        console.log(' CHITEMMURT');
+
                         setTimeout(function () {
-                            console.log('EXEC DONE CHITEMMURT doppio delay');
+
 
                             $rootScope.doneFunc.apply();
                         }, 0)
@@ -556,7 +556,7 @@ define([
 
                     resolve: {
                         log: function () {
-                            console.log('try here');
+
                         }
                     }
                 })
@@ -640,7 +640,7 @@ define([
         }]);
     analytics(app); //Attach analytics factory to app
     app.controller('MainCtrl', ['$scope', '$rootScope', 'externalPaths', 'userSession', '$location', '$http', '$q', 'notVerifiedStrings', function ($scope, $rootScope, externalPaths, userSession, $location, $http, $q, notVerifiedStrings) {
-        console.log('********** MAIN CONTROLLER');
+
         $rootScope.notVerifiedStrings = notVerifiedStrings;
 
         $rootScope.safeApply = function (fn) {
@@ -672,33 +672,33 @@ define([
 
         function sessionCallBack() {
             var loggedIn = false;
-            console.log("******* CALLBACK USER SESSION TYPE");
-            console.log($rootScope.linkJWT());
+
+
             if ($rootScope.linkJWT() === 'undefined') {
-                console.log('******** user is NOT logged in');
+
 
                 loggedIn = false;
 
             } else {
-                console.log('******** user is logged in');
+
                 loggedIn = true;
 
             }
             $rootScope.safeApply(function () {
-                console.log('******** SAFE APPLY', loggedIn);
+
                 $rootScope.loggedIn = loggedIn;
             })
         }
 
-        console.log("******* USER SESSION TYPE", userSession.getAuthSession());
+
 
         // bloody requireJS too complex using the rest services here
         //
         $rootScope.userUpdated = function () {
             $scope.userID = userSession.getJWTUser();
-            console.log('user url:', $scope.userID);
+
             if ($scope.userID === 'undefined' || typeof $scope.userID === 'undefined') {
-                console.log('NO SHIT');
+
 
                 $rootScope.loggedIn = false;
 
@@ -708,7 +708,7 @@ define([
                 url: config.userUrl + '/adult/' + $scope.userID,
                 method: "GET"
             }).then(function (res) {
-                console.log('user success', res.data);
+
                 $rootScope.refreshChildProfiles();
                 if (res.data.actorStatus == "VERIFIED") {
 
@@ -731,7 +731,7 @@ define([
 
 
             var adultProfileId = userSession.getJWTUser();
-            console.log('refresh CHILDS for ', adultProfileId);
+
             var defer = $q.defer();
             $http({
                 method: 'GET',
@@ -743,14 +743,14 @@ define([
             })
                 .then(function (result) {
 
-                    console.log("retrieved chid profileS", result.data);
+
                     $rootScope.safeApply(function () {
                         $rootScope.childProfiles = result.data;
-                        console.log("safe apply of", $rootScope.childProfiles);
+
 
                     })
                 }, function (err) {
-                    console.log("Failed to retrieve child profileS", err);
+
                     defer.reject(err);
                 });
             return defer.promise;
@@ -765,7 +765,7 @@ define([
              };*/
 
             $rootScope.logOut = function () {
-                console.log('************ LOGOUT');
+
                 userSession.sessionChanged("", "", true);
                 //analytics.sendEvent({ type: "logout" });
                 //analytics.clearUserId();
@@ -778,7 +778,7 @@ define([
 
     }])
         .controller('IsdesktopCtrl', ["$scope", function ($scope) {
-            console.log("****************************** IS DESKTOPctrl");
+
             $scope.ginoDesko = "Isdesktop page";
             $scope.isDeskTop = true;
         }]);

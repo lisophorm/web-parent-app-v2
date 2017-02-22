@@ -16,9 +16,9 @@ define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
         //
         function changePassword() {
             Pace.restart();
-            console.log("change password");
+
             if ($scope.newPassword !== $scope.confirmedPassword) {
-                console.log("pwd mismatch");
+
                 return;
             }
             passwordApi.changePassword($scope.oldPassword, $scope.newPassword)

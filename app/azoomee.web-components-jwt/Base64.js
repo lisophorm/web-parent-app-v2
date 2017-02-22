@@ -1,4 +1,4 @@
-console.log('WITHIN BASE64');
+
 define([], function () {
     var Base64 = {
         _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",

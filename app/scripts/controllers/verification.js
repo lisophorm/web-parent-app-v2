@@ -11,7 +11,7 @@
 define(['app', 'angular', 'config'], function (app, angular, config) {
     app.controller('VerificationCtrl', ["$scope", "$stateParams", '$rootScope', 'verificationApi', 'userSession', '$state', 'analytics', function ($scope, $stateParams, $rootScope, verificationApi, userSession, $state, analytics) {
         $scope.title = "Verification page";
-        console.log('within verification controller', $stateParams);
+
         $scope.submitVerification = submitVerification;
         $scope.verificationButtonText = "Activate";
         $scope.message = "Verifying your email";

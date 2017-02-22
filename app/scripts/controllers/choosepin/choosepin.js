@@ -13,7 +13,7 @@ define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
         function ($scope, userApi, choosePinStrings, $location, $timeout, $document, $stateParams) {
             //
 
-            console.log("choose pin controller");
+
             // controller init
             //
             var profile;
@@ -31,7 +31,7 @@ define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
             $scope.updatePin = updatePin;
             userApi.getAdultProfile()
                 .then(function (prf) {
-                    console.log("*** ADULT PROFILE RETRIEVED");
+
                     profile = prf;
                     if (profile.pinNumber != null) {
                         navigateToChildrenCreation();
@@ -84,7 +84,7 @@ define(['app', 'angular', 'azStatusBoard'], function (app, angular) {
             }
 
             function navigateToChildrenCreation() {
-                console.log("******** navigate to child creation");
+
                 if ($scope.signupJourney) {
                     $location.path('/signup/newChildProfile');
                 } else {

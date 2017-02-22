@@ -1,4 +1,4 @@
-console.log('WITHIN USERSESSION');
+
 define([''], function () {
     var userSession = function (newSessionCallback, sessionExpiredCallback) {
         var _newSessionCallback = newSessionCallback,

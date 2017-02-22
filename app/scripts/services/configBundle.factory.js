@@ -8,11 +8,11 @@
  * Factory in the com.tinizine.azoomee.parent.main.
  */
 define(['app', 'angular'], function (app, angular) {
-    console.log('within define of configBundle');
+
     app.factory('configBundle', function () {
         // Service logic
         // ...
-        console.log('service logic of configBundle');
+
 
         var meaningOfLife = 42;
 

@@ -1,4 +1,4 @@
-console.log('WITHIN httpproviderconfig');
+
 define(['lib/Base64', 'lib/moment.js', 'lib/crypto-js.js'], function (Base64, moment, CryptoJS) {
     var httpProviderSetup = function (conf, session) {
         conf.cookies = conf.cookies || {};

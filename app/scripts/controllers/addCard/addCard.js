@@ -11,7 +11,7 @@ var paymentDetailsChangedListener;
 define(['app', 'angular', 'config', 'azStatusBoard'], function (app, angular, config) {
     app.controller('AddCardCtrl', ['$scope', 'addCardStrings', 'availableCardTypes', '$sce', 'billingApi', '$timeout', '$document'
         , function ($scope, addCardStrings, availableCardTypes, $sce, billingApi, $timeout, $document) {
-            console.log("****** ADDCARD controller");
+
             $scope.availableCardTypes = availableCardTypes;
             $scope.showIFrame = false;
             //$scope.submitCardType = controller.submitCardType;
@@ -20,7 +20,7 @@ define(['app', 'angular', 'config', 'azStatusBoard'], function (app, angular, co
             $scope.strings = addCardStrings;
             $scope.$watch("selectedCard", cardSelected);
             function cardSelected(newCard, oldCard) {
-                console.log("*** watch selectedCard");
+
                 if (newCard === oldCard) {
                     return;
                 }
