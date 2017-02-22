@@ -1,6 +1,5 @@
 /* to check if needed */
 
-
 $MainColour1: #55CDC3;
 $MainColour1_dark: #40ADA0;
 $MainColour2: #F96B23;
@@ -64,6 +63,7 @@ body {
     font-family: 'Sofia Pro', sans-serif;
     font-size: 14px;
 
+    background-color: $backgroundColoue01;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -79,12 +79,15 @@ body {
     }
 }
 
+.whiteBg {
+    background-color: white;
+}
+
 @media (max-width: $screen-md-min) {
     #left, #right {
         margin-top: $viewHeaderHeight;
     }
 }
-
 
 
 @media (min-width: 768px) {
@@ -106,14 +109,12 @@ body {
 }
 
 #left {
-    background-color: #FC6E51;
 
     height: 100%;
 }
 
 #right {
     height: 100%;
-    background-color: #4FC1E9;
 
 }
 
