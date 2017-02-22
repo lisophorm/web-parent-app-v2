@@ -9,15 +9,13 @@
  */
 
 define(['app', 'angular', 'config', 'ModalcontrollerCtrl'], function (app, angular, config) {
-    app.controller('HomeCtrl', ["$scope", "servo01", "factory01", 'userSession', '$http', 'forgottenPasswordStrings', 'ModalService', function ($scope, servo01, factory01, userSession, $http, forgottenPasswordStrings, ModalService) {
+    app.controller('HomeCtrl', ["$scope", 'userSession', '$http', 'forgottenPasswordStrings', 'ModalService', function ($scope, userSession, $http, forgottenPasswordStrings, ModalService) {
         $scope.title = "Home page";
-        $scope.dummy = servo01.getGreet();
         $scope.userID = userSession.getJWTUser();
         $scope.profileName = "";
         console.log("test strings", forgottenPasswordStrings);
         //$scope.userID=userSession.getJWTUser();
-        var tempVar = factory01.someMethod();
-        console.log('factory value', tempVar);
+
         console.log(userSession.getJWTUser());
         console.log('user url:', config.userUrl);
         $http({

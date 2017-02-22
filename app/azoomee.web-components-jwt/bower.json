@@ -1,0 +1,24 @@
+{
+    "name": "azoomee.web-components-jwt",
+    "version": "1.2.5",
+    "authors": [
+        "Alan Churley <alan.churley@azoomee.com>"
+    ],
+    "license": "MIT",
+    "scripts": {
+        "test": "karma start karma.conf.js",
+        "coverage": "karma start karmaCoverage.conf.js"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "moment": "~2.10.6",
+        "crypto-js": "~3.1.4",
+        "requirejs": "~2.1.20"
+    }
+}

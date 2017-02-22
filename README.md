@@ -18,6 +18,9 @@ PAGE.JS loader
 
 the library necessaries are copued altogether from bower_components to /lib
 
+azoomee-web-components is slightly modified in order to run this flavour of requirejs. Source files are now within /app
+
+
 
 
 

@@ -351,7 +351,7 @@ define([
             $stateProvider
                 .state('change_passwordgulp', {
                     url: '/change_passwordgulp',
-                    files: ['first.service'],
+                    //files: ['first.service'],
                     resolve: {}
                 })
                 .state('choosepin', {
@@ -410,7 +410,7 @@ define([
                     controllerFile: 'controllers/learnmore.js',
 
                     url: '/learnmore',
-                    files: ['first.service'],
+                    //files: ['first.service'],
                     resolve: {}
                 })
 
@@ -421,7 +421,7 @@ define([
                     templateUrl: 'views/voucherredemption/voucherredemption.html',
                     controller: 'VoucherredemptionCtrl',
                     files: {
-                        s: ['first.service', 'rest/loginApi', 'rest/userApi', 'rest/billingApi']
+                        s: ['rest/loginApi', 'rest/userApi', 'rest/billingApi']
                     },
                     resolve: {}
                 })
@@ -431,20 +431,20 @@ define([
                     controllerFile: 'controllers/subscriptionstatus.js',
 
                     files: {
-                        s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
+                        s: ['rest/billingApi', 'addcardservice.factory']
                     },
                     resolve: {}
                 })
                 .state('cardrejection', {
                     url: '/cardrejection',
-                    files: ['first.service'],
+                    //  files: ['first.service'],
                     resolve: {}
                 })
                 .state('addCard', {
                     url: '/addcard',
                     controller: 'AddCardCtrl',
                     files: {
-                        s: ['first.service', 'rest/billingApi']
+                        s: ['rest/billingApi']
                     },
                     resolve: {}
                 })
@@ -452,7 +452,7 @@ define([
                     url: '/signup/signupsubscriptionoffer',
                     controllerFile: 'controllers/signupsubscriptionoffer.js',
                     files: {
-                        s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
+                        s: ['rest/billingApi', 'addcardservice.factory']
                     },
                     resolve: {}
                 })
@@ -460,7 +460,7 @@ define([
                     url: '/subscriptionoffer',
                     controllerFile: 'controllers/subscriptionOffer.js',
                     files: {
-                        s: ['first.service', 'rest/billingApi', 'addcardservice.factory']
+                        s: ['rest/billingApi', 'addcardservice.factory']
                     },
                     controller: 'SubscriptionofferCtrl',
                     resolve: {}
@@ -471,7 +471,7 @@ define([
                     controllerFile: 'controllers/signupend.js',
 
                     files: {
-                        s: ['first.service', 'rest/billingApi']
+                        s: ['rest/billingApi']
                     },
                     resolve: {}
                 })
@@ -480,7 +480,7 @@ define([
                     controller: 'ResendVerificationCtrl',
                     controllerFile: 'controllers/resendverification.js',
                     files: {
-                        s: ['first.service', 'rest/userApi']
+                        s: ['rest/userApi']
                     },
                     resolve: {}
                 })
@@ -490,7 +490,7 @@ define([
                     controllerFile: 'controllers/change_password.js',
 
                     files: {
-                        s: ['first.service', 'rest/passwordApi']
+                        s: ['rest/passwordApi']
                     },
                     resolve: {}
                 })
@@ -500,7 +500,7 @@ define([
                     controller: 'ForgottenPasswordResetCtrl',
                     controllerFile: 'controllers/passwordreset.js',
 
-                    files: ['first.service'],
+                    // files: ['first.service'],
 
                     resolve: {}
                 })
@@ -510,7 +510,7 @@ define([
                     controller: 'SignupCtrl',
                     controllerFile: 'controllers/signup.js',
                     files: {
-                        s: ['first.service', 'rest/loginApi', 'rest/billingApi']
+                        s: ['rest/loginApi', 'rest/billingApi']
                     },
                     resolve: {}
                 })
@@ -534,7 +534,7 @@ define([
                 .state('signup', {
                     url: '/signup',
                     files: {
-                        s: ['first.service', 'rest/loginApi', 'rest/billingApi']
+                        s: ['rest/loginApi', 'rest/billingApi']
                     },
                     controllerFile: 'controllers/signup.js',
 
@@ -543,7 +543,7 @@ define([
                 .state('login', {
                     url: '/login?token&reason',
                     files: {
-                        s: ['first.service', 'rest/loginApi']
+                        s: ['rest/loginApi']
                     },
                     controllerFile: 'controllers/login.js',
 
@@ -553,10 +553,7 @@ define([
                     url: '/home',
                     controllerFile: 'controllers/home.js',
 
-                    files: {
-                        s: ['factory01.factory', 'first.service', 'servo01'],
-                        d: ['tickyTag']
-                    },
+
                     resolve: {
                         log: function () {
                             console.log('try here');
