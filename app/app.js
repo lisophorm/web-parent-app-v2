@@ -526,7 +526,6 @@ define([
                     url: '/forgotten',
                     controller: 'ForgottenPasswordCtrl',
 
-                    files: ['first.service'],
                     controllerFile: 'controllers/forgotten.js',
 
                     resolve: {}

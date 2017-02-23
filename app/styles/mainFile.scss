@@ -84,7 +84,10 @@ body {
 }
 
 @media (max-width: $screen-md-min) {
-    #left, #right {
+    /*   #left, #right {
+           margin-top: $viewHeaderHeight;
+       } */
+    .wrapper {
         margin-top: $viewHeaderHeight;
     }
 }
