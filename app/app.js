@@ -287,7 +287,7 @@ define([
 
 
                         } else {
-                            $rootScope.animType = "anim-slide-left";
+                            $rootScope.animType = "anim-fade";
 
 
                         }
